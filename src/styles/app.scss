@@ -1,0 +1,218 @@
+@import '~normalize.css/normalize';
+@import '~modularscale-sass/stylesheets/modularscale';
+@import '~flexboxgrid/dist/flexboxgrid';
+@import 'colors';
+
+$base-font-family: 'Roboto', sans-serif;
+$base-font-size: 1rem;
+$base-line-height: 1.5 * $base-font-size;
+
+$success: $cyan-300;
+$success-hover: $cyan-500;
+$warning: $amber-500;
+$warning-hover: $amber-700;
+$danger: $deep-orange-400;
+$danger-hover: $deep-orange-600;
+$danger-dark: $red-700;
+$danger-dark-hover: $red-900;
+
+$base-font-color: $blue-grey-900;
+$secondary-font-color: $blue-grey-500;
+$light-bg: $blue-grey-C25;
+$dark-bg: $blue-grey-900;
+
+$modularscale: (
+  base: $base-font-size,
+  ratio: $major-third
+);
+
+html,
+body,
+#root,
+#root > .container {
+  height: 100%;
+}
+
+html {
+  font-size: ms(0);
+  background-color: $dark-bg;
+}
+
+body {
+  line-height: $base-line-height;
+  font-family: $base-font-family;
+  color: $base-font-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root > .container {
+  background: $white;
+}
+
+h1, h2, h3, h4,h5, h6 {
+  font-weight: 500;
+  margin: 0;
+}
+
+h1 {
+  font-size: ms(6);
+  line-height: $base-line-height * 3;
+}
+
+h2 {
+  font-size: ms(5);
+  line-height: $base-line-height * 3;
+}
+
+h3 {
+  font-size: ms(4);
+  line-height: $base-line-height * 2;
+}
+
+button {
+  cursor: pointer;
+}
+
+.text-secondary {
+  color: $secondary-font-color;
+}
+
+.text-regular {
+  font-weight: 400;
+}
+
+.chart {
+  height: 100%;
+
+  &--pie {
+    position: relative;
+
+    .chart__center {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+}
+
+.chart__title {
+  font-size: ms(8);
+  color: $success;
+  line-height: $base-line-height * 4;
+}
+
+.chart__subtitle {
+  font-size: ms(2);
+  line-height: $base-line-height * 1;
+  color: $secondary-font-color;
+}
+
+.operation {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.operation__main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: #{$base-line-height * 4} 2rem;
+}
+
+.operation__main__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.operation__main__chart {
+  width: $base-line-height * 13;
+  height: $base-line-height * 13;
+  padding-right: 3rem;
+}
+
+.operation__data {
+  background: $light-bg;
+  padding: #{$base-line-height * 2} 0;
+}
+
+.operation__info {
+  text-align: center;
+
+  &--warning .operation__info__value{
+    color: $warning;
+  }
+
+  &--danger .operation__info__value{
+    color: $danger;
+  }
+
+  &--danger-dark .operation__info__value{
+    color: $danger-dark;
+  }
+}
+
+.operation__info__label {
+  font-size: ms(0);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.operation__info__value {
+  font-size: ms(4);
+  line-height: $base-line-height * 2;
+  font-weight: 700;
+  color: $success;
+}
+
+.operation__actions {
+  display: flex;
+}
+
+.operation__btn {
+  border: 0;
+  background: $success;
+  line-height: $base-line-height * 7;
+  display: block;
+  width: 100%;
+  font-size: ms(4);
+  color: $white;
+  transition: all ease-in-out 0.15s;
+  outline: 0;
+
+  &:hover {
+    background: $success-hover;
+  }
+
+  &--warning {
+    background: $warning;
+
+    &:hover {
+      background: $warning-hover;
+    }
+  }
+
+  &--danger {
+    background: $danger;
+
+    &:hover {
+      background: $danger-hover;
+    }
+  }
+
+  &--danger-dark {
+    background: $danger-dark;
+
+    &:hover {
+      background: $danger-dark-hover;
+    }
+  }
+}
