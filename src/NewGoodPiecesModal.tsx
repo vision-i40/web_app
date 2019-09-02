@@ -6,7 +6,7 @@ type NewGoodPieceModalProps = {
   toggle: () => void
 }
 
-const NewGoodPieceModal: React.FC<NewGoodPieceModalProps> = props => {
+const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = props => {
   return (
     <Modal {...props} title="Adicionar peças boas">
       <form action="" className="form">
@@ -34,4 +34,4 @@ const NewGoodPieceModal: React.FC<NewGoodPieceModalProps> = props => {
   )
 }
 
-export default NewGoodPieceModal
+export default NewGoodPiecesModal

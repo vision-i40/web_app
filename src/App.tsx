@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import colors from './colors'
-import NewGoodPieceModal from './NewGoodPieceModal'
+import NewGoodPiecesModal from './NewGoodPiecesModal'
 
 const data = [
   {
@@ -122,10 +122,10 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      <NewGoodPieceModal
+      <NewGoodPiecesModal
         isOpen={openModals['goodPieces']}
         toggle={toggleModal('goodPieces')}
-      ></NewGoodPieceModal>
+      ></NewGoodPiecesModal>
     </>
   )
 }
