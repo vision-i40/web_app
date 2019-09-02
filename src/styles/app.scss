@@ -109,6 +109,11 @@ button {
     color: $white;
   }
 
+  &--warning {
+    background: $warning;
+    color: $white;
+  }
+
   &--lg {
     font-size: ms(1);
   }

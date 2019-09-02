@@ -2,6 +2,12 @@ import React, { useState, useCallback } from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import colors from './colors'
 import NewGoodPiecesModal from './NewGoodPiecesModal'
+import NewRejectedPiecesModal from './NewRejectedPiecesModal'
+
+type OpenModals = {
+  goodPieces: boolean
+  rejectedPieces: boolean
+}
 
 const data = [
   {
@@ -16,15 +22,16 @@ const data = [
   }
 ]
 
-const initOpenModals = {
-  goodPieces: false
+const initOpenModals: OpenModals = {
+  goodPieces: false,
+  rejectedPieces: false
 }
 
 const App: React.FC = () => {
   const [openModals, setOpenModals] = useState(initOpenModals)
 
   const toggleModal = useCallback(
-    (modalName: 'goodPieces') => () => {
+    (modalName: keyof OpenModals) => () => {
       setOpenModals(openModals => ({
         ...openModals,
         [modalName]: !openModals[modalName]
@@ -109,7 +116,10 @@ const App: React.FC = () => {
             >
               <i className="fas fa-plus"></i>
             </button>
-            <button className="operation__btn operation__btn--warning">
+            <button
+              onClick={toggleModal('rejectedPieces')}
+              className="operation__btn operation__btn--warning"
+            >
               <i className="fas fa-recycle"></i>
             </button>
             <button className="operation__btn operation__btn--danger">
@@ -126,6 +136,11 @@ const App: React.FC = () => {
         isOpen={openModals['goodPieces']}
         toggle={toggleModal('goodPieces')}
       ></NewGoodPiecesModal>
+
+      <NewRejectedPiecesModal
+        isOpen={openModals['rejectedPieces']}
+        toggle={toggleModal('rejectedPieces')}
+      ></NewRejectedPiecesModal>
     </>
   )
 }
