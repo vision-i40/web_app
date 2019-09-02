@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, MouseEvent } from 'react'
 
 export type ModalProps = {
   isOpen?: boolean
@@ -7,11 +7,16 @@ export type ModalProps = {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, toggle, title, children }) => {
+  const handleModalClick = useCallback((event: MouseEvent) => {
+    // prevents backdrop click event propagation
+    event.stopPropagation()
+  }, [])
+
   if (!isOpen) return <></>
 
   return (
-    <div className="modal__backdrop">
-      <div className="modal">
+    <div className="modal__backdrop" onClick={toggle}>
+      <div className="modal" onClick={handleModalClick}>
         <div className="modal__header">
           <div className="modal__title">{title}</div>
           <button type="button" className="modal__close" onClick={toggle}>
