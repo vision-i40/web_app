@@ -2,6 +2,7 @@
 @import '~modularscale-sass/stylesheets/modularscale';
 @import '~flexboxgrid/dist/flexboxgrid';
 @import 'colors';
+@import 'shadows';
 
 $base-font-family: 'Roboto', sans-serif;
 $base-font-size: 1rem;
@@ -21,10 +22,16 @@ $secondary-font-color: $blue-grey-500;
 $light-bg: $blue-grey-C25;
 $dark-bg: $blue-grey-900;
 
+$border-radius: 4px;
+
 $modularscale: (
   base: $base-font-size,
   ratio: $major-third
 );
+
+* {
+  box-sizing: border-box;
+}
 
 html,
 body,
@@ -74,6 +81,7 @@ h3 {
 
 button {
   cursor: pointer;
+  outline: none;
 }
 
 .text-secondary {
@@ -82,6 +90,32 @@ button {
 
 .text-regular {
   font-weight: 400;
+}
+
+.btn {
+  background: none;
+  border: 0;
+  padding: $base-line-height 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--success {
+    background: $success;
+    color: $white;
+  }
+
+  &--lg {
+    font-size: ms(1);
+  }
+
+  i {
+    margin-right: 0.5rem;
+  }
 }
 
 .chart {
@@ -116,6 +150,105 @@ button {
   color: $secondary-font-color;
 }
 
+.modal__backdrop {
+  position: fixed;
+  overflow-y: auto;
+  background: $black-3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.modal {
+  width: 100%;
+  max-width: 34rem;
+  margin: #{$base-line-height * 2} auto;
+  background: $white;
+  border-radius: $border-radius;
+  @include box_shadow(3);
+}
+
+.modal__header {
+  background: $light-bg;
+  line-height: $base-line-height;
+  padding:  $base-line-height 1.5rem;
+  font-size: ms(1);
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: relative;
+
+  .modal__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+.modal__close {
+  border: 0;
+  padding: 0;
+  line-height: $base-line-height * 3;
+  padding: 0 1.5rem;
+  background: transparent;
+  transition: all 0.15s ease-in-out;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.modal__body {
+  padding: $base-line-height 1.5rem;
+}
+
+.modal__body + .btn {
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+}
+
+.form__group {
+  margin-bottom: $base-line-height;
+}
+
+input.form__field,
+.form__field--select select {
+  display: block;
+  width: 100%;
+  line-height: $base-line-height * 2;
+  font-size: ms(1);
+  padding: 0 1rem;
+  border-radius: $border-radius;
+  border: 1px solid $blue-grey-100;
+  background: $light-bg;
+}
+
+.form__field--select {
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    border: #{$base-line-height/4} solid transparent;
+    border-top-color: black;
+    position: absolute;
+    line-height: $base-line-height * 2;
+    top:50%;
+    margin-top:-2px;
+    right: 1rem;
+  }
+
+  select {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+}
+
 .operation {
   display: flex;
   flex-direction: column;
@@ -136,8 +269,8 @@ button {
 }
 
 .operation__main__chart {
-  width: $base-line-height * 13;
-  height: $base-line-height * 13;
+  width: $base-line-height * 15;
+  height: $base-line-height * 15;
   padding-right: 3rem;
 }
 
@@ -188,7 +321,6 @@ button {
   font-size: ms(4);
   color: $white;
   transition: all ease-in-out 0.15s;
-  outline: 0;
 
   &:hover {
     background: $success-hover;
