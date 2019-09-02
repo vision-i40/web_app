@@ -98,6 +98,7 @@ button {
   padding: $base-line-height 1rem;
   text-transform: uppercase;
   font-weight: 700;
+  transition: all ease-in-out 0.15s;
 
   &--block {
     display: block;
@@ -107,11 +108,19 @@ button {
   &--success {
     background: $success;
     color: $white;
+
+    &:hover {
+      background: $success-hover;
+    }
   }
 
   &--warning {
     background: $warning;
     color: $white;
+
+    &:hover {
+      background: $warning-hover;
+    }
   }
 
   &--lg {
