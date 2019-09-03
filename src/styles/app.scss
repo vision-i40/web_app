@@ -123,6 +123,24 @@ button {
     }
   }
 
+  &--danger {
+    background: $danger;
+    color: $white;
+
+    &:hover {
+      background: $danger-hover;
+    }
+  }
+
+  &--danger-dark {
+    background: $danger-dark;
+    color: $white;
+
+    &:hover {
+      background: $danger-dark-hover;
+    }
+  }
+
   &--lg {
     font-size: ms(1);
   }

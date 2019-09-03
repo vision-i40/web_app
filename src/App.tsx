@@ -3,10 +3,14 @@ import { ResponsivePie } from '@nivo/pie'
 import colors from './colors'
 import NewGoodPiecesModal from './NewGoodPiecesModal'
 import NewRejectedPiecesModal from './NewRejectedPiecesModal'
+import NewStopsModal from './NewStopsModal'
+import NewScrapsModal from './NewScrapsModal'
 
 type OpenModals = {
-  goodPieces: boolean
-  rejectedPieces: boolean
+  newGoodPieces: boolean
+  newRejectedPieces: boolean
+  newStops: boolean
+  newScraps: boolean
 }
 
 const data = [
@@ -23,8 +27,10 @@ const data = [
 ]
 
 const initOpenModals: OpenModals = {
-  goodPieces: false,
-  rejectedPieces: false
+  newGoodPieces: false,
+  newRejectedPieces: false,
+  newStops: false,
+  newScraps: false
 }
 
 const App: React.FC = () => {
@@ -111,21 +117,27 @@ const App: React.FC = () => {
 
           <div className="operation__actions">
             <button
-              onClick={toggleModal('goodPieces')}
+              onClick={toggleModal('newGoodPieces')}
               className="operation__btn"
             >
               <i className="fas fa-plus"></i>
             </button>
             <button
-              onClick={toggleModal('rejectedPieces')}
+              onClick={toggleModal('newRejectedPieces')}
               className="operation__btn operation__btn--warning"
             >
               <i className="fas fa-recycle"></i>
             </button>
-            <button className="operation__btn operation__btn--danger">
+            <button
+              onClick={toggleModal('newStops')}
+              className="operation__btn operation__btn--danger"
+            >
               <i className="fas fa-ban"></i>
             </button>
-            <button className="operation__btn operation__btn--danger-dark">
+            <button
+              onClick={toggleModal('newScraps')}
+              className="operation__btn operation__btn--danger-dark"
+            >
               <i className="fas fa-recycle"></i>
             </button>
           </div>
@@ -133,14 +145,21 @@ const App: React.FC = () => {
       </div>
 
       <NewGoodPiecesModal
-        isOpen={openModals['goodPieces']}
-        toggle={toggleModal('goodPieces')}
+        isOpen={openModals['newGoodPieces']}
+        toggle={toggleModal('newGoodPieces')}
       ></NewGoodPiecesModal>
-
       <NewRejectedPiecesModal
-        isOpen={openModals['rejectedPieces']}
-        toggle={toggleModal('rejectedPieces')}
+        isOpen={openModals['newRejectedPieces']}
+        toggle={toggleModal('newRejectedPieces')}
       ></NewRejectedPiecesModal>
+      <NewStopsModal
+        isOpen={openModals['newStops']}
+        toggle={toggleModal('newStops')}
+      ></NewStopsModal>
+      <NewScrapsModal
+        isOpen={openModals['newScraps']}
+        toggle={toggleModal('newScraps')}
+      ></NewScrapsModal>
     </>
   )
 }
