@@ -13,8 +13,9 @@ const SignInPage: React.FC<RouteComponentProps> = () => {
           <div className="auth">
             <form className="form form--dark" onSubmit={handleSubmit(onSubmit)}>
               <div className="form__group">
-                <label htmlFor="">E-mail</label>
+                <label htmlFor="email">E-mail</label>
                 <input
+                  id="email"
                   name="email"
                   type="email"
                   className="form__field"
@@ -23,8 +24,9 @@ const SignInPage: React.FC<RouteComponentProps> = () => {
               </div>
 
               <div className="form__group">
-                <label htmlFor="">Senha</label>
+                <label htmlFor="id">Senha</label>
                 <input
+                  id="password"
                   name="password"
                   type="password"
                   className="form__field"
