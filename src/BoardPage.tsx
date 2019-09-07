@@ -5,7 +5,7 @@ import NewGoodPiecesModal from './NewGoodPiecesModal'
 import NewRejectedPiecesModal from './NewRejectedPiecesModal'
 import NewStopsModal from './NewStopsModal'
 import NewScrapsModal from './NewScrapsModal'
-import { useToggles } from './toggle'
+import { useToggle } from './useToggle'
 import MeasurementService, { Unit } from './MeasurementService'
 import { RouteComponentProps } from '@reach/router'
 
@@ -46,7 +46,7 @@ const initBoardState: BoardState = {
 }
 
 const BoardPage: React.FC<RouteComponentProps> = () => {
-  const { toggle, getToggleValue } = useToggles(toggleNames)
+  const { toggle, getToggleValue } = useToggle(toggleNames)
   const [boardState, setBoardState] = useState<BoardState>(initBoardState)
 
   useEffect(() => {

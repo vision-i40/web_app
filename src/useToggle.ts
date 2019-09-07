@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-type TogglesState = { [key: string]: boolean }
+type ToggleState = { [key: string]: boolean }
 
-export const useToggles = (names: string[]) => {
-  const initialState = mountTogglesState(names)
+export const useToggle = (names: string[]) => {
+  const initialState = mountToggleState(names)
   const [state, setState] = useState(initialState)
 
   const toggle = (name: string) => () => {
@@ -23,9 +23,9 @@ export const useToggles = (names: string[]) => {
   }
 }
 
-const mountTogglesState = (names: string[]) => {
+const mountToggleState = (names: string[]) => {
   return names.reduce(
-    (currentState: TogglesState, name: string): TogglesState => {
+    (currentState: ToggleState, name: string): ToggleState => {
       return {
         ...currentState,
         [name]: false
