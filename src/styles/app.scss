@@ -29,7 +29,8 @@ $modularscale: (
   ratio: $major-third
 );
 
-* {
+*,
+input {
   box-sizing: border-box;
 }
 
@@ -55,7 +56,6 @@ body {
 }
 
 #root > *[role="group"] > .container {
-  background: $white;
   width: 100%;
   max-width: 1280px;
 }
@@ -96,10 +96,12 @@ button {
 .btn {
   background: none;
   border: 0;
-  padding: $base-line-height 1rem;
+  padding: $base-line-height * 0.5 1rem;
+  line-height: $base-line-height;
   text-transform: uppercase;
   font-weight: 700;
   transition: all ease-in-out 0.15s;
+  border-radius: $border-radius;
 
   &--block {
     display: block;
@@ -144,6 +146,8 @@ button {
 
   &--lg {
     font-size: ms(1);
+    padding-top: $base-line-height;
+    padding-bottom: $base-line-height;
   }
 
   i {
@@ -239,8 +243,18 @@ button {
 }
 
 .modal__body + .btn {
-  border-bottom-left-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form {
+  text-align: left;
+
+  &--dark {
+    label {
+      color: $white;
+    }
+  }
 }
 
 .form__group {
@@ -251,7 +265,7 @@ input.form__field,
 .form__field--select select {
   display: block;
   width: 100%;
-  line-height: $base-line-height * 2;
+  line-height: calc(#{$base-line-height * 2} - 2px);
   font-size: ms(1);
   padding: 0 1rem;
   border-radius: $border-radius;
@@ -282,7 +296,12 @@ input.form__field,
   }
 }
 
+.auth {
+  margin-top: $base-line-height * 2;
+}
+
 .operation {
+  background: $white;
   display: flex;
   flex-direction: column;
   height: 100%;
