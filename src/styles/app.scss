@@ -190,11 +190,22 @@ button {
 .modal__backdrop {
   position: fixed;
   overflow-y: auto;
-  background: $black-3;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
+  visibility: hidden;
+  background-color: $transparent;
+  transition: all 0.25s ease-in-out;
+
+  &.open {
+    visibility: visible;
+    background-color: $black-3;
+  }
+
+  &.close {
+    transition-delay: 0.15s
+  }
 }
 
 .modal {
@@ -204,6 +215,15 @@ button {
   background: $white;
   border-radius: $border-radius;
   @include box_shadow(3);
+  opacity: 0;
+  transition: all 0.15s 0.25s ease-in-out;
+  position: relative;
+  top: $base-line-height;
+}
+
+.modal__backdrop.open .modal {
+  opacity: 1;
+  top: 0;
 }
 
 .modal__header {

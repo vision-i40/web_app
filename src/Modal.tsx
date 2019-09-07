@@ -8,14 +8,15 @@ export type ModalProps = {
 
 const Modal: React.FC<ModalProps> = ({ isOpen, toggle, title, children }) => {
   const handleModalClick = useCallback((event: MouseEvent) => {
-    // prevents backdrop click event propagation
+    // prevents backdrop click propagation
     event.stopPropagation()
   }, [])
 
-  if (!isOpen) return <></>
-
   return (
-    <div className="modal__backdrop" onClick={toggle}>
+    <div
+      className={`modal__backdrop ${isOpen ? 'open' : 'close'}`}
+      onClick={toggle}
+    >
       <div className="modal" onClick={handleModalClick}>
         <div className="modal__header">
           <div className="modal__title">{title}</div>
