@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import colors from './colors'
 import NewGoodPiecesModal from './NewGoodPiecesModal'
@@ -6,13 +6,6 @@ import NewRejectedPiecesModal from './NewRejectedPiecesModal'
 import NewStopsModal from './NewStopsModal'
 import NewScrapsModal from './NewScrapsModal'
 import { useToggles } from './toggle'
-
-type OpenModals = {
-  newGoodPieces: boolean
-  newRejectedPieces: boolean
-  newStops: boolean
-  newScraps: boolean
-}
 
 const data = [
   {
