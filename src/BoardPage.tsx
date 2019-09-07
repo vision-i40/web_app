@@ -6,7 +6,7 @@ import NewRejectedPiecesModal from './NewRejectedPiecesModal'
 import NewStopsModal from './NewStopsModal'
 import NewScrapsModal from './NewScrapsModal'
 import { useToggles } from './toggle'
-import MeasurementService, { Unit } from './services/MeasurementService'
+import MeasurementService, { Unit } from './MeasurementService'
 import { RouteComponentProps } from '@reach/router'
 
 type UnitsState = {
