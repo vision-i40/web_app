@@ -1,15 +1,20 @@
 import React from 'react'
 import Modal from './shared/Modal'
+import { Unit } from './services/MeasurementService'
 
 type NewGoodPieceModalProps = {
   isOpen?: boolean
   toggle: () => void
+  units: Unit[] | undefined
 }
 
-const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = props => {
+const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({
+  units,
+  ...modalProps
+}) => {
   return (
-    <Modal {...props} title="Adicionar peças boas">
-      <form action="" className="form">
+    <Modal {...modalProps} title="Adicionar peças boas">
+      <form className="form">
         <div className="modal__body">
           <div className="form__group">
             <label htmlFor="">Quantidade</label>
@@ -17,12 +22,21 @@ const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = props => {
           </div>
 
           <div className="form__group">
-            <label htmlFor="">Unidade de medida</label>
-            <div className="form__field form__field--select">
-              <select name="" id="">
-                <option value="">Selecione uma unidade de medida</option>
-              </select>
-            </div>
+            <label htmlFor="unitId">Unidade de medida</label>
+            {!units ? (
+              <p>Carregando...</p>
+            ) : (
+              <div className="form__field form__field--select">
+                <select id="unitId" required>
+                  <option value="">Selecione uma unidade de medida</option>
+                  {units.map(unit => (
+                    <option key={unit.id} value={unit.id}>
+                      {unit.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import colors from './colors'
 import NewGoodPiecesModal from './NewGoodPiecesModal'
@@ -6,6 +6,16 @@ import NewRejectedPiecesModal from './NewRejectedPiecesModal'
 import NewStopsModal from './NewStopsModal'
 import NewScrapsModal from './NewScrapsModal'
 import { useToggles } from './toggle'
+import MeasurementService, { Unit } from './services/MeasurementService'
+
+type UnitsState = {
+  items: Unit[] | undefined
+  loading: boolean
+}
+
+type BoardState = {
+  units: UnitsState
+}
 
 const data = [
   {
@@ -27,8 +37,46 @@ const toggleNames = [
   'newScraps'
 ]
 
+const initBoardState: BoardState = {
+  units: {
+    items: undefined,
+    loading: false
+  }
+}
+
 const App: React.FC = () => {
   const { toggle, getToggleValue } = useToggles(toggleNames)
+  const [boardState, setBoardState] = useState<BoardState>(initBoardState)
+
+  useEffect(() => {
+    const measurementService = MeasurementService()
+    const startLoading = (state: UnitsState) => ({ ...state, loading: true })
+    const stopLoading = (state: UnitsState) => ({ ...state, loading: false })
+    const setItems = (items: Unit[]) => (state: UnitsState) => ({
+      ...state,
+      items
+    })
+
+    setBoardState(boardState => ({
+      ...boardState,
+      units: startLoading(boardState.units)
+    }))
+
+    measurementService
+      .fetchAllUnits()
+      .then(units => {
+        setBoardState(boardState => ({
+          ...boardState,
+          units: setItems(units)(stopLoading(boardState.units))
+        }))
+      })
+      .finally(() =>
+        setBoardState(boardState => ({
+          ...boardState,
+          units: stopLoading(boardState.units)
+        }))
+      )
+  }, [])
 
   return (
     <>
@@ -131,6 +179,7 @@ const App: React.FC = () => {
       <NewGoodPiecesModal
         isOpen={getToggleValue('newGoodPieces')}
         toggle={toggle('newGoodPieces')}
+        units={boardState.units.items}
       ></NewGoodPiecesModal>
       <NewRejectedPiecesModal
         isOpen={getToggleValue('newRejectedPieces')}
