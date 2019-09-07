@@ -36,7 +36,8 @@ $modularscale: (
 html,
 body,
 #root,
-#root > .container {
+#root > *[role="group"] > .container,
+*[role="group"] {
   height: 100%;
 }
 
@@ -53,7 +54,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root > .container {
+#root > *[role="group"] > .container {
   background: $white;
   width: 100%;
   max-width: 1280px;
