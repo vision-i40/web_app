@@ -5,6 +5,7 @@ import NewGoodPiecesModal from './NewGoodPiecesModal'
 import NewRejectedPiecesModal from './NewRejectedPiecesModal'
 import NewStopsModal from './NewStopsModal'
 import NewScrapsModal from './NewScrapsModal'
+import { useToggles } from './toggle'
 
 type OpenModals = {
   newGoodPieces: boolean
@@ -26,25 +27,15 @@ const data = [
   }
 ]
 
-const initOpenModals: OpenModals = {
-  newGoodPieces: false,
-  newRejectedPieces: false,
-  newStops: false,
-  newScraps: false
-}
+const toggleNames = [
+  'newGoodPieces',
+  'newRejectedPieces',
+  'newStops',
+  'newScraps'
+]
 
 const App: React.FC = () => {
-  const [openModals, setOpenModals] = useState(initOpenModals)
-
-  const toggleModal = useCallback(
-    (modalName: keyof OpenModals) => () => {
-      setOpenModals(openModals => ({
-        ...openModals,
-        [modalName]: !openModals[modalName]
-      }))
-    },
-    []
-  )
+  const { toggle, getToggleValue } = useToggles(toggleNames)
 
   return (
     <>
@@ -117,25 +108,25 @@ const App: React.FC = () => {
 
           <div className="operation__actions">
             <button
-              onClick={toggleModal('newGoodPieces')}
+              onClick={toggle('newGoodPieces')}
               className="operation__btn"
             >
               <i className="fas fa-plus"></i>
             </button>
             <button
-              onClick={toggleModal('newRejectedPieces')}
+              onClick={toggle('newRejectedPieces')}
               className="operation__btn operation__btn--warning"
             >
               <i className="fas fa-recycle"></i>
             </button>
             <button
-              onClick={toggleModal('newStops')}
+              onClick={toggle('newStops')}
               className="operation__btn operation__btn--danger"
             >
               <i className="fas fa-ban"></i>
             </button>
             <button
-              onClick={toggleModal('newScraps')}
+              onClick={toggle('newScraps')}
               className="operation__btn operation__btn--danger-dark"
             >
               <i className="fas fa-recycle"></i>
@@ -145,20 +136,20 @@ const App: React.FC = () => {
       </div>
 
       <NewGoodPiecesModal
-        isOpen={openModals['newGoodPieces']}
-        toggle={toggleModal('newGoodPieces')}
+        isOpen={getToggleValue('newGoodPieces')}
+        toggle={toggle('newGoodPieces')}
       ></NewGoodPiecesModal>
       <NewRejectedPiecesModal
-        isOpen={openModals['newRejectedPieces']}
-        toggle={toggleModal('newRejectedPieces')}
+        isOpen={getToggleValue('newRejectedPieces')}
+        toggle={toggle('newRejectedPieces')}
       ></NewRejectedPiecesModal>
       <NewStopsModal
-        isOpen={openModals['newStops']}
-        toggle={toggleModal('newStops')}
+        isOpen={getToggleValue('newStops')}
+        toggle={toggle('newStops')}
       ></NewStopsModal>
       <NewScrapsModal
-        isOpen={openModals['newScraps']}
-        toggle={toggleModal('newScraps')}
+        isOpen={getToggleValue('newScraps')}
+        toggle={toggle('newScraps')}
       ></NewScrapsModal>
     </>
   )
