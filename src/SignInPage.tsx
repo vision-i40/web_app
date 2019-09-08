@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { RouteComponentProps } from '@reach/router'
 import useForm from 'react-hook-form'
 import AuthService from './AuthService'
-import ServerRequestFactory from './ServerRequestFactory'
+import RequestFactory from './RequestFactory'
 
 type SignInForm = {
   email: string
@@ -20,7 +20,7 @@ const initSignInState = {
 }
 
 const authService = AuthService({
-  request: ServerRequestFactory.createRequest()
+  request: RequestFactory.createServerRequest()
 })
 
 const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
