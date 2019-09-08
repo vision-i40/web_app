@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { RouteComponentProps } from '@reach/router'
 import useForm from 'react-hook-form'
-import AuthService from './AuthService'
-import RequestFactory from './RequestFactory'
+import AuthService from '../AuthService'
+import RequestFactory from '../RequestFactory'
 
 type SignInForm = {
   email: string

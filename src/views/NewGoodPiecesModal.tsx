@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from './Modal'
-import { Unit } from './MeasurementService'
+import { Unit } from '../MeasurementService'
 
 type NewGoodPieceModalProps = {
   isOpen?: boolean

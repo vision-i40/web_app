@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import AuthService from './AuthService'
+import AuthService from '../AuthService'
 import { RouteComponentProps } from '@reach/router'
 
 type ProtectRouteState = {

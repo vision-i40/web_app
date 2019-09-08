@@ -1,8 +1,8 @@
 import React from 'react'
 import { Router } from '@reach/router'
-import BoardPage from './BoardPage'
-import SignInPage from './SignInPage'
-import ProtectRoute from './ProtectRoute'
+import BoardPage from './views/BoardPage'
+import SignInPage from './views/SignInPage'
+import ProtectRoute from './views/ProtectRoute'
 
 const App: React.FC = () => {
   return (

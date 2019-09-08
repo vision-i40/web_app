@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { ResponsivePie } from '@nivo/pie'
-import colors from './colors'
+import colors from '../colors'
 import NewGoodPiecesModal from './NewGoodPiecesModal'
 import NewRejectedPiecesModal from './NewRejectedPiecesModal'
 import NewStopsModal from './NewStopsModal'
 import NewScrapsModal from './NewScrapsModal'
 import { useToggle } from './useToggle'
-import MeasurementService, { Unit } from './MeasurementService'
+import MeasurementService, { Unit } from '../MeasurementService'
 import { RouteComponentProps } from '@reach/router'
 
 type UnitsState = {
