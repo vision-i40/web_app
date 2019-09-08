@@ -1,4 +1,4 @@
-import ServerRequest from './ServerRequest'
+import { ServerRequest } from './ServerRequestFactory'
 
 export type Credentials = {
   email: string
@@ -11,7 +11,7 @@ export type AuthSession = {
 }
 
 export type AuthServiceOptions = {
-  request?: ReturnType<typeof ServerRequest>
+  request?: ServerRequest
 }
 
 type SignInResponse = {
