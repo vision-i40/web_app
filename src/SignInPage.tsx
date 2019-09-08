@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { RouteComponentProps } from '@reach/router'
 import useForm from 'react-hook-form'
 import AuthService from './AuthService'
+import ServerRequest from './ServerRequest'
 
 type SignInForm = {
   email: string
@@ -23,7 +24,7 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
   const onSubmit = async (data: SignInForm) => {
     try {
       setState({ isSignIn: true })
-      await AuthService.signIn(data)
+      await AuthService({ request: ServerRequest() }).signIn(data)
       navigate && navigate('/board')
     } catch {
       setState({ isSignIn: false })

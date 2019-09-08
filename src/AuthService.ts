@@ -1,4 +1,4 @@
-import AuthApi from './AuthApi'
+import ServerRequest from './ServerRequest'
 
 export type Credentials = {
   email: string
@@ -10,19 +10,37 @@ export type AuthSession = {
   refresh: string
 }
 
-export type AuthApiClient = {
-  signIn: (credentials: Credentials) => Promise<AuthSession>
+export type AuthServiceOptions = {
+  request: ReturnType<typeof ServerRequest>
 }
 
-const AuthService = (api: AuthApiClient) => ({
+type SignInResponse = {
+  access: string
+  refresh: string
+}
+
+const AuthService = ({ request }: AuthServiceOptions) => ({
   async signIn(credentials: Credentials): Promise<AuthSession> {
-    return api.signIn(credentials).then(saveAuthSession)
+    return request.send<SignInResponse>({
+      method: 'post',
+      path: '/auth/signin',
+      params: credentials
+    })
+    .then(signResponseToAuthSession)
+    .then(saveAuthSession)
   },
 
   isAuthenticated(): boolean {
     return getAuthSession() !== undefined
   }
 })
+
+const signResponseToAuthSession = (signInResponse: SignInResponse): AuthSession => {
+  return {
+    secret: signInResponse.access,
+    refresh: signInResponse.refresh
+  }
+}
 
 const saveAuthSession = (authSession: AuthSession) => {
   window.localStorage.setItem('session', JSON.stringify(authSession))
@@ -34,4 +52,4 @@ const getAuthSession = (): AuthSession | undefined => {
   return authSessionJSON ? JSON.parse(authSessionJSON) : undefined
 }
 
-export default AuthService(AuthApi)
+export default AuthService
