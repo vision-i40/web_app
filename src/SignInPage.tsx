@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { RouteComponentProps } from '@reach/router'
 import useForm from 'react-hook-form'
 import AuthService from './AuthService'
@@ -11,25 +11,40 @@ type SignInForm = {
 
 type SignInState = {
   isSignIn: boolean
+  shouldRender: boolean
 }
 
 const initSignInState = {
-  isSignIn: false
+  isSignIn: false,
+  shouldRender: false
 }
+
+const authService = AuthService({ request: ServerRequest() })
 
 const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
   const [state, setState] = useState<SignInState>(initSignInState)
   const { register, handleSubmit } = useForm<SignInForm>()
 
+  useEffect(() => {
+    if(authService.isAuthenticated()) {
+      navigate && navigate('/board')
+      return
+    }
+
+    setState(state => ({ ...state, shouldRender: true }))
+  }, [navigate])
+
   const onSubmit = async (data: SignInForm) => {
     try {
-      setState({ isSignIn: true })
-      await AuthService({ request: ServerRequest() }).signIn(data)
+      setState(state => ({ ...state, isSignIn: true }))
+      await authService.signIn(data)
       navigate && navigate('/board')
     } catch {
-      setState({ isSignIn: false })
+      setState(state => ({ ...state,  isSignIn: false }))
     }
   }
+
+  if(!state.shouldRender) return <></>
 
   return (
     <div className="container">

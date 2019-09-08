@@ -11,7 +11,7 @@ export type AuthSession = {
 }
 
 export type AuthServiceOptions = {
-  request: ReturnType<typeof ServerRequest>
+  request?: ReturnType<typeof ServerRequest>
 }
 
 type SignInResponse = {
@@ -19,8 +19,10 @@ type SignInResponse = {
   refresh: string
 }
 
-const AuthService = ({ request }: AuthServiceOptions) => ({
+const AuthService = ({ request }: AuthServiceOptions = {}) => ({
   async signIn(credentials: Credentials): Promise<AuthSession> {
+    if(!request) throw new Error('You should set a ServerRequest to use the signIn()')
+    
     return request.send<SignInResponse>({
       method: 'post',
       path: '/auth/signin',

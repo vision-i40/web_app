@@ -10,6 +10,8 @@ type ProtectRouteProps = {
   redirectTo: string
 }
 
+const authService = AuthService()
+
 const ProtectRoute: React.FC<ProtectRouteProps & RouteComponentProps> = ({
   children,
   redirectTo,
@@ -17,7 +19,7 @@ const ProtectRoute: React.FC<ProtectRouteProps & RouteComponentProps> = ({
 }) => {
   const [state, setState] = useState<ProtectRouteState>({ isSafe: false })
   useEffect(() => {
-    AuthService.isAuthenticated()
+    authService.isAuthenticated()
       ? setState({ isSafe: true })
       : navigate && navigate(redirectTo)
   }, [navigate, redirectTo])
