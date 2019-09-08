@@ -16,7 +16,6 @@ const ProtectRoute: React.FC<ProtectRouteProps & RouteComponentProps> = ({
   navigate
 }) => {
   const [state, setState] = useState<ProtectRouteState>({ isSafe: false })
-
   useEffect(() => {
     AuthService.isAuthenticated()
       ? setState({ isSafe: true })
