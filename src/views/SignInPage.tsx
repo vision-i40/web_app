@@ -11,11 +11,13 @@ type SignInForm = {
 type SignInState = {
   isSignIn: boolean
   shouldRender: boolean
+  hasError: boolean
 }
 
 const initSignInState = {
   isSignIn: false,
-  shouldRender: false
+  shouldRender: false,
+  hasError: false
 }
 
 const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
@@ -33,11 +35,11 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
 
   const onSubmit = async (data: SignInForm) => {
     try {
-      setState(state => ({ ...state, isSignIn: true }))
+      setState(state => ({ ...state, isSignIn: true, hasError: false }))
       await container.signIn(data)
       navigate && navigate('/board')
     } catch {
-      setState(state => ({ ...state, isSignIn: false }))
+      setState(state => ({ ...state, isSignIn: false, hasError: true }))
     }
   }
 
@@ -77,6 +79,10 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
                 <button className="btn btn--success btn--block">Entrar</button>
               </div>
             </form>
+
+            {state.hasError && (
+              <p className="text-danger">Usuário ou senha inválidos.</p>
+            )}
           </div>
         </div>
       </div>
