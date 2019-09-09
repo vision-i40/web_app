@@ -39,11 +39,11 @@ const createServerRequest = () => createRequest({
 })
 
 const getServerUrlOrThrowError = (): string => {
-  const { API_URL } = process.env
+  const { REACT_APP_API_URL } = process.env
 
-  if(!API_URL) throw new Error('No process.env.API_URL was defined.')
+  if(!REACT_APP_API_URL) throw new Error('No process.env.REACT_APP_API_URL was defined.')
   
-  return API_URL
+  return REACT_APP_API_URL
 }
 
 export default {
