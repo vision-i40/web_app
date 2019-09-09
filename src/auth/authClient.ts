@@ -1,6 +1,5 @@
 import { HttpClient } from '../types'
-import { AuthClient } from './types'
-import { Credentials } from '../AuthService'
+import { AuthClient, Credentials } from './authTypes'
 
 type SignInResponse = {
   access: string

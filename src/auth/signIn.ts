@@ -1,4 +1,4 @@
-import { AuthClient, Credentials, AuthSession } from './types'
+import { AuthClient, Credentials, AuthSession } from './authTypes'
 import makeSaveAuthSession from './saveAuthSession'
 
 type SignInDependencies = {

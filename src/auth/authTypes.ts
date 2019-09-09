@@ -10,6 +10,7 @@ export type AuthSession = {
 
 export type AuthStorage = {
   setItem: (key: string, value: string) => void
+  getItem: (key: string) => string | null
 }
 
 export type AuthClient = {
