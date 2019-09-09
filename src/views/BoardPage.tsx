@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ResponsivePie } from '@nivo/pie'
-import colors from '../colors'
+import colors from '../config/colors'
 import NewGoodPiecesModal from './NewGoodPiecesModal'
 import NewRejectedPiecesModal from './NewRejectedPiecesModal'
 import NewStopsModal from './NewStopsModal'
