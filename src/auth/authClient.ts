@@ -9,7 +9,7 @@ type SignInResponse = {
 export default (httpClient: HttpClient): AuthClient => ({
   async signIn(credentials: Credentials) {
     return httpClient
-      .post<SignInResponse>('/auth/token', credentials)
+      .post<SignInResponse>('/auth/token/', credentials)
       .then(signInResponseToAuthSession)
   }
 })

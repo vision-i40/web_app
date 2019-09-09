@@ -5,7 +5,7 @@ import makeSaveAuthSession from './auth/saveAuthSession'
 import makeCheckAuthSession from './auth/checkAuthSession'
 
 // Clients
-const httpClient = makeHttpClient()
+const httpClient = makeHttpClient('https://vision-i40-staging.herokuapp.com')
 const authClient = makeAuthClient(httpClient)
 
 // Auth Use Cases

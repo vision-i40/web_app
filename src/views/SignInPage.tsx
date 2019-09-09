@@ -46,7 +46,7 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
   return (
     <div className="container">
       <div className="row center-md">
-        <div className="col-md-4">
+        <div className="col-xs-12 col-md-4">
           <div className="auth">
             <form className="form form--dark" onSubmit={handleSubmit(onSubmit)}>
               <div className="form__group">
