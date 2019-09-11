@@ -47,8 +47,8 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
 
   return (
     <div className="container">
-      <div className="row center-md">
-        <div className="col-xs-12 col-md-4">
+      <div className="row center-xs">
+        <div className="col-xs-12 col-sm-8 col-md-6 col-lg-4">
           <div className="auth">
             <form className="form form--dark" onSubmit={handleSubmit(onSubmit)}>
               <div className="form__group">
@@ -76,7 +76,12 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
               </div>
 
               <div className="form__actions">
-                <button className="btn btn--success btn--block">Entrar</button>
+                <button
+                  disabled={state.isSignIn}
+                  className="btn btn--success btn--block"
+                >
+                  {state.isSignIn ? 'Entrando...' : 'Entrar'}
+                </button>
               </div>
             </form>
 

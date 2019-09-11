@@ -76,7 +76,10 @@ h3 {
 }
 
 button {
-  cursor: pointer;
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
   outline: none;
 }
 
@@ -128,6 +131,11 @@ button {
 
     &:hover {
       background: $success-hover;
+    }
+
+    &:disabled {
+      background: $success-hover;
+      color: $cyan-100;
     }
   }
 
