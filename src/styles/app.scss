@@ -8,8 +8,8 @@ $base-font-family: 'Roboto', sans-serif;
 $base-font-size: 1rem;
 $base-line-height: 1.5 * $base-font-size;
 
-$success: $cyan-300;
-$success-hover: $cyan-500;
+$success: $cyan-500;
+$success-hover: $cyan-600;
 $warning: $amber-500;
 $warning-hover: $amber-700;
 $danger: $deep-orange-400;
@@ -26,7 +26,7 @@ $border-radius: 4px;
 
 $modularscale: (
   base: $base-font-size,
-  ratio: $major-third
+  ratio: $minor-third
 );
 
 *,
@@ -94,16 +94,25 @@ button {
   color: $danger;
 }
 
+.text-warning {
+  color: $warning;
+}
+
 .text-regular {
   font-weight: 400;
 }
 
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .btn {
+  @extend .text-uppercase;
   background: none;
   border: 0;
   padding: $base-line-height * 0.5 1rem;
   line-height: $base-line-height;
-  text-transform: uppercase;
   font-weight: 700;
   transition: all ease-in-out 0.15s;
   border-radius: $border-radius;
@@ -275,15 +284,34 @@ button {
 .form {
   text-align: left;
 
+  label {
+    @extend .text-uppercase;
+    font-weight: 700;
+    font-size: ms(-1);
+    line-height: $base-line-height;
+    margin-bottom: $base-line-height * 0.25;
+    display: block;
+  }
+
   &--dark {
     label {
+      color: $blue-grey-100;
+    }
+
+    input.form__field,
+    input.form__field:-webkit-autofill {
+      background-color: $blue-grey-700;
+      border-color: $blue-grey-700;
+      box-shadow: 0 0 0px 1000px $blue-grey-700 inset;
       color: $white;
+      -webkit-text-fill-color: $white;
+      caret-color: $white;
     }
   }
 }
 
 .form__group {
-  margin-bottom: $base-line-height;
+  margin-bottom: $base-line-height * 0.75;
 }
 
 input.form__field,
@@ -296,6 +324,12 @@ input.form__field,
   border-radius: $border-radius;
   border: 1px solid $blue-grey-100;
   background: $light-bg;
+  outline: 0;
+
+  &:active,
+  &:focus {
+    border-color: $success;
+  }
 }
 
 .form__field--select {
@@ -321,8 +355,16 @@ input.form__field,
   }
 }
 
+.form__actions {
+  margin-top: $base-line-height;
+}
+
 .auth {
-  margin-top: $base-line-height * 2;
+  margin-top: $base-line-height * 3;
+}
+
+.auth__errors {
+  padding: #{0.5 * $base-line-height} 0;
 }
 
 .operation {

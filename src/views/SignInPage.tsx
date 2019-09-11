@@ -75,13 +75,15 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
                 />
               </div>
 
-              <div className="form__group">
+              <div className="form__actions">
                 <button className="btn btn--success btn--block">Entrar</button>
               </div>
             </form>
 
             {state.hasError && (
-              <p className="text-danger">Usuário ou senha inválidos.</p>
+              <p className="text-warning auth__errors">
+                Usuário ou senha inválidos.
+              </p>
             )}
           </div>
         </div>
