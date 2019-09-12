@@ -17,7 +17,7 @@ const ProtectRoute: React.FC<ProtectRouteProps & RouteComponentProps> = ({
 }) => {
   const [state, setState] = useState<ProtectRouteState>({ isSafe: false })
   useEffect(() => {
-    container.checkAuthSession()
+    container.authSession.isActive()
       ? setState({ isSafe: true })
       : navigate && navigate(redirectTo)
   }, [navigate, redirectTo])
