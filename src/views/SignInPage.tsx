@@ -37,7 +37,8 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
     try {
       setState(state => ({ ...state, isSignIn: true, hasError: false }))
       await container.signIn(data)
-      navigate && navigate('/board')
+      const userProfile = await container.getUserProfile()
+      navigate && navigate(`/companies/${userProfile.default_company.id}`)
     } catch {
       setState(state => ({ ...state, isSignIn: false, hasError: true }))
     }

@@ -1,3 +1,6 @@
+export type HttpMethod = <T>(path: string, params?: {}) => Promise<T>
+
 export type HttpClient = {
-  post: <T>(path: string, params: any, headers?: {[key: string]: string}) => Promise<T>
+  post: HttpMethod
+  get: HttpMethod
 }

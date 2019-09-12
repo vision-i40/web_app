@@ -1,14 +1,22 @@
 import axios from 'axios'
 import { HttpClient } from './types'
 
-export default (baseUrl: string): HttpClient => ({
-  async post<T>(
-    path: string,
-    params: any,
-    headers?: { [key: string]: string }
-  ): Promise<T> {
-    return axios
-      .post<T>(`${baseUrl}${path}`, params, { headers })
-      .then(response => response.data)
+type GetHeaders = () => { [key: string]: string } | undefined
+
+export default (baseUrl: string, getHeaders?: GetHeaders): HttpClient => {
+  return {
+    async post<T>(path: string, params?: {}): Promise<T> {
+      return axios
+        .post<T>(`${baseUrl}${path}`, params, {
+          headers: getHeaders && getHeaders()
+        })
+        .then(response => response.data)
+    },
+
+    async get<T>(path: string): Promise<T> {
+      return axios
+        .get<T>(`${baseUrl}${path}`, { headers: getHeaders && getHeaders() })
+        .then(response => response.data)
+    }
   }
-})
+}
