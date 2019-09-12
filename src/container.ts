@@ -2,9 +2,7 @@ import config from './config'
 import makeHttpClient from './httpClient'
 import makeSignIn from './auth/signIn'
 import makeAuthClient from './auth/authClient'
-import makeSaveAuthSession from './auth/saveAuthSession'
-import makeCheckAuthSession from './auth/checkAuthSession'
-import makeGetAuthSession from './auth/getAuthSession'
+import makeAuthSession from './auth/authSession'
 import makeGetUserProfile from './profile/getUserProfile'
 
 // Clients
@@ -13,19 +11,17 @@ const authClient = makeAuthClient(httpClient)
 
 // Auth Use Cases
 const authStorage = window.localStorage
-const saveAuthSession = makeSaveAuthSession(authStorage)
-const checkAuthSession = makeCheckAuthSession(authStorage)
-const getAuthSession = makeGetAuthSession(authStorage)
-const signIn = makeSignIn({ authClient, saveAuthSession })
+const authSession = makeAuthSession(authStorage)
+const signIn = makeSignIn({ authClient, authSession })
 
 // API Use Cases
 const makeAuthHeaders = () => {
-  const authSession = getAuthSession()
+  const sessionData = authSession.get()
 
-  if (!authSession) return
+  if (!sessionData) return
 
   return {
-    authorization: `Bearer ${authSession.secret}`
+    authorization: `Bearer ${sessionData.secret}`
   }
 }
 
@@ -34,6 +30,6 @@ const getUserProfile = makeGetUserProfile({ httpClient: secureHttpClient })
 
 export default {
   signIn,
-  checkAuthSession,
+  authSession,
   getUserProfile
 }

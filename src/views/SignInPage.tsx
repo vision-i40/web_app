@@ -25,7 +25,7 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
   const { register, handleSubmit } = useForm<SignInForm>()
 
   useEffect(() => {
-    if (container.checkAuthSession()) {
+    if (container.authSession.isActive()) {
       navigate && navigate('/board')
       return
     }

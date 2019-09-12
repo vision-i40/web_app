@@ -3,7 +3,7 @@ export type Credentials = {
   password: string
 }
 
-export type AuthSession = {
+export type AuthSessionData = {
   secret: string
   refresh: string
 }
@@ -14,5 +14,11 @@ export type AuthStorage = {
 }
 
 export type AuthClient = {
-  signIn: (credentials: Credentials) => Promise<AuthSession>
+  signIn: (credentials: Credentials) => Promise<AuthSessionData>
+}
+
+export type AuthSession = {
+  get(): AuthSessionData | undefined
+  isActive(): boolean
+  save(session: AuthSessionData): AuthSessionData
 }

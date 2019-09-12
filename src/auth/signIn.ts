@@ -1,13 +1,17 @@
-import { AuthClient, Credentials, AuthSession } from './authTypes'
-import makeSaveAuthSession from './saveAuthSession'
+import {
+  AuthClient,
+  Credentials,
+  AuthSessionData,
+  AuthSession
+} from './authTypes'
 
 type SignInDependencies = {
   authClient: AuthClient
-  saveAuthSession: ReturnType<typeof makeSaveAuthSession>
+  authSession: AuthSession
 }
 
-export default ({ authClient, saveAuthSession }: SignInDependencies) => (
+export default ({ authClient, authSession }: SignInDependencies) => (
   credentials: Credentials
-): Promise<AuthSession> => {
-  return authClient.signIn(credentials).then(saveAuthSession)
+): Promise<AuthSessionData> => {
+  return authClient.signIn(credentials).then(authSession.save)
 }
