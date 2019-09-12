@@ -1,9 +1,4 @@
-import {
-  AuthClient,
-  Credentials,
-  AuthSessionData,
-  AuthSession
-} from './authTypes'
+import { AuthClient, Credentials, AuthSessionData, AuthSession } from '../types'
 
 type SignInDependencies = {
   authClient: AuthClient
