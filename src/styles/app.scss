@@ -197,7 +197,7 @@ button {
 
 .topbar {
   color: $white;
-  background-color: $dark-bg;
+  background-color: $blue-grey-700;
   @include box_shadow(2);
 }
 
@@ -208,14 +208,33 @@ button {
 }
 
 .content {
-  padding: #{$base-line-height * 1.5} 0;
+  padding: $base-line-height 0;
 }
 
 .card {
   @include box_shadow(1);
-  padding: #{$base-line-height};
+  padding: #{$base-line-height * 0.75};
   border-radius: $border-radius;
   background-color: $white;
+
+  &--icon {
+    display: flex;
+    align-items: center;
+
+    .card__icon {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.card__icon {
+  font-size: ms(1);
+  width: 2 * $base-line-height;
+  height: 2 * $base-line-height;
+  line-height: 2 * $base-line-height;
+  text-align: center;
+  background-color: $blue-grey-50;
+  border-radius: 99999px;
 }
 
 .left-bar {
@@ -418,6 +437,7 @@ input.form__field,
 
 .auth {
   background-color: $dark-bg;
+  height: 100%;
 }
 
 .auth .form {

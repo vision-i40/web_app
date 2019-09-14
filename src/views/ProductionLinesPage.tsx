@@ -51,11 +51,18 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({
           ) : (
             state.productionLines.map(productionLine => (
               <div
-                className="card left-bar left-bar--success"
+                className="card card--icon left-bar left-bar--success"
                 key={productionLine.id}
               >
-                <div className="h6">
-                  <b>{productionLine.name}</b>
+                <div className="card__icon">
+                  <i className="fas fa-network-wired"></i>
+                </div>
+
+                <div className="card__content">
+                  <div>
+                    <b>{productionLine.name}</b>
+                  </div>
+                  <div>Biscoito</div>
                 </div>
               </div>
             ))
