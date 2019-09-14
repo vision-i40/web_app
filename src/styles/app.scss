@@ -228,6 +228,10 @@ button {
   }
 }
 
+.card + .card {
+  margin-top: 4px
+}
+
 .card__icon {
   font-size: ms(1);
   width: 2 * $base-line-height;
