@@ -44,7 +44,7 @@ body,
 
 html {
   font-size: ms(0);
-  background-color: $dark-bg;
+  background-color: $light-bg;
 }
 
 body {
@@ -70,9 +70,28 @@ h2 {
   line-height: $base-line-height * 3;
 }
 
-h3 {
+h3,
+.h3 {
   font-size: ms(4);
   line-height: $base-line-height * 2;
+}
+
+h4,
+.h4 {
+  font-size: ms(3);
+  line-height: $base-line-height * 2;
+}
+
+h5,
+.h5 {
+  font-size: ms(2);
+  line-height: $base-line-height;
+}
+
+h6,
+.h6 {
+  font-size: ms(1);
+  line-height: $base-line-height;
 }
 
 button {
@@ -86,7 +105,6 @@ button {
 .container {
   width: 100%;
   max-width: 1280px;
-  padding: 0 1rem;
 }
 
 .text-secondary {
@@ -174,6 +192,36 @@ button {
 
   i {
     margin-right: 0.5rem;
+  }
+}
+
+.topbar {
+  color: $white;
+  background-color: $dark-bg;
+  @include box_shadow(2);
+}
+
+.topbar__title {
+  font-size: ms(2);
+  line-height: $base-line-height * 2;
+  padding: #{$base-line-height * 0.5} 0;
+}
+
+.content {
+  padding: #{$base-line-height * 1.5} 0;
+}
+
+.card {
+  @include box_shadow(1);
+  padding: #{$base-line-height};
+  border-radius: $border-radius;
+}
+
+.left-bar {
+  border-left: 5px solid $light-bg;
+
+  &--success {
+    border-color: $success;
   }
 }
 
@@ -368,6 +416,10 @@ input.form__field,
 }
 
 .auth {
+  background-color: $dark-bg;
+}
+
+.auth .form {
   margin-top: $base-line-height * 3;
 }
 

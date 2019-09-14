@@ -4,6 +4,7 @@ import makeSignIn from './auth/signIn'
 import makeAuthClient from './auth/authClient'
 import makeAuthSession from './auth/authSession'
 import makeGetUserProfile from './profile/getUserProfile'
+import makeGetProductionLines from './getProductionLines'
 
 // Clients
 const httpClient = makeHttpClient(config.apiUrl)
@@ -27,9 +28,13 @@ const makeAuthHeaders = () => {
 
 const secureHttpClient = makeHttpClient(config.apiUrl, makeAuthHeaders)
 const getUserProfile = makeGetUserProfile({ httpClient: secureHttpClient })
+const getProductionLines = makeGetProductionLines({
+  httpClient: secureHttpClient
+})
 
 export default {
   signIn,
   authSession,
-  getUserProfile
+  getUserProfile,
+  getProductionLines
 }

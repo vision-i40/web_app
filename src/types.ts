@@ -29,3 +29,8 @@ export type AuthSession = {
   isActive(): boolean
   save(session: AuthSessionData): AuthSessionData
 }
+
+export type ProductionLine = {
+  id: number | string
+  name: string
+}

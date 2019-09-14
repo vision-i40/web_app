@@ -38,7 +38,10 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
       setState(state => ({ ...state, isSignIn: true, hasError: false }))
       await container.signIn(data)
       const userProfile = await container.getUserProfile()
-      navigate && navigate(`/companies/${userProfile.default_company.id}`)
+      navigate &&
+        navigate(
+          `/companies/${userProfile.default_company.id}/production_lines`
+        )
     } catch {
       setState(state => ({ ...state, isSignIn: false, hasError: true }))
     }
@@ -47,51 +50,49 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
   if (!state.shouldRender) return <></>
 
   return (
-    <div className="container">
+    <div className="container auth">
       <div className="row center-xs">
         <div className="col-xs-12 col-sm-8 col-md-6 col-lg-4">
-          <div className="auth">
-            <form className="form form--dark" onSubmit={handleSubmit(onSubmit)}>
-              <div className="form__group">
-                <label htmlFor="email">E-mail</label>
-                <input
-                  required
-                  id="email"
-                  name="email"
-                  type="email"
-                  className="form__field"
-                  ref={register}
-                />
-              </div>
+          <form className="form form--dark" onSubmit={handleSubmit(onSubmit)}>
+            <div className="form__group">
+              <label htmlFor="email">E-mail</label>
+              <input
+                required
+                id="email"
+                name="email"
+                type="email"
+                className="form__field"
+                ref={register}
+              />
+            </div>
 
-              <div className="form__group">
-                <label htmlFor="id">Senha</label>
-                <input
-                  required
-                  id="password"
-                  name="password"
-                  type="password"
-                  className="form__field"
-                  ref={register}
-                />
-              </div>
+            <div className="form__group">
+              <label htmlFor="id">Senha</label>
+              <input
+                required
+                id="password"
+                name="password"
+                type="password"
+                className="form__field"
+                ref={register}
+              />
+            </div>
 
-              <div className="form__actions">
-                <button
-                  disabled={state.isSignIn}
-                  className="btn btn--success btn--block"
-                >
-                  {state.isSignIn ? 'Entrando...' : 'Entrar'}
-                </button>
-              </div>
-            </form>
+            <div className="form__actions">
+              <button
+                disabled={state.isSignIn}
+                className="btn btn--success btn--block"
+              >
+                {state.isSignIn ? 'Entrando...' : 'Entrar'}
+              </button>
+            </div>
+          </form>
 
-            {state.hasError && (
-              <p className="text-warning auth__errors">
-                Usuário ou senha inválidos.
-              </p>
-            )}
-          </div>
+          {state.hasError && (
+            <p className="text-warning auth__errors">
+              Usuário ou senha inválidos.
+            </p>
+          )}
         </div>
       </div>
     </div>
