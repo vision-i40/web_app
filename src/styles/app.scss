@@ -215,6 +215,7 @@ button {
   @include box_shadow(1);
   padding: #{$base-line-height};
   border-radius: $border-radius;
+  background-color: $white;
 }
 
 .left-bar {
