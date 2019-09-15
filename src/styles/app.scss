@@ -214,6 +214,8 @@ button {
 
 .card {
   @include box_shadow(1);
+  color: inherit;
+  text-decoration: none;
   padding: #{$base-line-height * 0.75};
   border-radius: $border-radius;
   background-color: $white;
@@ -230,6 +232,14 @@ button {
 
 .card + .card {
   margin-top: 4px
+}
+
+a.card {
+  transition: all 0.25s ease-in-out;
+  
+  &:hover {
+    background-color: $blue-grey-50;
+  }
 }
 
 .card__icon {

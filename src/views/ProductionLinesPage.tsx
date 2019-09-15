@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { RouteComponentProps } from '@reach/router'
+import { RouteComponentProps, Link } from '@reach/router'
 import { ProductionLine } from '../types'
 import container from '../container'
 
@@ -50,9 +50,11 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({
             <p>Loading...</p>
           ) : (
             state.productionLines.map(productionLine => (
-              <div
-                className="card card--icon left-bar left-bar--success"
+              <Link
+                title={productionLine.name}
                 key={productionLine.id}
+                className="card card--icon left-bar left-bar--success"
+                to={`/companies/${companyId}/production_lines/${productionLine.id}`}
               >
                 <div className="card__icon">
                   <i className="fas fa-network-wired"></i>
@@ -62,9 +64,15 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({
                   <div>
                     <b>{productionLine.name}</b>
                   </div>
-                  <div>Biscoito</div>
+                  {productionLine.in_progress_order ? (
+                    <span>{productionLine.in_progress_order.product.name}</span>
+                  ) : (
+                    <span className="text-secondary">
+                      Ordem de produção não definida
+                    </span>
+                  )}
                 </div>
-              </div>
+              </Link>
             ))
           )}
         </div>

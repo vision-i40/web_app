@@ -30,7 +30,16 @@ export type AuthSession = {
   save(session: AuthSessionData): AuthSessionData
 }
 
+export type Product = {
+  name: string
+}
+
+export type ProductionOrder = {
+  product: Product
+}
+
 export type ProductionLine = {
   id: number | string
   name: string
+  in_progress_order?: ProductionOrder
 }
