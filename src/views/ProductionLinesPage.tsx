@@ -25,6 +25,10 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({
   )
 
   useEffect(() => {
+    window.document.title = 'Linhas de Produção - Vision'
+  }, [])
+
+  useEffect(() => {
     if (!companyId) return
 
     container.getProductionLines(companyId).then(productionLines => {
