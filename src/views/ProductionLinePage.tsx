@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from '@reach/router'
 import { ProductionLine } from '../types'
-import container from '../container'
 import ProductionLineBoard from './ProductionOrderBoard'
+import getProductionLine from '../getProductionLine'
 
 type ProductionLinePageProps = RouteComponentProps<{
   companyId: string
@@ -32,9 +32,9 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
   useEffect(() => {
     if (!companyId || !productionLineId) return
 
-    container
-      .getProductionLine(companyId, productionLineId)
-      .then(productionLine => setState({ productionLine }))
+    getProductionLine(companyId, productionLineId).then(productionLine =>
+      setState({ productionLine })
+    )
   }, [companyId, productionLineId])
 
   return (

@@ -17,6 +17,10 @@ const authSession = (storage: AuthStorage): AuthSession => {
     save(session: AuthSessionData) {
       storage.setItem('session', JSON.stringify(session))
       return session
+    },
+
+    clear() {
+      storage.removeItem('session')
     }
   }
 }

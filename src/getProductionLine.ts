@@ -1,18 +1,13 @@
-import { HttpClient, ProductionLine } from './types'
+import { ProductionLine } from './types'
+import container from './container'
 
-type GetProductionLinesDependency = {
-  httpClient: HttpClient
-}
-
-const GetProductionLine = ({
-  httpClient
-}: GetProductionLinesDependency) => async (
+const getProductionLine = async (
   companyId: string | number,
   productionLineId: string | number
 ) => {
-  return httpClient.get<ProductionLine>(
+  return container.secureHttpClient.get<ProductionLine>(
     `/v1/companies/${companyId}/production_lines/${productionLineId}/`
   )
 }
 
-export default GetProductionLine
+export default getProductionLine

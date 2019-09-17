@@ -1,8 +1,18 @@
 export type HttpMethod = <T>(path: string, params?: {}) => Promise<T>
 
+export type HttpError = {
+  message: string
+  response: {
+    status: number
+  }
+}
+
+export type HttpErrorHandler = (error: HttpError | Error) => void
+
 export type HttpClient = {
   post: HttpMethod
   get: HttpMethod
+  onError: (handler: HttpErrorHandler) => void
 }
 
 export type Credentials = {
@@ -18,6 +28,7 @@ export type AuthSessionData = {
 export type AuthStorage = {
   setItem: (key: string, value: string) => void
   getItem: (key: string) => string | null
+  removeItem: (key: string) => void
 }
 
 export type AuthClient = {
@@ -25,9 +36,10 @@ export type AuthClient = {
 }
 
 export type AuthSession = {
-  get(): AuthSessionData | undefined
-  isActive(): boolean
-  save(session: AuthSessionData): AuthSessionData
+  get: () => AuthSessionData | undefined
+  isActive: () => boolean
+  save: (session: AuthSessionData) => AuthSessionData
+  clear: () => void
 }
 
 export type Product = {
