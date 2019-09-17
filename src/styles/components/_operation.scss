@@ -1,0 +1,132 @@
+.operation {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.operation__main {
+  flex: 1;
+  padding: #{$base-line-height * 2} 2rem;
+}
+
+.operation__main__wrapper {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  text-align: center;
+}
+
+.operation__main__chart {
+  width: $base-line-height * 15;
+  height: $base-line-height * 15;
+  padding: $base-line-height;
+}
+
+.operation__data {
+  background: $white;
+  padding: #{$base-line-height * 1} 0;
+}
+
+.operation__info {
+  text-align: center;
+
+  &:nth-child(1) {
+    margin-bottom: $base-line-height;
+  }
+
+  &--warning .operation__info__value{
+    color: $warning;
+  }
+
+  &--danger .operation__info__value{
+    color: $danger;
+  }
+
+  &--danger-dark .operation__info__value{
+    color: $danger-dark;
+  }
+}
+
+.operation__info__label {
+  font-size: ms(0);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.operation__info__value {
+  font-size: ms(4);
+  line-height: $base-line-height * 2;
+  font-weight: 700;
+  color: $success;
+}
+
+.operation__actions {
+  border-top: 2px solid $blue-grey-50;
+}
+
+.operation__actions,
+.operation__actions > .container {
+  background-color: $white;
+  display: flex;
+  padding: 0;
+}
+
+.operation__btn {
+  border: 0;
+  color: $success;
+  border-bottom: 8px solid $success;
+  line-height: $base-line-height * 3;
+  display: block;
+  width: 100%;
+  font-size: ms(4);
+  transition: all ease-in-out 0.15s;
+
+  &:hover {
+    color: $success-hover;
+  }
+
+  &--warning {
+    color: $warning;
+    border-bottom-color: $warning;
+
+    &:hover {
+      color: $warning-hover;
+    }
+  }
+
+  &--danger {
+    color: $danger;
+    border-bottom-color: $danger;
+
+    &:hover {
+      color: $danger-hover;
+    }
+  }
+
+  &--danger-dark {
+    color: $danger-dark;
+    border-bottom-color: $danger-dark;
+
+    &:hover {
+      color: $danger-dark-hover;
+    }
+  }
+}
+
+@media only screen and (min-width: 48em) {
+  .operation__main__wrapper {
+    flex-direction: row;
+    text-align: left;
+    justify-content: center;
+  }
+
+  .operation__main__chart {
+    padding-right: 2rem;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  .operation__btn {
+    line-height: $base-line-height * 5;
+  }
+}

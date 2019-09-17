@@ -1,0 +1,24 @@
+$base-font-family: 'Roboto', sans-serif;
+$base-font-size: 1rem;
+$base-line-height: 1.5 * $base-font-size;
+
+$success: $cyan-500;
+$success-hover: $cyan-600;
+$warning: $amber-500;
+$warning-hover: $amber-700;
+$danger: $deep-orange-400;
+$danger-hover: $deep-orange-600;
+$danger-dark: $red-700;
+$danger-dark-hover: $red-900;
+
+$base-font-color: $blue-grey-900;
+$secondary-font-color: $blue-grey-500;
+$light-bg: $blue-grey-C25;
+$dark-bg: $blue-grey-900;
+
+$border-radius: 4px;
+
+$modularscale: (
+  base: $base-font-size,
+  ratio: $minor-third
+);

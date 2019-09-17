@@ -38,7 +38,7 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
   }, [companyId, productionLineId])
 
   return (
-    <>
+    <div className="panel">
       <div className="topbar">
         <div className="container">
           <div className="topbar__title">Linha de Produção</div>
@@ -64,7 +64,7 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

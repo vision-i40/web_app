@@ -114,8 +114,8 @@ const ProductionOrderBoard: React.FC<ProductionOrderBoardProps> = ({
               </div>
               <div className="operation__main__info">
                 <hgroup>
+                  <h3 className="text-secondary">#{productionOrder.code}</h3>
                   <h1>{productionOrder.product.name}</h1>
-                  <h2 className="text-secondary">{productionOrder.code}</h2>
                   <h3 className="text-secondary text-regular">
                     Iniciado de 10:00:00
                   </h3>
@@ -128,28 +128,28 @@ const ProductionOrderBoard: React.FC<ProductionOrderBoardProps> = ({
         <div className="operation__data">
           <div className="container">
             <div className="row">
-              <div className="col-xs">
+              <div className="col-xs-6 col-md-3">
                 <div className="operation__info">
                   <div className="operation__info__label">Boas</div>
                   <div className="operation__info__value">37.675</div>
                 </div>
               </div>
 
-              <div className="col-xs">
+              <div className="col-xs-6 col-md-3">
                 <div className="operation__info operation__info--warning">
                   <div className="operation__info__label">Rejeitadas</div>
                   <div className="operation__info__value">37.675</div>
                 </div>
               </div>
 
-              <div className="col-xs">
+              <div className="col-xs-6 col-md-3">
                 <div className="operation__info operation__info--danger">
                   <div className="operation__info__label">Paradas</div>
                   <div className="operation__info__value">37.675</div>
                 </div>
               </div>
 
-              <div className="col-xs">
+              <div className="col-xs-6 col-md-3">
                 <div className="operation__info operation__info--danger-dark">
                   <div className="operation__info__label">Refugos</div>
                   <div className="operation__info__value">37.675</div>

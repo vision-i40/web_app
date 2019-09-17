@@ -3,31 +3,8 @@
 @import '~flexboxgrid/dist/flexboxgrid';
 @import 'colors';
 @import 'shadows';
-
-$base-font-family: 'Roboto', sans-serif;
-$base-font-size: 1rem;
-$base-line-height: 1.5 * $base-font-size;
-
-$success: $cyan-500;
-$success-hover: $cyan-600;
-$warning: $amber-500;
-$warning-hover: $amber-700;
-$danger: $deep-orange-400;
-$danger-hover: $deep-orange-600;
-$danger-dark: $red-700;
-$danger-dark-hover: $red-900;
-
-$base-font-color: $blue-grey-900;
-$secondary-font-color: $blue-grey-500;
-$light-bg: $blue-grey-C25;
-$dark-bg: $blue-grey-900;
-
-$border-radius: 4px;
-
-$modularscale: (
-  base: $base-font-size,
-  ratio: $minor-third
-);
+@import 'variables';
+@import 'components/operation';
 
 *,
 input {
@@ -38,7 +15,8 @@ html,
 body,
 #root,
 .container,
-*[role="group"] {
+*[role="group"],
+.panel {
   height: 100%;
 }
 
@@ -196,6 +174,11 @@ button {
   }
 }
 
+.panel {
+  display: flex;
+  flex-direction: column;
+}
+
 .topbar {
   color: $white;
   background-color: $blue-grey-700;
@@ -206,6 +189,10 @@ button {
   font-size: ms(2);
   line-height: $base-line-height * 2;
   padding: #{$base-line-height * 0.5} 0;
+}
+
+.content {
+  flex: 1;
 }
 
 .content:not(.content--no-spacing) {
@@ -461,115 +448,4 @@ input.form__field,
 
 .auth__errors {
   padding: #{0.5 * $base-line-height} 0;
-}
-
-.operation {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.operation__main {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding: #{$base-line-height * 2} 2rem;
-}
-
-.operation__main__wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.operation__main__chart {
-  width: $base-line-height * 15;
-  height: $base-line-height * 15;
-  padding-right: 3rem;
-}
-
-.operation__data {
-  background: $white;
-  padding: #{$base-line-height * 1} 0;
-}
-
-.operation__info {
-  text-align: center;
-
-  &--warning .operation__info__value{
-    color: $warning;
-  }
-
-  &--danger .operation__info__value{
-    color: $danger;
-  }
-
-  &--danger-dark .operation__info__value{
-    color: $danger-dark;
-  }
-}
-
-.operation__info__label {
-  font-size: ms(0);
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.operation__info__value {
-  font-size: ms(4);
-  line-height: $base-line-height * 2;
-  font-weight: 700;
-  color: $success;
-}
-
-.operation__actions {
-  border-top: 2px solid $blue-grey-50;
-}
-
-.operation__actions,
-.operation__actions > .container {
-  background-color: $white;
-  display: flex;
-}
-
-.operation__btn {
-  border: 0;
-  color: $success;
-  border-bottom: 8px solid $success;
-  line-height: $base-line-height * 5;
-  display: block;
-  width: 100%;
-  font-size: ms(4);
-  transition: all ease-in-out 0.15s;
-
-  &:hover {
-    color: $success-hover;
-  }
-
-  &--warning {
-    color: $warning;
-    border-bottom-color: $warning;
-
-    &:hover {
-      color: $warning-hover;
-    }
-  }
-
-  &--danger {
-    color: $danger;
-    border-bottom-color: $danger;
-
-    &:hover {
-      color: $danger-hover;
-    }
-  }
-
-  &--danger-dark {
-    color: $danger-dark;
-    border-bottom-color: $danger-dark;
-
-    &:hover {
-      color: $danger-dark-hover;
-    }
-  }
 }
