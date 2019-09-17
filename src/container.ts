@@ -8,20 +8,18 @@ import makeGetUserProfile from './profile/getUserProfile'
 import makeGetProductionLines from './getProductionLines'
 import makeGetProductionLine from './getProductionLine'
 
-// Clients
+// Infra
 const httpClient = makeHttpClient({ baseUrl: config.apiUrl })
 const authClient = makeAuthClient(httpClient)
-
-// Auth Use Cases
 const authStorage = window.localStorage
 const authSession = makeAuthSession(authStorage)
-const signIn = makeSignIn({ authClient, authSession })
-
-// API Use Cases=
 const secureHttpClient = makeSecureHttpClient({
   baseUrl: config.apiUrl,
   authSession: authSession
 })
+
+// Use cases
+const signIn = makeSignIn({ authClient, authSession })
 const getUserProfile = makeGetUserProfile({ httpClient: secureHttpClient })
 const getProductionLines = makeGetProductionLines({
   httpClient: secureHttpClient
