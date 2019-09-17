@@ -8,9 +8,9 @@ type GetProductionLinesResponse = {
   results: ProductionLine[]
 }
 
-const getUserProfile = ({ httpClient }: GetProductionLinesDependency) => async (
-  companyId: string | number
-) => {
+const getProductionLines = ({
+  httpClient
+}: GetProductionLinesDependency) => async (companyId: string | number) => {
   return httpClient
     .get<GetProductionLinesResponse>(
       `/v1/companies/${companyId}/production_lines/`
@@ -18,4 +18,4 @@ const getUserProfile = ({ httpClient }: GetProductionLinesDependency) => async (
     .then(response => response.results)
 }
 
-export default getUserProfile
+export default getProductionLines

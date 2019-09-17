@@ -208,7 +208,7 @@ button {
   padding: #{$base-line-height * 0.5} 0;
 }
 
-.content {
+.content:not(.content--no-spacing) {
   padding: $base-line-height 0;
 }
 
@@ -464,7 +464,6 @@ input.form__field,
 }
 
 .operation {
-  background: $white;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -490,8 +489,8 @@ input.form__field,
 }
 
 .operation__data {
-  background: $light-bg;
-  padding: #{$base-line-height * 2} 0;
+  background: $white;
+  padding: #{$base-line-height * 1} 0;
 }
 
 .operation__info {
@@ -524,44 +523,53 @@ input.form__field,
 }
 
 .operation__actions {
+  border-top: 2px solid $blue-grey-50;
+}
+
+.operation__actions,
+.operation__actions > .container {
+  background-color: $white;
   display: flex;
 }
 
 .operation__btn {
   border: 0;
-  background: $success;
-  line-height: $base-line-height * 7;
+  color: $success;
+  border-bottom: 8px solid $success;
+  line-height: $base-line-height * 5;
   display: block;
   width: 100%;
   font-size: ms(4);
-  color: $white;
   transition: all ease-in-out 0.15s;
 
   &:hover {
-    background: $success-hover;
+    color: $success-hover;
   }
 
   &--warning {
-    background: $warning;
+    color: $warning;
+    border-bottom-color: $warning;
 
     &:hover {
-      background: $warning-hover;
+      color: $warning-hover;
     }
   }
 
   &--danger {
-    background: $danger;
+    color: $danger;
+    border-bottom-color: $danger;
 
     &:hover {
-      background: $danger-hover;
+      color: $danger-hover;
     }
   }
 
   &--danger-dark {
-    background: $danger-dark;
+    color: $danger-dark;
+    border-bottom-color: $danger-dark;
 
     &:hover {
-      background: $danger-dark-hover;
+      color: $danger-dark-hover;
     }
   }
 }

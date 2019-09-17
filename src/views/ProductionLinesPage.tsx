@@ -50,35 +50,35 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({
 
       <div className="content">
         <div className="container">
-          {state.isLoading || !state.productionLines ? (
-            <p>Loading...</p>
-          ) : (
-            state.productionLines.map(productionLine => (
-              <Link
-                title={productionLine.name}
-                key={productionLine.id}
-                className="card card--icon left-bar left-bar--success"
-                to={`/companies/${companyId}/production_lines/${productionLine.id}`}
-              >
-                <div className="card__icon">
-                  <i className="fas fa-network-wired"></i>
-                </div>
-
-                <div className="card__content">
-                  <div>
-                    <b>{productionLine.name}</b>
+          {state.isLoading || !state.productionLines
+            ? 'Carregando...'
+            : state.productionLines.map(productionLine => (
+                <Link
+                  title={productionLine.name}
+                  key={productionLine.id}
+                  className="card card--icon left-bar left-bar--success"
+                  to={`/companies/${companyId}/production_lines/${productionLine.id}`}
+                >
+                  <div className="card__icon">
+                    <i className="fas fa-network-wired"></i>
                   </div>
-                  {productionLine.in_progress_order ? (
-                    <span>{productionLine.in_progress_order.product.name}</span>
-                  ) : (
-                    <span className="text-secondary">
-                      Ordem de produção não definida
-                    </span>
-                  )}
-                </div>
-              </Link>
-            ))
-          )}
+
+                  <div className="card__content">
+                    <div>
+                      <b>{productionLine.name}</b>
+                    </div>
+                    {productionLine.in_progress_order ? (
+                      <span>
+                        {productionLine.in_progress_order.product.name}
+                      </span>
+                    ) : (
+                      <span className="text-secondary">
+                        Ordem de produção não definida
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              ))}
         </div>
       </div>
     </>

@@ -7,7 +7,11 @@ import NewStopsModal from './NewStopsModal'
 import NewScrapsModal from './NewScrapsModal'
 import { useToggle } from './useToggle'
 import MeasurementService, { Unit } from '../MeasurementService'
-import { RouteComponentProps } from '@reach/router'
+import { ProductionOrder } from '../types'
+
+type ProductionOrderBoardProps = {
+  productionOrder: ProductionOrder
+}
 
 type UnitsState = {
   items: Unit[] | undefined
@@ -17,19 +21,6 @@ type UnitsState = {
 type BoardState = {
   units: UnitsState
 }
-
-const data = [
-  {
-    id: 'completed',
-    value: 126,
-    color: colors.SUCCESS
-  },
-  {
-    id: 'remaining',
-    value: 567,
-    color: colors.SECONDARY
-  }
-]
 
 const toggleNames = [
   'newGoodPieces',
@@ -45,7 +36,22 @@ const initBoardState: BoardState = {
   }
 }
 
-const BoardPage: React.FC<RouteComponentProps> = () => {
+const data = [
+  {
+    id: 'completed',
+    value: 126,
+    color: colors.SUCCESS
+  },
+  {
+    id: 'remaining',
+    value: 567,
+    color: colors.SECONDARY
+  }
+]
+
+const ProductionOrderBoard: React.FC<ProductionOrderBoardProps> = ({
+  productionOrder
+}) => {
   const { toggle, getToggleValue } = useToggle(toggleNames)
   const [boardState, setBoardState] = useState<BoardState>(initBoardState)
 
@@ -81,9 +87,9 @@ const BoardPage: React.FC<RouteComponentProps> = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="operation">
-          <div className="operation__main">
+      <div className="operation">
+        <div className="operation__main">
+          <div className="container">
             <div className="operation__main__wrapper">
               <div className="operation__main__chart">
                 <div className="chart chart--pie">
@@ -100,14 +106,16 @@ const BoardPage: React.FC<RouteComponentProps> = () => {
                   />
                   <div className="chart__center">
                     <div className="chart__title">100%</div>
-                    <div className="chart__subtitle">2.000 / 3.000</div>
+                    <div className="chart__subtitle">
+                      {productionOrder.production_quantity} / 3.000
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="operation__main__info">
                 <hgroup>
-                  <h1>Água Mineral Boa Viagem</h1>
-                  <h2 className="text-secondary">TI000004</h2>
+                  <h1>{productionOrder.product.name}</h1>
+                  <h2 className="text-secondary">{productionOrder.code}</h2>
                   <h3 className="text-secondary text-regular">
                     Iniciado de 10:00:00
                   </h3>
@@ -115,8 +123,10 @@ const BoardPage: React.FC<RouteComponentProps> = () => {
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="operation__data">
+        <div className="operation__data">
+          <div className="container">
             <div className="row">
               <div className="col-xs">
                 <div className="operation__info">
@@ -147,8 +157,10 @@ const BoardPage: React.FC<RouteComponentProps> = () => {
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="operation__actions">
+        <div className="operation__actions">
+          <div className="container">
             <button
               onClick={toggle('newGoodPieces')}
               className="operation__btn"
@@ -198,4 +210,4 @@ const BoardPage: React.FC<RouteComponentProps> = () => {
   )
 }
 
-export default BoardPage
+export default ProductionOrderBoard

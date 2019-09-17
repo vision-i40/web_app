@@ -36,6 +36,8 @@ export type Product = {
 
 export type ProductionOrder = {
   product: Product
+  code: string
+  production_quantity: number
 }
 
 export type ProductionLine = {
