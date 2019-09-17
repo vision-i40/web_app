@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { RouteComponentProps } from '@reach/router'
+import { RouteComponentProps, Link } from '@reach/router'
 import { ProductionLine } from '../types'
 import ProductionLineBoard from './ProductionOrderBoard'
 import container from '../container'
@@ -41,7 +41,19 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
     <div className="panel">
       <div className="topbar">
         <div className="container">
-          <div className="topbar__title">Linha de Produção</div>
+          <div className="topbar__wrapper">
+            <div className="topbar__left-action">
+              <Link
+                title="Back to Production Lines"
+                to={`/companies/${companyId}/production_lines/`}
+                className="btn btn--icon"
+              >
+                <i className="fas fa-arrow-left"></i>
+              </Link>
+            </div>
+
+            <div className="topbar__title">Linha de Produção</div>
+          </div>
         </div>
       </div>
 
