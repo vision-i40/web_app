@@ -280,6 +280,7 @@ a.card {
 }
 
 .modal__backdrop {
+  padding: 0 1rem;
   position: fixed;
   overflow-y: auto;
   top: 0;
@@ -301,7 +302,6 @@ a.card {
 }
 
 .modal {
-  width: 100%;
   max-width: 34rem;
   margin: #{$base-line-height * 2} auto;
   background: $white;
