@@ -1,8 +1,5 @@
 # Vision Client
 
-## Development
-Before you start we recomend to use VSCode as your default JS code editor because it has a great compatibility with Typescript and many great plugins for front-end development, but of course feel free to use another editor if you want to.
-
 ### Stack
 - Typescript
 - React
@@ -30,9 +27,6 @@ It means the view only should access the use cases trough the container. It also
 ##### Container
 The container is responsible to instantiate the modules and inject the dependencies. It is also used as an interface between the views and the business logic. The container help us to avoid coupling making easier to change any pieces in the future if we want to.
 
-### Test
-Todo
-
 ### Design
 Our current desing implementation is partially following the [Material Design](https://material.io).
 
@@ -45,6 +39,20 @@ Just a few guidlines to maintain the code style concise.
 - For types you should use camelCase with the first letter capitalized
 - [Use Prettier](https://prettier.io). We recommend you to install the extension in your editor
 - If you need to create a module which has depencies create a factory.
+
+## Development
+Before you start we recomend to use VSCode as your default JS code editor because it has a great compatibility with Typescript and many great plugins for front-end development, but of course feel free to use another editor if you want to.
+
+### Running
+```bash
+yarn install
+yarn start
+```
+
+### Test
+Todo
+
+
 
 
 
