@@ -1,11 +1,11 @@
 import React from 'react'
 import Modal from './Modal'
-import { Unit } from '../MeasurementService'
+import { UnitOfMeasurement } from '../types'
 
 type NewGoodPieceModalProps = {
   isOpen?: boolean
   toggle: () => void
-  units: Unit[] | undefined
+  units: UnitOfMeasurement[] | undefined
 }
 
 const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({

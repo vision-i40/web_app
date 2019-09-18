@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import colors from '../config/colors'
 import NewGoodPiecesModal from './NewGoodPiecesModal'
@@ -6,20 +6,10 @@ import NewRejectedPiecesModal from './NewRejectedPiecesModal'
 import NewStopsModal from './NewStopsModal'
 import NewScrapsModal from './NewScrapsModal'
 import { useToggle } from './useToggle'
-import MeasurementService, { Unit } from '../MeasurementService'
 import { ProductionOrder } from '../types'
 
 type ProductionOrderBoardProps = {
   productionOrder: ProductionOrder
-}
-
-type UnitsState = {
-  items: Unit[] | undefined
-  loading: boolean
-}
-
-type BoardState = {
-  units: UnitsState
 }
 
 const toggleNames = [
@@ -28,13 +18,6 @@ const toggleNames = [
   'newStops',
   'newScraps'
 ]
-
-const initBoardState: BoardState = {
-  units: {
-    items: undefined,
-    loading: false
-  }
-}
 
 const data = [
   {
@@ -53,37 +36,6 @@ const ProductionOrderBoard: React.FC<ProductionOrderBoardProps> = ({
   productionOrder
 }) => {
   const { toggle, getToggleValue } = useToggle(toggleNames)
-  const [boardState, setBoardState] = useState<BoardState>(initBoardState)
-
-  useEffect(() => {
-    const measurementService = MeasurementService()
-    const startLoading = (state: UnitsState) => ({ ...state, loading: true })
-    const stopLoading = (state: UnitsState) => ({ ...state, loading: false })
-    const setItems = (items: Unit[]) => (state: UnitsState) => ({
-      ...state,
-      items
-    })
-
-    setBoardState(boardState => ({
-      ...boardState,
-      units: startLoading(boardState.units)
-    }))
-
-    measurementService
-      .fetchAllUnits()
-      .then(units => {
-        setBoardState(boardState => ({
-          ...boardState,
-          units: setItems(units)(stopLoading(boardState.units))
-        }))
-      })
-      .finally(() =>
-        setBoardState(boardState => ({
-          ...boardState,
-          units: stopLoading(boardState.units)
-        }))
-      )
-  }, [])
 
   return (
     <>
@@ -192,7 +144,7 @@ const ProductionOrderBoard: React.FC<ProductionOrderBoardProps> = ({
       <NewGoodPiecesModal
         isOpen={getToggleValue('newGoodPieces')}
         toggle={toggle('newGoodPieces')}
-        units={boardState.units.items}
+        units={productionOrder.product.units_of_measurement}
       ></NewGoodPiecesModal>
       <NewRejectedPiecesModal
         isOpen={getToggleValue('newRejectedPieces')}

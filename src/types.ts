@@ -42,8 +42,14 @@ export type AuthSession = {
   clear: () => void
 }
 
+export type UnitOfMeasurement = {
+  id: number
+  name: string
+}
+
 export type Product = {
   name: string
+  units_of_measurement: UnitOfMeasurement[]
 }
 
 export type ProductionOrder = {
