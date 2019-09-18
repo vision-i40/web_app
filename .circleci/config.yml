@@ -1,16 +1,21 @@
-orbs:
-  react: "thefrontside/react@dev:alpha"
 version: 2.1
-workflows:
-  push:
-    jobs:
-      - react/install
-      - react/eslint:
-          requires:
-            - react/install
-      - react/test:
-          requires:
-            - react/install
-      - react/coverage:
-          requires:
-            - react/install
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.15.3
+    working_directory: ~/web_app
+    steps:
+      - checkout
+      
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+  
+      - run: CI=true yarn test --silent --runInBand
