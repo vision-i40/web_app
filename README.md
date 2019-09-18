@@ -1,44 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Vision Client
 
-## Available Scripts
+### Stack
+- Typescript
+- React
+- SASS
 
-In the project directory, you can run:
+### External Dependencies
+- [Vision API](https://github.com/vision-i40/company_service)
 
-### `npm start`
+### Architecture
+Our architecture aims to be modular and not coupled to frameworks. To achieve this goal, we are creating independent modules where the dependencies are injected trough the container. The container is resposinble to create and instantiate all the modules.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Types and Interfaces
+Types and interfaces are greate to abstract the implementation making the code more "pluggable" and not coupled to libraries or frameworks. Usually, you should define types and interfaces inside of the module scope but for core components (mostly use cases and infra), you should define these in `src/types` since they should be visible in the entire architecture.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+#### Use Cases
+The use cases are responsible to handle the business logic. Many times front-end developers are tempted to do many of those things inside of views because it is faster and easier but it is not scalable and hightly couple to external dependecies like frameworks and third party libs.
 
-### `npm test`
+#### Dependencies
+Our dependency flow should follow:
+```
+View -> Container -> Use Cases -> Core(Entities and Infra)
+```
+It means the view only should access the use cases trough the container. It also means the core never should access the use cases.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##### Container
+The container is responsible to instantiate the modules and inject the dependencies. It is also used as an interface between the views and the business logic. The container help us to avoid coupling making easier to change any pieces in the future if we want to.
 
-### `npm run build`
+### Design
+Our current desing implementation is partially following the [Material Design](https://material.io).
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Code Guidlines
+Just a few guidlines to maintain the code style concise.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- No commas
+- Single quotes
+- camelCase to filenames and variable definitions. Is ok to use snack_case when the attribute is coming from an external response
+- For types you should use camelCase with the first letter capitalized
+- [Use Prettier](https://prettier.io). We recommend you to install the extension in your editor
+- If you need to create a module which has depencies create a factory.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Development
+Before you start we recomend to use VSCode as your default JS code editor because it has a great compatibility with Typescript and many great plugins for front-end development, but of course feel free to use another editor if you want to.
 
-### `npm run eject`
+### Running
+```bash
+yarn install
+yarn start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Test
+Todo
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
