@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from '@reach/router'
+import { Router, Redirect } from '@reach/router'
 import SignInPage from './SignInPage'
 import ProtectRoute from './ProtectRoute'
 import ProductionLinesPage from './ProductionLinesPage'
@@ -8,6 +8,8 @@ import ProductionLinePage from './ProductionLinePage'
 const App: React.FC = () => {
   return (
     <Router>
+      <Redirect noThrow from="/" to="/login" />
+
       <SignInPage path="/login" />
 
       <ProtectRoute path="/" redirectTo="/login">
