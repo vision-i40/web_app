@@ -1,7 +1,7 @@
 # Vision Client
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6a0ee1c2-4fb7-4595-a78a-361fc16bf604/deploy-status)](https://app.netlify.com/sites/vision-i40/deploys) [![CircleCI](https://circleci.com/gh/vision-i40/web_app.svg?style=svg)](https://circleci.com/gh/vision-i40/web_app)
 
-[Access the site](vision-i40.netlify.com).
+[Access the site](https://vision-i40.netlify.com).
 
 ### Stack
 - Typescript
