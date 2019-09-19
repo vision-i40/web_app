@@ -425,6 +425,11 @@ input.form__field,
   }
 }
 
+input[type="date"].form__field {
+  -webkit-appearance: listbox;
+  line-height: calc(#{$base-line-height * 2} - 4px);
+}
+
 .form__field--select {
   position: relative;
 
