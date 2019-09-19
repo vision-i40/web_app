@@ -36,10 +36,6 @@
 .operation__info {
   text-align: center;
 
-  &:nth-child(1) {
-    margin-bottom: $base-line-height;
-  }
-
   &--warning .operation__info__value{
     color: $warning;
   }
@@ -78,6 +74,7 @@
 }
 
 .operation__btn {
+  background-color: $white;
   border: 0;
   color: $success;
   border-bottom: 8px solid $success;
