@@ -1,4 +1,4 @@
-import { AuthStorage, AuthSessionData, AuthSession } from '../types'
+import { AuthStorage, AuthSessionData, AuthSession } from './types'
 
 const authSession = (storage: AuthStorage): AuthSession => {
   return {
