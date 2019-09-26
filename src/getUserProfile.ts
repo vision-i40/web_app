@@ -1,4 +1,4 @@
-import { HttpClient } from '../types'
+import { HttpClient } from './types'
 
 type GetUserCompanyDependencies = {
   httpClient: HttpClient
