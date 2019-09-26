@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { HttpClient, HttpErrorHandler } from './types'
+import { HttpClient, HttpErrorHandler } from '../types'
 
 type HttpClientOptions = {
   baseUrl: string

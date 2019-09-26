@@ -1,4 +1,4 @@
-import { AuthSession } from './types'
+import { AuthSession } from '../types'
 import makeHttpClient from './httpClient'
 
 type SecureHttpClientOptions = {
