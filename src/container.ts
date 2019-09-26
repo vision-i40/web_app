@@ -5,6 +5,7 @@ import makeSignIn from './auth/signIn'
 import makeAuthClient from './auth/authClient'
 import makeAuthSession from './auth/authSession'
 import makeGetUserProfile from './profile/getUserProfile'
+import makeGetCompanies from './getCompanies'
 import makeGetProductionLines from './getProductionLines'
 import makeGetProductionLine from './getProductionLine'
 
@@ -21,6 +22,7 @@ const secureHttpClient = makeSecureHttpClient({
 // Use cases
 const signIn = makeSignIn({ authClient, authSession })
 const getUserProfile = makeGetUserProfile({ httpClient: secureHttpClient })
+const getCompanies = makeGetCompanies({ httpClient: secureHttpClient })
 const getProductionLines = makeGetProductionLines({
   httpClient: secureHttpClient
 })
@@ -34,5 +36,6 @@ export default {
   signIn,
   getUserProfile,
   getProductionLines,
-  getProductionLine
+  getProductionLine,
+  getCompanies
 }

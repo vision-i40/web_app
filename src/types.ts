@@ -1,3 +1,30 @@
+export type Company = {
+  id: ID
+  corporate_name: string
+}
+
+export type ProductionLine = {
+  id: ID
+  name: string
+  in_progress_order?: ProductionOrder
+}
+
+export type ProductionOrder = {
+  product: Product
+  code: string
+  production_quantity: number
+}
+
+export type Product = {
+  name: string
+  units_of_measurement: UnitOfMeasurement[]
+}
+
+export type UnitOfMeasurement = {
+  id: number
+  name: string
+}
+
 export type HttpMethod = <T>(path: string, params?: {}) => Promise<T>
 
 export type HttpError = {
@@ -42,24 +69,4 @@ export type AuthSession = {
   clear: () => void
 }
 
-export type UnitOfMeasurement = {
-  id: number
-  name: string
-}
-
-export type Product = {
-  name: string
-  units_of_measurement: UnitOfMeasurement[]
-}
-
-export type ProductionOrder = {
-  product: Product
-  code: string
-  production_quantity: number
-}
-
-export type ProductionLine = {
-  id: number | string
-  name: string
-  in_progress_order?: ProductionOrder
-}
+type ID = number | string

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { RouteComponentProps } from '@reach/router'
 import useForm from 'react-hook-form'
 import container from '../container'
+import config from '../config'
 
 type SignInForm = {
   email: string
@@ -26,7 +27,7 @@ const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
 
   useEffect(() => {
     if (container.authSession.isActive()) {
-      navigate && navigate('/board')
+      navigate && navigate(config.auth.activeRedirectPath)
       return
     }
 
