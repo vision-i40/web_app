@@ -469,3 +469,73 @@ input[type="date"].form__field {
 .auth__errors {
   padding: #{0.5 * $base-line-height} 0;
 }
+
+@keyframes progress {
+  from { width: 0% }
+  to { width: 100% }
+}
+
+.stack-notification {
+  @include box_shadow(3);
+  padding: #{0.65 * $base-line-height} $base-line-height;
+  background: $cyan-100;
+  color: $cyan-900;
+  width: 100%;
+  max-width: 26rem;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  position: fixed;
+  margin-left: -13rem;
+  left: 50%;
+  top: -5rem;
+  opacity: 0;
+  transition: all 0.5s ease-in;
+}
+
+.stack-notification__icon {
+  margin-right: 0.5rem;
+  font-size: 90%;
+}
+
+.stack-notification__progress {
+  position: absolute;
+  width: 100%;
+  height: $base-line-height/6;
+  left: 0;
+  top: 0;
+}
+
+.stack-notification__progress__bar {
+  height: 100%;
+  background: $cyan-500;
+}
+
+.stack-notification__close {
+  background: none;
+  border: 0;
+  padding: #{0.65 * $base-line-height} $base-line-height;
+  position: absolute;
+  top: $base-line-height/6;
+  right: 0;
+  opacity: 0.35;
+  color: inherit;
+  transition: all 0.15s ease-in;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.stack-notification.open {
+  top: 0;
+  opacity: 1;
+}
+
+.stack-notification.close {
+  transition-duration: 0.25s;
+}
+
+.stack-notification.open .stack-notification__progress__bar {
+  animation-name: progress;
+  animation-timing-function: linear;
+}

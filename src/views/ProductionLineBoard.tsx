@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import colors from '../config/colors'
 import NewGoodPiecesModal, { NewGoodPiecesFormData } from './NewGoodPiecesModal'
@@ -8,6 +8,7 @@ import NewScrapsModal from './NewScrapsModal'
 import { useToggle } from './useToggle'
 import { ID, ProductionLine, ProductionOrder } from '../types'
 import container from '../container'
+import { NotificationContext } from './NotificationProvider'
 
 type ProductionLineBoardProps = {
   productionLine: ProductionLine
@@ -33,6 +34,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
   productionOrder,
   companyId
 }) => {
+  const { notify } = useContext(NotificationContext)
   const [isNewGoodPiecesOpen, toggleNewGoodPieces] = useToggle()
   const [isNewRejectedPiecesOpen, toggleNewRejectedPieces] = useToggle()
   const [isNewStopsOpen, toggleNewStops] = useToggle()
@@ -65,6 +67,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
 
     setFetchState({ state: 'successed' })
     toggleNewGoodPieces()
+    notify('Evento adicionado com sucesso.', 'success', 5)
   }
 
   return (
