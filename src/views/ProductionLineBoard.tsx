@@ -1,23 +1,19 @@
 import React from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import colors from '../config/colors'
-import NewGoodPiecesModal from './NewGoodPiecesModal'
+import NewGoodPiecesModal, { NewGoodPiecesFormData } from './NewGoodPiecesModal'
 import NewRejectedPiecesModal from './NewRejectedPiecesModal'
 import NewStopsModal from './NewStopsModal'
 import NewScrapsModal from './NewScrapsModal'
 import { useToggle } from './useToggle'
-import { ProductionOrder } from '../types'
+import { ID, ProductionLine, ProductionOrder } from '../types'
+import container from '../container'
 
-type ProductionOrderBoardProps = {
+type ProductionLineBoardProps = {
+  productionLine: ProductionLine
   productionOrder: ProductionOrder
+  companyId: ID
 }
-
-const toggleNames = [
-  'newGoodPieces',
-  'newRejectedPieces',
-  'newStops',
-  'newScraps'
-]
 
 const data = [
   {
@@ -32,10 +28,28 @@ const data = [
   }
 ]
 
-const ProductionOrderBoard: React.FC<ProductionOrderBoardProps> = ({
-  productionOrder
+const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
+  productionLine,
+  productionOrder,
+  companyId
 }) => {
-  const { toggle, getToggleValue } = useToggle(toggleNames)
+  const [isNewGoodPiecesOpen, toggleNewGoodPieces] = useToggle()
+  const [isNewRejectedPiecesOpen, toggleNewRejectedPieces] = useToggle()
+  const [isNewStopsOpen, toggleNewStops] = useToggle()
+  const [isNewScrapsOpen, toggleNewScraps] = useToggle()
+
+  const handleNewGoodPiecesSubmit = async (formData: NewGoodPiecesFormData) => {
+    await container.createEvent({
+      data: {
+        eventType: 'Production',
+        quantity: Number(formData.quantity),
+        eventDatetime: formData.eventDatetime
+      },
+      companyId,
+      productionLineId: productionLine.id,
+      productionOrderId: productionOrder.id
+    })
+  }
 
   return (
     <>
@@ -113,26 +127,23 @@ const ProductionOrderBoard: React.FC<ProductionOrderBoardProps> = ({
 
         <div className="operation__actions">
           <div className="container">
-            <button
-              onClick={toggle('newGoodPieces')}
-              className="operation__btn"
-            >
+            <button onClick={toggleNewGoodPieces} className="operation__btn">
               <i className="fas fa-plus"></i>
             </button>
             <button
-              onClick={toggle('newRejectedPieces')}
+              onClick={toggleNewRejectedPieces}
               className="operation__btn operation__btn--warning"
             >
               <i className="fas fa-recycle"></i>
             </button>
             <button
-              onClick={toggle('newStops')}
+              onClick={toggleNewStops}
               className="operation__btn operation__btn--danger"
             >
               <i className="fas fa-ban"></i>
             </button>
             <button
-              onClick={toggle('newScraps')}
+              onClick={toggleNewScraps}
               className="operation__btn operation__btn--danger-dark"
             >
               <i className="fas fa-recycle"></i>
@@ -142,24 +153,25 @@ const ProductionOrderBoard: React.FC<ProductionOrderBoardProps> = ({
       </div>
 
       <NewGoodPiecesModal
-        isOpen={getToggleValue('newGoodPieces')}
-        toggle={toggle('newGoodPieces')}
+        isOpen={isNewGoodPiecesOpen}
+        toggle={toggleNewGoodPieces}
         units={productionOrder.product.units_of_measurement}
+        onSubmit={handleNewGoodPiecesSubmit}
       ></NewGoodPiecesModal>
       <NewRejectedPiecesModal
-        isOpen={getToggleValue('newRejectedPieces')}
-        toggle={toggle('newRejectedPieces')}
+        isOpen={isNewRejectedPiecesOpen}
+        toggle={toggleNewRejectedPieces}
       ></NewRejectedPiecesModal>
       <NewStopsModal
-        isOpen={getToggleValue('newStops')}
-        toggle={toggle('newStops')}
+        isOpen={isNewStopsOpen}
+        toggle={toggleNewStops}
       ></NewStopsModal>
       <NewScrapsModal
-        isOpen={getToggleValue('newScraps')}
-        toggle={toggle('newScraps')}
+        isOpen={isNewScrapsOpen}
+        toggle={toggleNewScraps}
       ></NewScrapsModal>
     </>
   )
 }
 
-export default ProductionOrderBoard
+export default ProductionLineBoard

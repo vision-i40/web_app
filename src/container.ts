@@ -8,6 +8,7 @@ import makeGetUserProfile from './getUserProfile'
 import makeGetCompanies from './getCompanies'
 import makeGetProductionLines from './getProductionLines'
 import makeGetProductionLine from './getProductionLine'
+import makeCreateEvent from './createEvent'
 
 // Infra
 const httpClient = makeHttpClient({ baseUrl: config.apiUrl })
@@ -29,6 +30,9 @@ const getProductionLines = makeGetProductionLines({
 const getProductionLine = makeGetProductionLine({
   httpClient: secureHttpClient
 })
+const createEvent = makeCreateEvent({
+  httpClient: secureHttpClient
+})
 
 export default {
   secureHttpClient,
@@ -37,5 +41,6 @@ export default {
   getUserProfile,
   getProductionLines,
   getProductionLine,
-  getCompanies
+  getCompanies,
+  createEvent
 }

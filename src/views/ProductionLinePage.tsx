@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps, Link } from '@reach/router'
 import { ProductionLine } from '../types'
-import ProductionLineBoard from './ProductionOrderBoard'
+import ProductionLineBoard from './ProductionLineBoard'
 import container from '../container'
 
 type ProductionLinePageProps = RouteComponentProps<{
@@ -37,6 +37,8 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
       .then(productionLine => setState({ productionLine }))
   }, [companyId, productionLineId])
 
+  if (!companyId) return <></>
+
   return (
     <div className="panel">
       <div className="topbar">
@@ -61,7 +63,9 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
         {state.productionLine ? (
           state.productionLine.in_progress_order ? (
             <ProductionLineBoard
+              productionLine={state.productionLine}
               productionOrder={state.productionLine.in_progress_order}
+              companyId={companyId}
             ></ProductionLineBoard>
           ) : (
             <div className="container">

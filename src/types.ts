@@ -10,6 +10,7 @@ export type ProductionLine = {
 }
 
 export type ProductionOrder = {
+  id: ID
   product: Product
   code: string
   production_quantity: number
@@ -69,4 +70,4 @@ export type AuthSession = {
   clear: () => void
 }
 
-type ID = number | string
+export type ID = number | string
