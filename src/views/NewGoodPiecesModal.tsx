@@ -5,8 +5,9 @@ import { UnitOfMeasurement } from '../types'
 
 type NewGoodPieceModalProps = {
   isOpen?: boolean
-  toggle: () => void
+  isLoading?: boolean
   units: UnitOfMeasurement[] | undefined
+  toggle: () => void
   onSubmit: (data: NewGoodPiecesFormData) => void
 }
 
@@ -18,6 +19,7 @@ export type NewGoodPiecesFormData = {
 const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({
   units,
   onSubmit,
+  isLoading,
   ...modalProps
 }) => {
   const { register, handleSubmit } = useForm<NewGoodPiecesFormData>()
@@ -50,8 +52,12 @@ const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({
           </div>
         </div>
 
-        <button className="btn btn--block btn--success btn--lg">
-          <i className="fas fa-plus"></i> Adicionar peça boa
+        <button
+          disabled={isLoading}
+          className="btn btn--block btn--success btn--lg"
+        >
+          <i className="fas fa-plus"></i>{' '}
+          {isLoading ? 'Adicionando peça boa ....' : 'Adicionar peça boa'}
         </button>
       </form>
     </Modal>

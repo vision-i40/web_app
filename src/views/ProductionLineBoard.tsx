@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import colors from '../config/colors'
 import NewGoodPiecesModal, { NewGoodPiecesFormData } from './NewGoodPiecesModal'
@@ -37,8 +37,21 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
   const [isNewRejectedPiecesOpen, toggleNewRejectedPieces] = useToggle()
   const [isNewStopsOpen, toggleNewStops] = useToggle()
   const [isNewScrapsOpen, toggleNewScraps] = useToggle()
+  const [fetchState, setFetchState] = useState<{
+    state: 'idle' | 'fetching' | 'successed' | 'failed'
+    data?: any
+    error?: Error
+  }>({
+    state: 'idle',
+    data: undefined,
+    error: undefined
+  })
 
   const handleNewGoodPiecesSubmit = async (formData: NewGoodPiecesFormData) => {
+    setFetchState({
+      state: 'fetching'
+    })
+
     await container.createEvent({
       data: {
         eventType: 'Production',
@@ -49,6 +62,9 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
       productionLineId: productionLine.id,
       productionOrderId: productionOrder.id
     })
+
+    setFetchState({ state: 'successed' })
+    toggleNewGoodPieces()
   }
 
   return (
@@ -153,6 +169,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
       </div>
 
       <NewGoodPiecesModal
+        isLoading={fetchState.state === 'fetching'}
         isOpen={isNewGoodPiecesOpen}
         toggle={toggleNewGoodPieces}
         units={productionOrder.product.units_of_measurement}
