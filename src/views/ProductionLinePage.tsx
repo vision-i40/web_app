@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { RouteComponentProps, Link } from '@reach/router'
 import { ProductionLine } from '../types'
 import ProductionLineBoard from './ProductionLineBoard'
@@ -25,17 +25,21 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
     initProductionLinePageState
   )
 
-  useEffect(() => {
-    window.document.title = 'Linha de Produção - Vision'
-  }, [])
-
-  useEffect(() => {
+  const loadProductionline = useCallback(() => {
     if (!companyId || !productionLineId) return
 
     container
       .getProductionLine(companyId, productionLineId)
       .then(productionLine => setState({ productionLine }))
   }, [companyId, productionLineId])
+
+  useEffect(() => {
+    window.document.title = 'Linha de Produção - Vision'
+  }, [])
+
+  useEffect(() => {
+    loadProductionline()
+  }, [loadProductionline])
 
   if (!companyId) return <></>
 
@@ -65,6 +69,7 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
             <ProductionLineBoard
               productionLine={state.productionLine}
               productionOrder={state.productionLine.in_progress_order}
+              reload={loadProductionline}
               companyId={companyId}
             ></ProductionLineBoard>
           ) : (

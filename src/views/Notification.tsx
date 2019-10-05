@@ -29,14 +29,14 @@ const Notification: React.FC<NotificationProps> = ({
 
   return (
     <div className={classNames.join(' ')}>
-      {duration && (
+      {/* {duration && (
         <div className="stack-notification__progress">
           <div
             className="stack-notification__progress__bar"
             style={{ animationDuration: `${duration}s` }}
           />
         </div>
-      )}
+      )} */}
 
       <span className="stack-notification__icon">
         <i className={typeIcons[type]}></i>

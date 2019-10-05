@@ -14,6 +14,7 @@ type ProductionLineBoardProps = {
   productionLine: ProductionLine
   productionOrder: ProductionOrder
   companyId: ID
+  reload: () => void
 }
 
 const data = [
@@ -32,7 +33,8 @@ const data = [
 const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
   productionLine,
   productionOrder,
-  companyId
+  companyId,
+  reload
 }) => {
   const { notify } = useContext(NotificationContext)
   const [isNewGoodPiecesOpen, toggleNewGoodPieces] = useToggle()
@@ -68,6 +70,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
     setFetchState({ state: 'successed' })
     toggleNewGoodPieces()
     notify('Evento adicionado com sucesso.', 'success', 5)
+    reload()
   }
 
   return (
