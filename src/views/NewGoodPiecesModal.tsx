@@ -1,5 +1,6 @@
 import React from 'react'
 import useForm from 'react-hook-form'
+import dayjs from 'dayjs'
 import Modal from './Modal'
 import { UnitOfMeasurement } from '../types'
 
@@ -22,7 +23,11 @@ const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({
   isLoading,
   ...modalProps
 }) => {
-  const { register, handleSubmit } = useForm<NewGoodPiecesFormData>()
+  const { register, handleSubmit } = useForm<NewGoodPiecesFormData>({
+    defaultValues: {
+      eventDatetime: dayjs().format('YYYY-MM-DDTHH:mm')
+    }
+  })
 
   return (
     <Modal {...modalProps} title="Adicionar peças boas">
