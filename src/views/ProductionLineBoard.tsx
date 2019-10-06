@@ -9,6 +9,7 @@ import { useToggle } from './useToggle'
 import { ID, ProductionLine, ProductionOrder } from '../types'
 import container from '../container'
 import { NotificationContext } from './NotificationProvider'
+import { percentage } from './utils/calc'
 
 type ProductionLineBoardProps = {
   productionLine: ProductionLine
@@ -16,19 +17,6 @@ type ProductionLineBoardProps = {
   companyId: ID
   reload: () => void
 }
-
-const data = [
-  {
-    id: 'completed',
-    value: 126,
-    color: colors.SUCCESS
-  },
-  {
-    id: 'remaining',
-    value: 567,
-    color: colors.SECONDARY
-  }
-]
 
 const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
   productionLine,
@@ -50,6 +38,19 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
     data: undefined,
     error: undefined
   })
+
+  const data = [
+    {
+      id: 'completed',
+      value: productionOrder.production_quantity,
+      color: colors.SUCCESS
+    },
+    {
+      id: 'remaining',
+      value: productionOrder.quantity - productionOrder.production_quantity,
+      color: colors.SECONDARY
+    }
+  ]
 
   const handleNewGoodPiecesSubmit = async (formData: NewGoodPiecesFormData) => {
     setFetchState({
@@ -93,9 +94,16 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
                     isInteractive={false}
                   />
                   <div className="chart__center">
-                    <div className="chart__title">100%</div>
+                    <div className="chart__title">
+                      {percentage(
+                        productionOrder.production_quantity,
+                        productionOrder.quantity
+                      ).toFixed(0)}
+                      %
+                    </div>
                     <div className="chart__subtitle">
-                      {productionOrder.production_quantity} / 3.000
+                      {productionOrder.production_quantity} /{' '}
+                      {productionOrder.quantity}
                     </div>
                   </div>
                 </div>
@@ -116,31 +124,24 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
         <div className="operation__data">
           <div className="container">
             <div className="row">
-              <div className="col-xs-6 col-md-3">
+              <div className="col-xs-4">
                 <div className="operation__info">
                   <div className="operation__info__label">Boas</div>
-                  <div className="operation__info__value">37.675</div>
+                  <div className="operation__info__value">{productionOrder.production_quantity}</div>
                 </div>
               </div>
 
-              <div className="col-xs-6 col-md-3">
+              <div className="col-xs-4">
                 <div className="operation__info operation__info--warning">
                   <div className="operation__info__label">Rejeitadas</div>
-                  <div className="operation__info__value">37.675</div>
+                  <div className="operation__info__value">{productionOrder.rework_quantity}</div>
                 </div>
               </div>
 
-              <div className="col-xs-6 col-md-3">
-                <div className="operation__info operation__info--danger">
-                  <div className="operation__info__label">Paradas</div>
-                  <div className="operation__info__value">37.675</div>
-                </div>
-              </div>
-
-              <div className="col-xs-6 col-md-3">
+              <div className="col-xs-4">
                 <div className="operation__info operation__info--danger-dark">
                   <div className="operation__info__label">Refugos</div>
-                  <div className="operation__info__value">37.675</div>
+                  <div className="operation__info__value">{productionOrder.waste_quantity}</div>
                 </div>
               </div>
             </div>

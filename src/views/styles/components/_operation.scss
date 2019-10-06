@@ -33,6 +33,10 @@
   padding: #{$base-line-height * 1} 0;
 }
 
+.operation__data .container {
+  max-width: 48em;
+}
+
 .operation__info {
   text-align: center;
 
@@ -86,6 +90,7 @@
 
   &:hover {
     color: $success-hover;
+    background: $blue-grey-C25;
   }
 
   &--warning {

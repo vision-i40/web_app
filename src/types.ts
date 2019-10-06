@@ -14,6 +14,9 @@ export type ProductionOrder = {
   product: Product
   code: string
   production_quantity: number
+  rework_quantity: number
+  waste_quantity: number
+  quantity: number
 }
 
 export type Product = {
