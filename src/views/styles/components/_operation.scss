@@ -6,7 +6,6 @@
 
 .operation__main {
   flex: 1;
-  padding: #{$base-line-height * 2} 2rem;
   display: flex;
   align-items: center;
 }
@@ -28,13 +27,113 @@
   padding: $base-line-height;
 }
 
-.operation__data {
-  background: $white;
-  padding: #{$base-line-height * 1} 0;
+.operation__main__info__title {
+  line-height: $base-line-height * 2;
+  margin-bottom: $base-line-height * 0.5;
+  font-weight: 700;
 }
 
-.operation__data .container {
-  max-width: 48em;
+.operation__main__info__secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.operation__main__info__time {
+  color: $secondary-font-color;
+  font-weight: 400;
+  font-size: ms(2);
+  line-height: $base-line-height;
+
+  i {
+    font-size: 90%;
+  }
+}
+
+.operation__main__info__status {
+  display: inline-block;
+  padding: #{$base-line-height * 0.25}  #{$base-line-height * 0.75};
+  background: $success;
+  border-radius: 9999px;
+  color: $white;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 0.75rem;
+}
+
+// .operation__data {
+//   background: $white;
+//   padding: #{$base-line-height * 1} 0;
+// }
+
+// .operation__data .container {
+//   max-width: 48em;
+// }
+
+.operation__data {
+  padding: #{$base-line-height * 1.5} 0;
+}
+
+.operation__card {
+  background: $white;
+  padding: #{$base-line-height * 0.5} $base-line-height;
+  border-radius: $border-radius;
+  position: relative;
+  @include box_shadow(1);
+  overflow: hidden;
+  margin-bottom: $base-line-height * 0.25;
+}
+
+.operation__title {
+  display: flex;
+  align-items: center;
+  font-size: ms(1);
+  line-height: $base-line-height * 2;
+}
+
+.operation__title__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $cyan-100;
+  border-radius: 999px;
+  margin-right: 0.5rem;
+  font-size: 90%;
+  color: $cyan-600;
+}
+
+.operation__value {
+  font-size: ms(6);
+  font-weight: 700;
+  line-height: $base-line-height * 2;
+}
+
+.operation__bg__icon {
+  position: absolute;
+  font-size: ms(7);
+  width: ms(12);
+  height: ms(12);
+  background: $cyan-50;
+  color: $cyan-200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  bottom: -#{ms(12)/4};
+  right: -#{ms(12)/4};
+
+  &--warning {
+    background: $amber-50;
+    color: $amber-200;
+  }
+
+  &--danger {
+    background: $deep-orange-50;
+    color: $deep-orange-200;
+  }
 }
 
 .operation__info {
@@ -66,59 +165,51 @@
   color: $success;
 }
 
-.operation__actions {
-  border-top: 2px solid $blue-grey-50;
-}
-
-.operation__actions,
 .operation__actions > .container {
-  background-color: $white;
   display: flex;
   padding: 0;
 }
 
 .operation__btn {
-  background-color: $white;
+  padding: 2rem 0;
   border: 0;
-  color: $success;
-  border-bottom: 8px solid $success;
-  line-height: $base-line-height * 3;
   display: block;
   width: 100%;
   font-size: ms(4);
   transition: all ease-in-out 0.15s;
 
-  &:hover {
-    color: $success-hover;
-    background: $blue-grey-C25;
-  }
+  background-color: $cyan-500;
+  color: $white;
 
   &--warning {
-    color: $warning;
-    border-bottom-color: $warning;
+    background-color: $amber-500;
 
     &:hover {
-      color: $warning-hover;
+      background-color: $warning-hover;
     }
   }
 
   &--danger {
-    color: $danger;
-    border-bottom-color: $danger;
+    background-color: $danger;
 
     &:hover {
-      color: $danger-hover;
+      background-color: $danger-hover;
     }
   }
 
   &--danger-dark {
-    color: $danger-dark;
-    border-bottom-color: $danger-dark;
+    background-color: $danger-dark;
 
     &:hover {
-      color: $danger-dark-hover;
+      background-color: $danger-dark-hover;
     }
   }
+}
+
+.operation__btn__label {
+  font-size: ms(1);
+  margin: 0;
+  margin-top: $base-line-height * 0.5;
 }
 
 @media only screen and (min-width: 48em) {
@@ -129,12 +220,35 @@
   }
 
   .operation__main__chart {
-    padding-right: 2rem;
+    margin-right: 0.5rem;
+  }
+
+  .operation__main__info__title {
+    font-size: ms(8);
+    line-height: $base-line-height * 3;
+  }
+
+  .operation__main__info__secondary {
+    justify-content: left;
+  }
+
+  .operation__card {
+    margin-bottom: 0;
   }
 }
 
 @media only screen and (min-width: 64em) {
-  .operation__btn {
-    line-height: $base-line-height * 5;
+  .operation__actions > .container {
+    display: flex;
+
+    padding: 0 1rem;
+  }
+
+  .operation__btn:first-child {
+    border-top-left-radius: $border-radius;
+  }
+
+  .operation__btn:last-child {
+    border-top-right-radius: $border-radius;
   }
 }

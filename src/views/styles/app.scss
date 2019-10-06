@@ -285,7 +285,9 @@ a.card {
 .chart__title {
   font-size: ms(8);
   color: $success;
-  line-height: $base-line-height * 4;
+  line-height: $base-line-height * 3;
+  font-weight: 700;
+  margin-bottom: $base-line-height * 0.25;
 }
 
 .chart__subtitle {
