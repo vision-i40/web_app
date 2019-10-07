@@ -4,6 +4,7 @@
 @import 'colors';
 @import 'shadows';
 @import 'variables';
+@import 'components/topbar';
 @import 'components/operation';
 
 *,
@@ -182,28 +183,6 @@ button {
 .panel {
   display: flex;
   flex-direction: column;
-}
-
-.topbar {
-  color: $white;
-  background-color: $blue-grey-700;
-  @include box_shadow(2);
-}
-
-.topbar__wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.topbar__left-action {
-  margin-right: 1rem;
-  font-size: ms(2);
-}
-
-.topbar__title {
-  font-size: ms(2);
-  line-height: $base-line-height * 2;
-  padding: #{$base-line-height * 0.5} 0;
 }
 
 .content {
