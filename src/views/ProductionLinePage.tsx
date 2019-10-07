@@ -58,7 +58,11 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
               </Link>
             </div>
 
-            <div className="topbar__title">Linha de Produção</div>
+            <div className="topbar__title">
+              {state.productionLine
+                ? state.productionLine.name
+                : 'Linha de Produção'}
+            </div>
           </div>
         </div>
       </div>
