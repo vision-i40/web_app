@@ -4,6 +4,7 @@
 @import 'colors';
 @import 'shadows';
 @import 'variables';
+@import 'components/container';
 @import 'components/topbar';
 @import 'components/notification';
 @import 'components/operation';
@@ -16,7 +17,6 @@ input {
 html,
 body,
 #root,
-.container,
 *[role="group"],
 .panel {
   height: 100%;
@@ -80,12 +80,6 @@ button {
   }
 
   outline: none;
-}
-
-.container {
-  width: 100%;
-  max-width: 1280px;
-  padding: 0 1rem;
 }
 
 .text-secondary {
