@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useLayoutEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import useForm from 'react-hook-form'
 import dayjs from 'dayjs'
 import Modal from './Modal'
