@@ -1,3 +1,4 @@
 export default {
-  modalOpen: 300
+  modalOpen: 300,
+  modalClose: 300
 }
