@@ -44,7 +44,9 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({
     <>
       <div className="topbar">
         <div className="container">
-          <div className="topbar__title">Linhas de Produção</div>
+          <div className="topbar__wrapper">
+            <div className="topbar__title">Linhas de Produção</div>
+          </div>
         </div>
       </div>
 

@@ -45,7 +45,7 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
 
   return (
     <div className="panel">
-      <div className="topbar">
+      <div className="topbar topbar--dense">
         <div className="container">
           <div className="topbar__wrapper">
             <div className="topbar__left-action">

@@ -1,9 +1,13 @@
 .topbar {
   color: $white;
   background-color: $blue-grey-700;
-  padding: #{$base-line-height * 0.5} 0;
+  padding: #{$base-line-height * 0.75} 0;
   @include box_shadow(2);
   font-size: ms(1);
+
+  &--dense {
+    padding: #{$base-line-height * 0.5} 0;
+  }
 }
 
 .topbar__wrapper {
@@ -17,6 +21,11 @@
 
 .topbar__title {
   font-weight: 500;
+  margin-left: 1.75rem;
+}
+
+.topbar__left-action + .topbar__title {
+  margin-left: 0;
 }
 
 .topbar__subtitle {
@@ -29,6 +38,10 @@
 @media only screen and (min-width: 48em) {
   .topbar {
     padding: #{$base-line-height * 0.75} 0;
+  }
+
+  .topbar__title {
+    margin-left: 0;
   }
   
   .topbar__subtitle {
