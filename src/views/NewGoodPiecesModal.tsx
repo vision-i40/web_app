@@ -61,8 +61,7 @@ const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({
           disabled={isLoading}
           className="btn btn--block btn--success btn--lg"
         >
-          <i className="fas fa-plus"></i>{' '}
-          {isLoading ? 'Adicionando peça boa ....' : 'Adicionar peça boa'}
+          {isLoading ? 'Adicionando...' : 'Adicionar'}
         </button>
       </form>
     </Modal>

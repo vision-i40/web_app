@@ -315,14 +315,11 @@ a.card {
 }
 
 .modal__header {
-  background: $light-bg;
-  line-height: $base-line-height;
-  padding:  $base-line-height 1.5rem;
+  padding:  $base-line-height 1.5rem 0;
   font-size: ms(1);
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   font-weight: 700;
-  text-transform: uppercase;
   position: relative;
 
   .modal__close {
@@ -359,9 +356,8 @@ a.card {
   text-align: left;
 
   label {
-    @extend .text-uppercase;
-    font-weight: 700;
-    font-size: ms(-1);
+    font-weight: 500;
+    font-size: ms(0);
     line-height: $base-line-height;
     margin-bottom: $base-line-height * 0.25;
     display: block;
@@ -396,9 +392,10 @@ input.form__field,
   font-size: ms(1);
   padding: 0 1rem;
   border-radius: $border-radius;
-  border: 1px solid $blue-grey-100;
-  background: $light-bg;
+  border: 1px solid $blue-grey-C200;
+  background: $blue-grey-C200;
   outline: 0;
+  color: $blue-grey-700;
 
   &:active,
   &:focus {
