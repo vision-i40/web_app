@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useRef, useEffect, useLayoutEffect } from 'react'
 import useForm from 'react-hook-form'
 import dayjs from 'dayjs'
 import Modal from './Modal'
 import { UnitOfMeasurement } from '../types'
+import transitions from '../config/transitions'
 
 type NewGoodPieceModalProps = {
   isOpen?: boolean
@@ -23,11 +24,20 @@ const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({
   isLoading,
   ...modalProps
 }) => {
+  const quantityRef = useRef<HTMLInputElement | null>(null)
   const { register, handleSubmit } = useForm<NewGoodPiecesFormData>({
     defaultValues: {
       eventDatetime: dayjs().format('YYYY-MM-DDTHH:mm')
     }
   })
+
+  useEffect(() => {
+    if (modalProps.isOpen) {
+      setTimeout(() => {
+        quantityRef.current && quantityRef.current.focus()
+      }, transitions.modalOpen)
+    }
+  }, [modalProps.isOpen])
 
   return (
     <Modal {...modalProps} title="Adicionar peças boas">
@@ -36,12 +46,16 @@ const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({
           <div className="form__group">
             <label htmlFor="">Quantidade</label>
             <input
+              id="quantity"
               required
               name="quantity"
               type="number"
               className="form__field"
               min={1}
-              ref={register}
+              ref={e => {
+                register(e)
+                quantityRef.current = e
+              }}
             />
           </div>
 
