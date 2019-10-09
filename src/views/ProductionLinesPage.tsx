@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { RouteComponentProps, Link } from '@reach/router'
+import { RouteComponentProps, Link } from 'react-router-dom'
 import { ProductionLine } from '../types'
 import container from '../container'
 
@@ -17,9 +17,8 @@ const initialProductionLinesPageState: ProductionLinesPageState = {
   isLoading: true
 }
 
-const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({
-  companyId
-}) => {
+const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({ match }) => {
+  const companyId = match.params.companyId
   const [state, setState] = useState<ProductionLinesPageState>(
     initialProductionLinesPageState
   )
@@ -29,8 +28,6 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({
   }, [])
 
   useEffect(() => {
-    if (!companyId) return
-
     container.getProductionLines(companyId).then(productionLines => {
       setState({
         isLoading: false,

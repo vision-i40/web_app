@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { RouteComponentProps } from '@reach/router'
+import React, { useState } from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 import useForm from 'react-hook-form'
 import container from '../container'
-import config from '../config'
+import { useAuth } from './AuthProvider'
 
 type SignInForm = {
   email: string
@@ -11,44 +11,31 @@ type SignInForm = {
 
 type SignInState = {
   isSignIn: boolean
-  shouldRender: boolean
   hasError: boolean
 }
 
 const initSignInState = {
   isSignIn: false,
-  shouldRender: false,
   hasError: false
 }
 
-const SignInPage: React.FC<RouteComponentProps> = ({ navigate }) => {
+const SignInPage: React.FC<RouteComponentProps> = ({ history }) => {
   const [state, setState] = useState<SignInState>(initSignInState)
   const { register, handleSubmit } = useForm<SignInForm>()
+  const { signIn } = useAuth()
 
-  useEffect(() => {
-    if (container.authSession.isActive()) {
-      navigate && navigate(config.auth.activeRedirectPath)
-      return
-    }
-
-    setState(state => ({ ...state, shouldRender: true }))
-  }, [navigate])
-
-  const onSubmit = async (data: SignInForm) => {
+  const onSubmit = async (form: SignInForm) => {
     try {
       setState(state => ({ ...state, isSignIn: true, hasError: false }))
-      await container.signIn(data)
+      await signIn(form)
       const userProfile = await container.getUserProfile()
-      navigate &&
-        navigate(
-          `/companies/${userProfile.default_company.id}/production_lines`
-        )
+      history.push(
+        `/companies/${userProfile.default_company.id}/production_lines`
+      )
     } catch {
       setState(state => ({ ...state, isSignIn: false, hasError: true }))
     }
   }
-
-  if (!state.shouldRender) return <></>
 
   return (
     <div className="auth">

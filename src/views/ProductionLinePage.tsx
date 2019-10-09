@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { RouteComponentProps, Link } from '@reach/router'
+import { RouteComponentProps, Link } from 'react-router-dom'
 import { ProductionLine } from '../types'
 import ProductionLineBoard from './ProductionLineBoard'
 import container from '../container'
@@ -17,17 +17,13 @@ const initProductionLinePageState = {
   productionLine: undefined
 }
 
-const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
-  companyId,
-  productionLineId
-}) => {
+const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
+  const { companyId, productionLineId } = match.params
   const [state, setState] = useState<ProductionLinePageState>(
     initProductionLinePageState
   )
 
   const loadProductionline = useCallback(() => {
-    if (!companyId || !productionLineId) return
-
     container
       .getProductionLine(companyId, productionLineId)
       .then(productionLine => setState({ productionLine }))
@@ -40,8 +36,6 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({
   useEffect(() => {
     loadProductionline()
   }, [loadProductionline])
-
-  if (!companyId) return <></>
 
   return (
     <div className="panel">

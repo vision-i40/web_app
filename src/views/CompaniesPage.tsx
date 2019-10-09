@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, RouteComponentProps } from '@reach/router'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import { Company } from '../types'
 import container from '../container'
 

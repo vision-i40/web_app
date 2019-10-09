@@ -38,12 +38,11 @@ export type HttpError = {
   }
 }
 
-export type HttpErrorHandler = (error: HttpError | Error) => void
+export type HttpErrorHandler = (error: HttpError) => void
 
 export type HttpClient = {
   post: HttpMethod
   get: HttpMethod
-  onError: (handler: HttpErrorHandler) => void
 }
 
 export type Credentials = {
