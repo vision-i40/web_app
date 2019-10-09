@@ -1,35 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import { useAsync } from 'react-async'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { Company } from '../types'
 import container from '../container'
 
-type CompaniesPageState = {
-  isLoading: boolean
-  companies?: Company[]
-  error?: string
-}
-
 const CompaniesPage: React.FC<RouteComponentProps> = () => {
-  const [state, setState] = useState<CompaniesPageState>({
-    isLoading: true
+  const { data: companies, isLoading } = useAsync<Company[]>({
+    promiseFn: container.getCompanies
   })
-
-  useEffect(() => {
-    window.document.title = 'Empresas - Vision'
-  }, [])
-
-  useEffect(() => {
-    container.getCompanies().then(companies => {
-      setState({
-        isLoading: false,
-        companies,
-        error: undefined
-      })
-    })
-  }, [])
 
   return (
     <>
+      <Helmet>
+        <title>Empresas - Vision</title>
+      </Helmet>
+
       <div className="topbar">
         <div className="container">
           <div className="topbar__title">Empresas</div>
@@ -38,9 +24,9 @@ const CompaniesPage: React.FC<RouteComponentProps> = () => {
 
       <div className="content">
         <div className="container">
-          {state.isLoading || !state.companies
+          {isLoading || !companies
             ? 'Carregando...'
-            : state.companies.map(company => (
+            : companies.map(company => (
                 <Link
                   title={company.corporate_name}
                   key={company.id}
