@@ -4,17 +4,11 @@ import makeHttpClient from './httpClient'
 type SecureHttpClientOptions = {
   authSession: AuthSession
   baseUrl: string
-  onError?: HttpErrorHandler
 }
 
-const secureHttpClient = ({
-  authSession,
-  baseUrl,
-  onError
-}: SecureHttpClientOptions) =>
+const secureHttpClient = ({ authSession, baseUrl }: SecureHttpClientOptions) =>
   makeHttpClient({
     baseUrl,
-    onError,
     getHeaders: () => {
       const sessionData = authSession.get()
 

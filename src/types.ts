@@ -43,6 +43,7 @@ export type HttpErrorHandler = (error: HttpError) => void
 export type HttpClient = {
   post: HttpMethod
   get: HttpMethod
+  onError: (errorHandler: HttpErrorHandler) => void
 }
 
 export type Credentials = {

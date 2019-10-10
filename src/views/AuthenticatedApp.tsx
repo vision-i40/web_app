@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Route,
@@ -8,8 +8,20 @@ import {
 import ProductionLinesPage from './ProductionLinesPage'
 import ProductionLinePage from './ProductionLinePage'
 import CompaniesPage from './CompaniesPage'
+import { useAuth } from './AuthProvider'
+import container from '../container'
 
 const AuthenticatedApp: React.FC = () => {
+  const { signOut } = useAuth()
+
+  useEffect(() => {
+    container.secureHttpClient.onError(error => {
+      if (error.response.status === 401) {
+        signOut()
+      }
+    })
+  }, [signOut])
+
   return (
     <Router>
       <Switch>

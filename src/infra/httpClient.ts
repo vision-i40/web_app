@@ -4,14 +4,11 @@ import { HttpClient, HttpErrorHandler } from '../types'
 type HttpClientOptions = {
   baseUrl: string
   getHeaders?: () => { [key: string]: string } | undefined
-  onError?: HttpErrorHandler
 }
 
-export default ({
-  baseUrl,
-  getHeaders,
-  onError
-}: HttpClientOptions): HttpClient => {
+export default ({ baseUrl, getHeaders }: HttpClientOptions): HttpClient => {
+  let errorHandler: HttpErrorHandler
+
   const post = async <T>(path: string, params?: {}): Promise<T> => {
     return axios
       .post<T>(`${baseUrl}${path}`, params, {
@@ -19,7 +16,7 @@ export default ({
       })
       .then(response => response.data)
       .catch(error => {
-        onError && onError(error)
+        errorHandler && errorHandler(error)
         throw error
       })
   }
@@ -29,13 +26,18 @@ export default ({
       .get<T>(`${baseUrl}${path}`, { headers: getHeaders && getHeaders() })
       .then(response => response.data)
       .catch(error => {
-        onError && onError(error)
+        errorHandler && errorHandler(error)
         throw error
       })
   }
 
+  const onError = (newErrorHandler: HttpErrorHandler) => {
+    errorHandler = newErrorHandler
+  }
+
   return {
     get,
-    post
+    post,
+    onError
   }
 }

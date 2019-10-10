@@ -5,10 +5,12 @@ import { Credentials } from '../types'
 const AuthContext = React.createContext<{
   isAuthenticated: boolean
   signIn: (credentials: Credentials) => Promise<void>
+  signOut: () => void
 }>({
   isAuthenticated: false,
   signIn: (credentials: Credentials) =>
-    Promise.reject('No Sign In function defined.')
+    Promise.reject('No Sign In function defined.'),
+  signOut: () => {}
 })
 
 const AuthProvider: React.FC = props => {
@@ -19,7 +21,14 @@ const AuthProvider: React.FC = props => {
   const signIn = (credentials: Credentials) =>
     container.signIn(credentials).then(() => setIsAuthenticated(true))
 
-  return <AuthContext.Provider value={{ signIn, isAuthenticated }} {...props} />
+  const signOut = () => container.authSession.clear()
+
+  return (
+    <AuthContext.Provider
+      value={{ signIn, signOut, isAuthenticated }}
+      {...props}
+    />
+  )
 }
 
 const useAuth = () => {

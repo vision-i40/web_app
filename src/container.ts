@@ -18,12 +18,7 @@ const authStorage = window.localStorage
 const authSession = makeAuthSession(authStorage)
 const secureHttpClient = makeSecureHttpClient({
   baseUrl: config.apiUrl,
-  authSession: authSession,
-  onError: (error: HttpError) => {
-    if (error.response.status === 401) {
-      authSession.clear()
-    }
-  }
+  authSession: authSession
 })
 
 // Use cases
