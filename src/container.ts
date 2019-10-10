@@ -9,7 +9,6 @@ import makeGetCompanies from './getCompanies'
 import makeGetProductionLines from './getProductionLines'
 import makeGetProductionLine from './getProductionLine'
 import makeCreateEvent from './createEvent'
-import { HttpError } from './types'
 
 // Infra
 const httpClient = makeHttpClient({ baseUrl: config.apiUrl })
