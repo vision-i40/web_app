@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useCallback } from 'react'
+import { Helmet } from 'react-helmet'
+import { useAsync } from 'react-async'
 import { RouteComponentProps, Link } from 'react-router-dom'
-import { ProductionLine } from '../types'
 import ProductionLineBoard from './ProductionLineBoard'
 import container from '../container'
 
@@ -9,36 +10,23 @@ type ProductionLinePageProps = RouteComponentProps<{
   productionLineId: string
 }>
 
-type ProductionLinePageState = {
-  productionLine?: ProductionLine
-}
-
-const initProductionLinePageState = {
-  productionLine: undefined
-}
-
 const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
   const { companyId, productionLineId } = match.params
-  const [state, setState] = useState<ProductionLinePageState>(
-    initProductionLinePageState
+
+  const fetchProductionLine = useCallback(
+    () => container.getProductionLine(companyId, productionLineId),
+    [companyId, productionLineId]
   )
 
-  const loadProductionline = useCallback(() => {
-    container
-      .getProductionLine(companyId, productionLineId)
-      .then(productionLine => setState({ productionLine }))
-  }, [companyId, productionLineId])
-
-  useEffect(() => {
-    window.document.title = 'Linha de Produção - Vision'
-  }, [])
-
-  useEffect(() => {
-    loadProductionline()
-  }, [loadProductionline])
+  const { data: productionLine, reload } = useAsync({
+    promiseFn: fetchProductionLine
+  })
 
   return (
     <div className="panel">
+      <Helmet>
+        <title>Linha de Produção - Vision</title>
+      </Helmet>
       <div className="topbar topbar--dense">
         <div className="container">
           <div className="topbar__wrapper">
@@ -53,9 +41,7 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
             </div>
 
             <div className="topbar__title">
-              {state.productionLine
-                ? state.productionLine.name
-                : 'Linha de Produção'}
+              {productionLine ? productionLine.name : 'Linha de Produção'}
 
               <span className="topbar__subtitle">Manhã</span>
             </div>
@@ -64,12 +50,12 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
       </div>
 
       <div className="content content--no-spacing">
-        {state.productionLine ? (
-          state.productionLine.in_progress_order ? (
+        {productionLine ? (
+          productionLine.in_progress_order ? (
             <ProductionLineBoard
-              productionLine={state.productionLine}
-              productionOrder={state.productionLine.in_progress_order}
-              reload={loadProductionline}
+              productionLine={productionLine}
+              productionOrder={productionLine.in_progress_order}
+              reload={reload}
               companyId={companyId}
             ></ProductionLineBoard>
           ) : (
