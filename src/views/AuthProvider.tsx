@@ -21,7 +21,10 @@ const AuthProvider: React.FC = props => {
   const signIn = (credentials: Credentials) =>
     container.signIn(credentials).then(() => setIsAuthenticated(true))
 
-  const signOut = () => container.authSession.clear()
+  const signOut = () => {
+    container.authSession.clear()
+    setIsAuthenticated(false)
+  }
 
   return (
     <AuthContext.Provider
