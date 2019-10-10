@@ -1,18 +1,12 @@
-import { HttpClient, ProductionLine } from './types'
-
-type GetProductionLinesDependency = {
-  httpClient: HttpClient
-}
-
-type GetProductionLinesResponse = {
-  results: ProductionLine[]
-}
+import { HttpClient, ProductionLine, ID } from './types'
 
 const getProductionLines = ({
   httpClient
-}: GetProductionLinesDependency) => async (companyId: string | number) => {
+}: {
+  httpClient: HttpClient
+}) => async (companyId: ID) => {
   return httpClient
-    .get<GetProductionLinesResponse>(
+    .get<{ results: ProductionLine[] }>(
       `/v1/companies/${companyId}/production_lines/`
     )
     .then(response => response.results)

@@ -1,44 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback } from 'react'
+import { Helmet } from 'react-helmet'
+import { useAsync } from 'react-async'
 import { RouteComponentProps, Link } from 'react-router-dom'
-import { ProductionLine } from '../types'
 import container from '../container'
 
 type ProductionLinesPageProps = RouteComponentProps<{
   companyId: string
 }>
 
-type ProductionLinesPageState = {
-  isLoading: boolean
-  productionLines?: ProductionLine[]
-  error?: string
-}
-
-const initialProductionLinesPageState: ProductionLinesPageState = {
-  isLoading: true
-}
-
 const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({ match }) => {
-  const companyId = match.params.companyId
-  const [state, setState] = useState<ProductionLinesPageState>(
-    initialProductionLinesPageState
+  const { companyId } = match.params
+
+  const fetchProductionLines = useCallback(
+    () => container.getProductionLines(companyId),
+    [companyId]
   )
 
-  useEffect(() => {
-    window.document.title = 'Linhas de Produção - Vision'
-  }, [])
-
-  useEffect(() => {
-    container.getProductionLines(companyId).then(productionLines => {
-      setState({
-        isLoading: false,
-        productionLines,
-        error: undefined
-      })
-    })
-  }, [companyId])
+  const { data: productionLines, isLoading } = useAsync({
+    promiseFn: fetchProductionLines
+  })
 
   return (
     <>
+      <Helmet>
+        <title>Linhas de Produção - Vision</title>
+      </Helmet>
+
       <div className="topbar">
         <div className="container">
           <div className="topbar__wrapper">
@@ -49,9 +36,9 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({ match }) => {
 
       <div className="content">
         <div className="container">
-          {state.isLoading || !state.productionLines
+          {isLoading || !productionLines
             ? 'Carregando...'
-            : state.productionLines.map(productionLine => (
+            : productionLines.map(productionLine => (
                 <Link
                   title={productionLine.name}
                   key={productionLine.id}
