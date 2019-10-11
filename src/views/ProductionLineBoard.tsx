@@ -231,6 +231,8 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
         onSubmit={handleNewGoodPiecesSubmit}
       ></NewGoodPiecesModal>
       <NewRejectedPiecesModal
+        reload={reload}
+        productionOrderId={productionOrder.id}
         isOpen={isNewRejectedPiecesOpen}
         toggle={toggleNewRejectedPieces}
       ></NewRejectedPiecesModal>

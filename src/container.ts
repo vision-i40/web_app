@@ -8,6 +8,8 @@ import makeGetUserProfile from './getUserProfile'
 import makeGetCompanies from './getCompanies'
 import makeGetProductionLines from './getProductionLines'
 import makeGetProductionLine from './getProductionLine'
+import makeGetCodeGroups from './getCodeGroups'
+import makeGetReworkCodes from './getReworkCodes'
 import makeCreateEvent from './createEvent'
 
 // Infra
@@ -30,6 +32,8 @@ const getProductionLines = makeGetProductionLines({
 const getProductionLine = makeGetProductionLine({
   httpClient: secureHttpClient
 })
+const getCodeGroups = makeGetCodeGroups({ httpClient: secureHttpClient })
+const getReworkCodes = makeGetReworkCodes({ httpClient: secureHttpClient })
 const createEvent = makeCreateEvent({
   httpClient: secureHttpClient
 })
@@ -42,5 +46,7 @@ export default {
   getProductionLines,
   getProductionLine,
   getCompanies,
+  getCodeGroups,
+  getReworkCodes,
   createEvent
 }

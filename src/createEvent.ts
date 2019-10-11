@@ -1,6 +1,6 @@
 import { HttpClient, ID } from './types'
 
-type EventInput = {
+export type EventInput = {
   quantity: number
   eventType: string
   eventDatetime: string

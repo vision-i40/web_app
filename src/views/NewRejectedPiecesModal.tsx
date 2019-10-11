@@ -1,47 +1,181 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import dayjs from 'dayjs'
+import useForm from 'react-hook-form'
 import Modal from './Modal'
+import { useAsync } from 'react-async'
+import container from '../container'
+import { useParams } from 'react-router'
+import { isEmpty } from './utils/values'
+import { ID } from '../types'
 
 type NewRejectedPiecesModalProps = {
   isOpen?: boolean
+  productionOrderId: ID
+  reload: () => void
   toggle: () => void
 }
 
-const NewRejectedPiecesModal: React.FC<NewRejectedPiecesModalProps> = props => {
+type NewRejectedPiecesFormData = {
+  quantity: string
+  eventDatetime: string
+  codeGroupId: string
+  reworkCodeId: string
+}
+
+const NewRejectedPiecesModal: React.FC<NewRejectedPiecesModalProps> = ({
+  productionOrderId,
+  reload,
+  ...modalProps
+}) => {
+  const { companyId, productionLineId } = useParams<{
+    companyId: string
+    productionLineId: string
+  }>()
+  const { register, watch, handleSubmit, reset } = useForm<
+    NewRejectedPiecesFormData
+  >({
+    defaultValues: {
+      eventDatetime: dayjs().format('YYYY-MM-DDTHH:mm')
+    }
+  })
+  const codeGroupId = watch('codeGroupId')
+
+  // Fetch code groups
+  const fetchCodeGroups = useCallback(
+    () => container.getCodeGroups(companyId),
+    [companyId]
+  )
+  const { data: codeGroups } = useAsync({
+    promiseFn: fetchCodeGroups
+  })
+
+  // Fetch rework codes
+  const fetchReworkCodes = useCallback(
+    () => container.getReworkCodes(companyId, codeGroupId),
+    [codeGroupId, companyId]
+  )
+  const { run: runFetchReworkCodes, data: reworkCodes } = useAsync({
+    deferFn: fetchReworkCodes
+  })
+  useEffect(() => {
+    if (!isEmpty(codeGroupId)) {
+      runFetchReworkCodes()
+    }
+  }, [codeGroupId, runFetchReworkCodes])
+
+  // Submit
+  const [isCreating, setIsCreating] = useState(false)
+  const onSubmit = async (formData: NewRejectedPiecesFormData) => {
+    setIsCreating(true)
+    await container.createEvent({
+      data: {
+        eventType: 'Rework',
+        quantity: Number(formData.quantity),
+        eventDatetime: formData.eventDatetime,
+        reworkCode: formData.reworkCodeId
+      },
+      companyId,
+      productionLineId,
+      productionOrderId
+    })
+
+    modalProps.toggle()
+    reload()
+    setIsCreating(false)
+    reset()
+  }
+
   return (
-    <Modal {...props} title="Adicionar peças rejeitadas">
-      <form action="" className="form">
+    <Modal {...modalProps} title="Adicionar retrabalho">
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="modal__body">
           <div className="form__group">
-            <label htmlFor="">Quantidade</label>
-            <input type="number" className="form__field" />
+            <label htmlFor="quantity">Quantidade</label>
+            <input
+              required
+              min={1}
+              type="nusmber"
+              className="form__field"
+              id="quantity"
+              name="quantity"
+              ref={register}
+            />
           </div>
 
           <div className="form__group">
             <div className="row">
               <div className="col-xs">
-                <label htmlFor="">Começou em</label>
-                <input type="date" className="form__field" />
-              </div>
-
-              <div className="col-xs">
-                <label htmlFor="">Duração em minutos</label>
-                <input type="number" className="form__field" />
+                <label htmlFor="eventDatetime">Começou em</label>
+                <input
+                  type="datetime-local"
+                  className="form__field"
+                  name="eventDatetime"
+                  id="eventDatetime"
+                  ref={register}
+                />
               </div>
             </div>
           </div>
 
           <div className="form__group">
-            <label htmlFor="">Motivo</label>
+            <label htmlFor="codeGroupId">Grupo do motivo</label>
             <div className="form__field form__field--select">
-              <select name="" id="">
-                <option value="">Selecione um motivo</option>
+              <select
+                name="codeGroupId"
+                id="codeGroupId"
+                ref={register}
+                required
+              >
+                {!codeGroups ? (
+                  <option value="">Carregando...</option>
+                ) : (
+                  <>
+                    <option value="">Selecione um grupo</option>
+                    {codeGroups.map(codeGroup => (
+                      <option key={codeGroup.id} value={codeGroup.id}>
+                        {codeGroup.name}
+                      </option>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
+          </div>
+
+          <div className="form__group">
+            <label htmlFor="reworkCodeId">Código de retrabalho</label>
+            <div className="form__field form__field--select">
+              <select
+                name="reworkCodeId"
+                id="reworkCodeId"
+                ref={register}
+                disabled={isEmpty(codeGroupId)}
+                required
+              >
+                {!reworkCodes ? (
+                  <option value="">
+                    {!isEmpty(codeGroupId) && 'Loading...'}
+                  </option>
+                ) : (
+                  <>
+                    <option value="">Selecione um grupo</option>
+                    {reworkCodes.map(reworkCode => (
+                      <option key={reworkCode.id} value={reworkCode.id}>
+                        {reworkCode.name}
+                      </option>
+                    ))}
+                  </>
+                )}
               </select>
             </div>
           </div>
         </div>
 
-        <button className="btn btn--block btn--warning btn--lg">
-          <i className="fas fa-recycle"></i> Adicionar peça rejeitada
+        <button
+          disabled={isCreating}
+          className="btn btn--block btn--warning btn--lg"
+        >
+          {isCreating ? 'Adicionando...' : 'Adicionar retrabalho'}
         </button>
       </form>
     </Modal>

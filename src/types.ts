@@ -29,6 +29,19 @@ export type UnitOfMeasurement = {
   name: string
 }
 
+export type CodeGroup = {
+  id: ID
+  name: string
+  groupType: GroupTypes
+}
+
+export type GroupTypes = 'StopCode' | 'ReworkCode' | 'WasteCode'
+
+export type ReworkCode = {
+  id: string
+  name: string
+}
+
 export type HttpMethod = <T>(path: string, params?: {}) => Promise<T>
 
 export type HttpError = {
