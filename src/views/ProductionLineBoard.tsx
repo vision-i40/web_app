@@ -236,14 +236,16 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
         isOpen={isNewRejectedPiecesOpen}
         toggle={toggleNewRejectedPieces}
       ></NewRejectedPiecesModal>
+      <NewScrapsModal
+        reload={reload}
+        productionOrderId={productionOrder.id}
+        isOpen={isNewScrapsOpen}
+        toggle={toggleNewScraps}
+      ></NewScrapsModal>
       <NewStopsModal
         isOpen={isNewStopsOpen}
         toggle={toggleNewStops}
       ></NewStopsModal>
-      <NewScrapsModal
-        isOpen={isNewScrapsOpen}
-        toggle={toggleNewScraps}
-      ></NewScrapsModal>
     </>
   )
 }

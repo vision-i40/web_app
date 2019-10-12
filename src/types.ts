@@ -42,6 +42,11 @@ export type ReworkCode = {
   name: string
 }
 
+export type WasteCode = {
+  id: string
+  name: string
+}
+
 export type HttpMethod = <T>(path: string, params?: {}) => Promise<T>
 
 export type HttpError = {

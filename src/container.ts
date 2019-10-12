@@ -10,6 +10,7 @@ import makeGetProductionLines from './getProductionLines'
 import makeGetProductionLine from './getProductionLine'
 import makeGetCodeGroups from './getCodeGroups'
 import makeGetReworkCodes from './getReworkCodes'
+import makeGetWasteCodes from './getWasteCodes'
 import makeCreateEvent from './createEvent'
 
 // Infra
@@ -34,6 +35,7 @@ const getProductionLine = makeGetProductionLine({
 })
 const getCodeGroups = makeGetCodeGroups({ httpClient: secureHttpClient })
 const getReworkCodes = makeGetReworkCodes({ httpClient: secureHttpClient })
+const getWasteCodes = makeGetWasteCodes({ httpClient: secureHttpClient })
 const createEvent = makeCreateEvent({
   httpClient: secureHttpClient
 })
@@ -48,5 +50,6 @@ export default {
   getCompanies,
   getCodeGroups,
   getReworkCodes,
+  getWasteCodes,
   createEvent
 }
