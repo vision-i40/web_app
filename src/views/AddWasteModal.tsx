@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import useForm from 'react-hook-form'
 import Modal from './Modal'
-import { useAsync } from 'react-async'
+import useAsync from './useAsync'
 import container from '../container'
 import { useParams } from 'react-router'
 import { isEmpty } from './utils/values'
-import { ID } from '../types'
+import { ID, WasteCode } from '../types'
 import CodeGroupSelect from './CodeGroupSelect'
 
 type AddWasteModalProps = {
@@ -42,18 +42,14 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
   const codeGroupId = watch('codeGroupId')
 
   // Fetch waste codes
-  const fetchWasteCodes = useCallback(
-    () => container.getWasteCodes(companyId, codeGroupId),
-    [codeGroupId, companyId]
+  const { run: fetchWasteCodes, data: reworkCodes } = useAsync<WasteCode[]>(
+    container.getWasteCodes
   )
-  const { run: runFetchWasteCodes, data: reworkCodes } = useAsync({
-    deferFn: fetchWasteCodes
-  })
   useEffect(() => {
     if (!isEmpty(codeGroupId)) {
-      runFetchWasteCodes()
+      fetchWasteCodes(companyId, codeGroupId)
     }
-  }, [codeGroupId, runFetchWasteCodes])
+  }, [companyId, codeGroupId, fetchWasteCodes])
 
   // Submit
   const [isCreating, setIsCreating] = useState(false)

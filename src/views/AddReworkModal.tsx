@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import useForm from 'react-hook-form'
 import Modal from './Modal'
-import { useAsync } from 'react-async'
+import useAsync from './useAsync'
 import container from '../container'
 import { useParams } from 'react-router'
 import { isEmpty } from './utils/values'
-import { ID } from '../types'
+import { ID, ReworkCode } from '../types'
 import CodeGroupSelect from './CodeGroupSelect'
 
 type AddReworkModalProps = {
@@ -42,18 +42,15 @@ const AddReworkModal: React.FC<AddReworkModalProps> = ({
   const codeGroupId = watch('codeGroupId')
 
   // Fetch rework codes
-  const fetchReworkCodes = useCallback(
-    () => container.getReworkCodes(companyId, codeGroupId),
-    [codeGroupId, companyId]
+  const { run: fetchReworkCodes, data: reworkCodes } = useAsync<ReworkCode[]>(
+    container.getReworkCodes
   )
-  const { run: runFetchReworkCodes, data: reworkCodes } = useAsync({
-    deferFn: fetchReworkCodes
-  })
+
   useEffect(() => {
     if (!isEmpty(codeGroupId)) {
-      runFetchReworkCodes()
+      fetchReworkCodes(companyId, codeGroupId)
     }
-  }, [codeGroupId, runFetchReworkCodes])
+  }, [codeGroupId, companyId, fetchReworkCodes])
 
   // Submit
   const [isCreating, setIsCreating] = useState(false)
