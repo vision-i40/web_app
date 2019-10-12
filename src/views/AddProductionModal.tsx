@@ -18,7 +18,7 @@ export type NewGoodPiecesFormData = {
   eventDatetime: string
 }
 
-const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({
+const AddProductionModal: React.FC<NewGoodPieceModalProps> = ({
   units,
   onSubmit,
   isLoading,
@@ -88,4 +88,4 @@ const NewGoodPiecesModal: React.FC<NewGoodPieceModalProps> = ({
   )
 }
 
-export default NewGoodPiecesModal
+export default AddProductionModal

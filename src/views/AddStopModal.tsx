@@ -1,12 +1,12 @@
 import React from 'react'
 import Modal from './Modal'
 
-type NewStopsModalProps = {
+type AddStopModalProps = {
   isOpen?: boolean
   toggle: () => void
 }
 
-const NewStopsModal: React.FC<NewStopsModalProps> = props => {
+const AddStopModal: React.FC<AddStopModalProps> = props => {
   return (
     <Modal {...props} title="Adicionar paradas">
       <form action="" className="form">
@@ -48,4 +48,4 @@ const NewStopsModal: React.FC<NewStopsModalProps> = props => {
   )
 }
 
-export default NewStopsModal
+export default AddStopModal

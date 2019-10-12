@@ -8,21 +8,21 @@ import { useParams } from 'react-router'
 import { isEmpty } from './utils/values'
 import { ID } from '../types'
 
-type NewRejectedPiecesModalProps = {
+type AddWasteModalProps = {
   isOpen?: boolean
   productionOrderId: ID
   reload: () => void
   toggle: () => void
 }
 
-type NewRejectedPiecesFormData = {
+type NewScrapPiecesFormData = {
   quantity: string
   eventDatetime: string
   codeGroupId: string
-  reworkCodeId: string
+  wasteCodeId: string
 }
 
-const NewRejectedPiecesModal: React.FC<NewRejectedPiecesModalProps> = ({
+const AddWasteModal: React.FC<AddWasteModalProps> = ({
   productionOrderId,
   reload,
   ...modalProps
@@ -32,7 +32,7 @@ const NewRejectedPiecesModal: React.FC<NewRejectedPiecesModalProps> = ({
     productionLineId: string
   }>()
   const { register, watch, handleSubmit, reset } = useForm<
-    NewRejectedPiecesFormData
+    NewScrapPiecesFormData
   >({
     defaultValues: {
       eventDatetime: dayjs().format('YYYY-MM-DDTHH:mm')
@@ -49,30 +49,30 @@ const NewRejectedPiecesModal: React.FC<NewRejectedPiecesModalProps> = ({
     promiseFn: fetchCodeGroups
   })
 
-  // Fetch rework codes
-  const fetchReworkCodes = useCallback(
-    () => container.getReworkCodes(companyId, codeGroupId),
+  // Fetch waste codes
+  const fetchWasteCodes = useCallback(
+    () => container.getWasteCodes(companyId, codeGroupId),
     [codeGroupId, companyId]
   )
-  const { run: runFetchReworkCodes, data: reworkCodes } = useAsync({
-    deferFn: fetchReworkCodes
+  const { run: runFetchWasteCodes, data: reworkCodes } = useAsync({
+    deferFn: fetchWasteCodes
   })
   useEffect(() => {
     if (!isEmpty(codeGroupId)) {
-      runFetchReworkCodes()
+      runFetchWasteCodes()
     }
-  }, [codeGroupId, runFetchReworkCodes])
+  }, [codeGroupId, runFetchWasteCodes])
 
   // Submit
   const [isCreating, setIsCreating] = useState(false)
-  const onSubmit = async (formData: NewRejectedPiecesFormData) => {
+  const onSubmit = async (formData: NewScrapPiecesFormData) => {
     setIsCreating(true)
     await container.createEvent({
       data: {
-        eventType: 'Rework',
+        eventType: 'Waste',
         quantity: Number(formData.quantity),
         eventDatetime: formData.eventDatetime,
-        reworkCode: formData.reworkCodeId
+        wasteCode: formData.wasteCodeId
       },
       companyId,
       productionLineId,
@@ -86,7 +86,7 @@ const NewRejectedPiecesModal: React.FC<NewRejectedPiecesModalProps> = ({
   }
 
   return (
-    <Modal {...modalProps} title="Adicionar retrabalho">
+    <Modal {...modalProps} title="Adicionar disperdício">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="modal__body">
           <div className="form__group">
@@ -143,11 +143,11 @@ const NewRejectedPiecesModal: React.FC<NewRejectedPiecesModalProps> = ({
           </div>
 
           <div className="form__group">
-            <label htmlFor="reworkCodeId">Código de retrabalho</label>
+            <label htmlFor="wasteCodeId">Código de disperdício</label>
             <div className="form__field form__field--select">
               <select
-                name="reworkCodeId"
-                id="reworkCodeId"
+                name="wasteCodeId"
+                id="wasteCodeId"
                 ref={register}
                 disabled={isEmpty(codeGroupId)}
                 required
@@ -173,13 +173,13 @@ const NewRejectedPiecesModal: React.FC<NewRejectedPiecesModalProps> = ({
 
         <button
           disabled={isCreating}
-          className="btn btn--block btn--warning btn--lg"
+          className="btn btn--block btn--danger btn--lg"
         >
-          {isCreating ? 'Adicionando...' : 'Adicionar retrabalho'}
+          {isCreating ? 'Adicionando...' : 'Adicionar disperdício'}
         </button>
       </form>
     </Modal>
   )
 }
 
-export default NewRejectedPiecesModal
+export default AddWasteModal

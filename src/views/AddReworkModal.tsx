@@ -8,21 +8,21 @@ import { useParams } from 'react-router'
 import { isEmpty } from './utils/values'
 import { ID } from '../types'
 
-type NewScrapsModalProps = {
+type AddReworkModalProps = {
   isOpen?: boolean
   productionOrderId: ID
   reload: () => void
   toggle: () => void
 }
 
-type NewScrapPiecesFormData = {
+type NewRejectedPiecesFormData = {
   quantity: string
   eventDatetime: string
   codeGroupId: string
-  wasteCodeId: string
+  reworkCodeId: string
 }
 
-const NewScrapsModal: React.FC<NewScrapsModalProps> = ({
+const AddReworkModal: React.FC<AddReworkModalProps> = ({
   productionOrderId,
   reload,
   ...modalProps
@@ -32,7 +32,7 @@ const NewScrapsModal: React.FC<NewScrapsModalProps> = ({
     productionLineId: string
   }>()
   const { register, watch, handleSubmit, reset } = useForm<
-    NewScrapPiecesFormData
+    NewRejectedPiecesFormData
   >({
     defaultValues: {
       eventDatetime: dayjs().format('YYYY-MM-DDTHH:mm')
@@ -49,30 +49,30 @@ const NewScrapsModal: React.FC<NewScrapsModalProps> = ({
     promiseFn: fetchCodeGroups
   })
 
-  // Fetch waste codes
-  const fetchWasteCodes = useCallback(
-    () => container.getWasteCodes(companyId, codeGroupId),
+  // Fetch rework codes
+  const fetchReworkCodes = useCallback(
+    () => container.getReworkCodes(companyId, codeGroupId),
     [codeGroupId, companyId]
   )
-  const { run: runFetchWasteCodes, data: reworkCodes } = useAsync({
-    deferFn: fetchWasteCodes
+  const { run: runFetchReworkCodes, data: reworkCodes } = useAsync({
+    deferFn: fetchReworkCodes
   })
   useEffect(() => {
     if (!isEmpty(codeGroupId)) {
-      runFetchWasteCodes()
+      runFetchReworkCodes()
     }
-  }, [codeGroupId, runFetchWasteCodes])
+  }, [codeGroupId, runFetchReworkCodes])
 
   // Submit
   const [isCreating, setIsCreating] = useState(false)
-  const onSubmit = async (formData: NewScrapPiecesFormData) => {
+  const onSubmit = async (formData: NewRejectedPiecesFormData) => {
     setIsCreating(true)
     await container.createEvent({
       data: {
-        eventType: 'Waste',
+        eventType: 'Rework',
         quantity: Number(formData.quantity),
         eventDatetime: formData.eventDatetime,
-        wasteCode: formData.wasteCodeId
+        reworkCode: formData.reworkCodeId
       },
       companyId,
       productionLineId,
@@ -86,7 +86,7 @@ const NewScrapsModal: React.FC<NewScrapsModalProps> = ({
   }
 
   return (
-    <Modal {...modalProps} title="Adicionar disperdício">
+    <Modal {...modalProps} title="Adicionar retrabalho">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="modal__body">
           <div className="form__group">
@@ -143,11 +143,11 @@ const NewScrapsModal: React.FC<NewScrapsModalProps> = ({
           </div>
 
           <div className="form__group">
-            <label htmlFor="wasteCodeId">Código de disperdício</label>
+            <label htmlFor="reworkCodeId">Código de retrabalho</label>
             <div className="form__field form__field--select">
               <select
-                name="wasteCodeId"
-                id="wasteCodeId"
+                name="reworkCodeId"
+                id="reworkCodeId"
                 ref={register}
                 disabled={isEmpty(codeGroupId)}
                 required
@@ -173,13 +173,13 @@ const NewScrapsModal: React.FC<NewScrapsModalProps> = ({
 
         <button
           disabled={isCreating}
-          className="btn btn--block btn--danger btn--lg"
+          className="btn btn--block btn--warning btn--lg"
         >
-          {isCreating ? 'Adicionando...' : 'Adicionar disperdício'}
+          {isCreating ? 'Adicionando...' : 'Adicionar retrabalho'}
         </button>
       </form>
     </Modal>
   )
 }
 
-export default NewScrapsModal
+export default AddReworkModal

@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import colors from '../config/colors'
-import NewGoodPiecesModal, { NewGoodPiecesFormData } from './NewGoodPiecesModal'
-import NewRejectedPiecesModal from './NewRejectedPiecesModal'
-import NewStopsModal from './NewStopsModal'
-import NewScrapsModal from './NewScrapsModal'
+import AddProductionModal, { NewGoodPiecesFormData } from './AddProductionModal'
+import AddReworkModal from './AddReworkModal'
+import AddStopModal from './AddStopModal'
+import AddWasteModal from './AddWasteModal'
 import { useToggle } from './useToggle'
 import { ID, ProductionLine, ProductionOrder } from '../types'
 import container from '../container'
@@ -223,29 +223,29 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
         </div>
       </div>
 
-      <NewGoodPiecesModal
+      <AddProductionModal
         isLoading={fetchState.state === 'fetching'}
         isOpen={isNewGoodPiecesOpen}
         toggle={toggleNewGoodPieces}
         units={productionOrder.product.units_of_measurement}
         onSubmit={handleNewGoodPiecesSubmit}
-      ></NewGoodPiecesModal>
-      <NewRejectedPiecesModal
+      ></AddProductionModal>
+      <AddReworkModal
         reload={reload}
         productionOrderId={productionOrder.id}
         isOpen={isNewRejectedPiecesOpen}
         toggle={toggleNewRejectedPieces}
-      ></NewRejectedPiecesModal>
-      <NewScrapsModal
+      ></AddReworkModal>
+      <AddWasteModal
         reload={reload}
         productionOrderId={productionOrder.id}
         isOpen={isNewScrapsOpen}
         toggle={toggleNewScraps}
-      ></NewScrapsModal>
-      <NewStopsModal
+      ></AddWasteModal>
+      <AddStopModal
         isOpen={isNewStopsOpen}
         toggle={toggleNewStops}
-      ></NewStopsModal>
+      ></AddStopModal>
     </>
   )
 }
