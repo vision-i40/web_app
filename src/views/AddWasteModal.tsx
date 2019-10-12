@@ -6,7 +6,7 @@ import useAsync from './useAsync'
 import container from '../container'
 import { useParams } from 'react-router'
 import { isEmpty } from './utils/values'
-import { ID, WasteCode } from '../types'
+import { ID } from '../types'
 import CodeGroupSelect from './CodeGroupSelect'
 
 type AddWasteModalProps = {
@@ -42,7 +42,7 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
   const codeGroupId = watch('codeGroupId')
 
   // Fetch waste codes
-  const { run: fetchWasteCodes, data: reworkCodes } = useAsync<WasteCode[]>(
+  const { run: fetchWasteCodes, data: reworkCodes } = useAsync(
     container.getWasteCodes
   )
   useEffect(() => {

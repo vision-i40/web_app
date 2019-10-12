@@ -1,13 +1,12 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { useAsync } from 'react-async'
+import useAsync from './useAsync'
 import { Link, RouteComponentProps } from 'react-router-dom'
-import { Company } from '../types'
 import container from '../container'
 
 const CompaniesPage: React.FC<RouteComponentProps> = () => {
-  const { data: companies, isLoading } = useAsync<Company[]>({
-    promiseFn: container.getCompanies
+  const { data: companies, isLoading } = useAsync(container.getCompanies, {
+    onLoad: true
   })
 
   return (

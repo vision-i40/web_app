@@ -1,5 +1,5 @@
-import React, { HTMLProps, useCallback, forwardRef, useMemo } from 'react'
-import { useAsync } from 'react-async'
+import React, { HTMLProps, forwardRef, useMemo } from 'react'
+import useAsync from './useAsync'
 import container from '../container'
 import { GroupTypes } from '../types'
 
@@ -11,13 +11,9 @@ type CodeGroupSelectOptions = HTMLProps<HTMLSelectElement> & {
 
 const CodeGroupSelect: React.FC<CodeGroupSelectOptions> = forwardRef(
   ({ companyId, filterBy, ...selectProps }, ref) => {
-    const fetchCodeGroups = useCallback(
-      () => container.getCodeGroups(companyId),
-      [companyId]
-    )
-
-    const { data: codeGroups } = useAsync({
-      promiseFn: fetchCodeGroups
+    const { data: codeGroups } = useAsync(container.getCodeGroups, {
+      onLoad: true,
+      args: [companyId]
     })
 
     const filteredCodeGroups = useMemo(() => {

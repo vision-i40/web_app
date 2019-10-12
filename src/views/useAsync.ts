@@ -6,22 +6,21 @@ type AsyncState<T, U = Error> = {
   error?: U
 }
 
-type AsyncOptions = {
+type AsyncOptions<T> = {
   onLoad?: boolean
-  args?: any[]
+  args?: T | []
 }
 
-type AsyncFunction = (() => Promise<any>) | ((...args: any[]) => Promise<any>)
-
-export default <T>(
-  asyncFn: AsyncFunction,
-  { onLoad, args }: AsyncOptions = {}
+export default <T extends any[], U>(
+  asyncFn: (...args: T) => Promise<U>,
+  { onLoad, args }: AsyncOptions<T> = {}
 ) => {
-  const [state, setState] = useState<AsyncState<T>>({
+  const usableArgs = (args || []) as T
+  const [state, setState] = useState<AsyncState<U>>({
     status: 'idle'
   })
 
-  const run = useCallback((...args: any[]) => {
+  const run = useCallback((...args: T) => {
     setState(state => ({
       ...state,
       status: 'loading'
@@ -44,14 +43,19 @@ export default <T>(
       })
   }, [])
 
+  const reload = useCallback(() => {
+    run(...usableArgs)
+  }, [])
+
   useEffect(() => {
     if (onLoad) {
-      args ? run(...args) : run()
+      run(...usableArgs)
     }
   }, [])
 
   return {
     run,
+    reload,
     status: state.status,
     data: state.data,
     error: state.error,

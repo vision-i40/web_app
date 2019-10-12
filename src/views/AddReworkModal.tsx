@@ -6,7 +6,7 @@ import useAsync from './useAsync'
 import container from '../container'
 import { useParams } from 'react-router'
 import { isEmpty } from './utils/values'
-import { ID, ReworkCode } from '../types'
+import { ID } from '../types'
 import CodeGroupSelect from './CodeGroupSelect'
 
 type AddReworkModalProps = {
@@ -42,7 +42,7 @@ const AddReworkModal: React.FC<AddReworkModalProps> = ({
   const codeGroupId = watch('codeGroupId')
 
   // Fetch rework codes
-  const { run: fetchReworkCodes, data: reworkCodes } = useAsync<ReworkCode[]>(
+  const { run: fetchReworkCodes, data: reworkCodes } = useAsync(
     container.getReworkCodes
   )
 

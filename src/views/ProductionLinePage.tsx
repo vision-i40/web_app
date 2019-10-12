@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
-import { useAsync } from 'react-async'
+import useAsync from './useAsync'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import ProductionLineBoard from './ProductionLineBoard'
 import container from '../container'
@@ -13,14 +13,13 @@ type ProductionLinePageProps = RouteComponentProps<{
 const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
   const { companyId, productionLineId } = match.params
 
-  const fetchProductionLine = useCallback(
-    () => container.getProductionLine(companyId, productionLineId),
-    [companyId, productionLineId]
+  const { data: productionLine, reload } = useAsync(
+    container.getProductionLine,
+    {
+      onLoad: true,
+      args: [companyId, productionLineId]
+    }
   )
-
-  const { data: productionLine, reload } = useAsync({
-    promiseFn: fetchProductionLine
-  })
 
   return (
     <div className="panel">
