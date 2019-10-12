@@ -7,6 +7,7 @@ import container from '../container'
 import { useParams } from 'react-router'
 import { isEmpty } from './utils/values'
 import { ID } from '../types'
+import CodeGroupSelect from './CodeGroupSelect'
 
 type AddWasteModalProps = {
   isOpen?: boolean
@@ -39,15 +40,6 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
     }
   })
   const codeGroupId = watch('codeGroupId')
-
-  // Fetch code groups
-  const fetchCodeGroups = useCallback(
-    () => container.getCodeGroups(companyId),
-    [companyId]
-  )
-  const { data: codeGroups } = useAsync({
-    promiseFn: fetchCodeGroups
-  })
 
   // Fetch waste codes
   const fetchWasteCodes = useCallback(
@@ -120,25 +112,14 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
           <div className="form__group">
             <label htmlFor="codeGroupId">Grupo do motivo</label>
             <div className="form__field form__field--select">
-              <select
+              <CodeGroupSelect
+                filterBy="WasteCode"
+                companyId={companyId}
                 name="codeGroupId"
                 id="codeGroupId"
                 ref={register}
                 required
-              >
-                {!codeGroups ? (
-                  <option value="">Carregando...</option>
-                ) : (
-                  <>
-                    <option value="">Selecione um grupo</option>
-                    {codeGroups.map(codeGroup => (
-                      <option key={codeGroup.id} value={codeGroup.id}>
-                        {codeGroup.name}
-                      </option>
-                    ))}
-                  </>
-                )}
-              </select>
+              />
             </div>
           </div>
 
