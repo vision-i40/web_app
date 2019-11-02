@@ -11,7 +11,9 @@ import makeGetProductionLine from './getProductionLine'
 import makeGetCodeGroups from './getCodeGroups'
 import makeGetReworkCodes from './getReworkCodes'
 import makeGetWasteCodes from './getWasteCodes'
+import makeGetStopCodes from './getStopCodes'
 import makeCreateEvent from './createEvent'
+import makeCreateManualStop from './createManualStop'
 
 // Infra
 const httpClient = makeHttpClient({ baseUrl: config.apiUrl })
@@ -36,7 +38,11 @@ const getProductionLine = makeGetProductionLine({
 const getCodeGroups = makeGetCodeGroups({ httpClient: secureHttpClient })
 const getReworkCodes = makeGetReworkCodes({ httpClient: secureHttpClient })
 const getWasteCodes = makeGetWasteCodes({ httpClient: secureHttpClient })
+const getStopCodes = makeGetStopCodes({ httpClient: secureHttpClient })
 const createEvent = makeCreateEvent({
+  httpClient: secureHttpClient
+})
+const createManualStop = makeCreateManualStop({
   httpClient: secureHttpClient
 })
 
@@ -51,5 +57,7 @@ export default {
   getCodeGroups,
   getReworkCodes,
   getWasteCodes,
-  createEvent
+  getStopCodes,
+  createEvent,
+  createManualStop
 }

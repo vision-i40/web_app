@@ -48,6 +48,11 @@ export type WasteCode = {
   name: string
 }
 
+export type StopCode = {
+  id: string
+  name: string
+}
+
 export type HttpMethod = <T>(path: string, params?: {}) => Promise<T>
 
 export type HttpError = {

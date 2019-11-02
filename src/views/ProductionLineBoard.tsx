@@ -243,6 +243,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
         toggle={toggleNewScraps}
       ></AddWasteModal>
       <AddStopModal
+        reload={reload}
         isOpen={isNewStopsOpen}
         toggle={toggleNewStops}
       ></AddStopModal>
