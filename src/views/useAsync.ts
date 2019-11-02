@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
+import useDeepCompareEffect from 'use-deep-compare-effect'
 
 type AsyncState<T, U = Error> = {
   status: 'idle' | 'loading' | 'finished' | 'failed'
@@ -15,43 +16,46 @@ export default <T extends any[], U>(
   asyncFn: (...args: T) => Promise<U>,
   { onLoad, args }: AsyncOptions<T> = {}
 ) => {
-  const usableArgs = (args || []) as T
+  const usableArgs = useMemo(() => args || [], [args]) as T
   const [state, setState] = useState<AsyncState<U>>({
     status: 'idle'
   })
 
-  const run = useCallback((...args: T) => {
-    setState(state => ({
-      ...state,
-      status: 'loading'
-    }))
+  const run = useCallback(
+    (...args: T) => {
+      setState(state => ({
+        ...state,
+        status: 'loading'
+      }))
 
-    asyncFn(...args)
-      .then(data =>
-        setState({
-          data,
-          status: 'finished',
-          error: undefined
+      asyncFn(...args)
+        .then(data =>
+          setState({
+            data,
+            status: 'finished',
+            error: undefined
+          })
+        )
+        .catch(error => {
+          setState(state => ({
+            ...state,
+            status: 'failed',
+            error
+          }))
         })
-      )
-      .catch(error => {
-        setState(state => ({
-          ...state,
-          status: 'failed',
-          error
-        }))
-      })
-  }, [])
+    },
+    [asyncFn]
+  )
 
   const reload = useCallback(() => {
     run(...usableArgs)
-  }, [])
+  }, [run, usableArgs])
 
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     if (onLoad) {
       run(...usableArgs)
     }
-  }, [])
+  }, [run, onLoad, usableArgs])
 
   return {
     run,
