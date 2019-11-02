@@ -42,7 +42,9 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
             <div className="topbar__title">
               {productionLine ? productionLine.name : 'Linha de Produção'}
 
-              <span className="topbar__subtitle">Manhã</span>
+              <span className="topbar__subtitle">
+                {productionLine && productionLine.turn}
+              </span>
             </div>
           </div>
         </div>

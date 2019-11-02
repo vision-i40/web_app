@@ -6,6 +6,7 @@ export type Company = {
 export type ProductionLine = {
   id: ID
   name: string
+  turn?: string
   in_progress_order?: ProductionOrder
 }
 
