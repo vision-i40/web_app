@@ -273,6 +273,7 @@ a.card {
 }
 
 .modal__backdrop {
+  will-change: opacity;
   padding: 0 1rem;
   position: fixed;
   overflow-y: auto;
@@ -285,6 +286,7 @@ a.card {
 }
 
 .modal {
+  will-change: opacity, transform;
   max-width: 34rem;
   margin: #{$base-line-height * 2} auto;
   background: $white;

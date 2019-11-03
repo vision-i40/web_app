@@ -20,10 +20,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, toggle, title, children }) => {
   const modalTransitions = useTransition(isOpen, null, {
     from: { opacity: 0, transform: 'scale(0.9) translateY(250px)' },
     enter: { opacity: 1, transform: 'scale(1) translateY(0)' },
-    leave: { opacity: 0, transform: 'scale(0.9) translateY(250px)' },
-    config: {
-      duration: 100
-    }
+    leave: { opacity: 0, transform: 'scale(0.9) translateY(250px)' }
   })
 
   const handleModalClick = useCallback((event: MouseEvent) => {
