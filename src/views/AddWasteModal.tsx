@@ -129,7 +129,7 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
               >
                 {!reworkCodes ? (
                   <option value="">
-                    {!isEmpty(codeGroupId) && 'Loading...'}
+                    {!isEmpty(codeGroupId) && 'Carregando...'}
                   </option>
                 ) : (
                   <>

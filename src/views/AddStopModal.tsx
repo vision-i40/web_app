@@ -118,7 +118,7 @@ const AddStopModal: React.FC<AddStopModalProps> = ({
               >
                 {!stopCodes ? (
                   <option value="">
-                    {!isEmpty(codeGroupId) && 'Loading...'}
+                    {!isEmpty(codeGroupId) && 'Carregando...'}
                   </option>
                 ) : (
                   <>

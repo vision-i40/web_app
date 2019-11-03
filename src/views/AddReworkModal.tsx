@@ -130,7 +130,7 @@ const AddReworkModal: React.FC<AddReworkModalProps> = ({
               >
                 {!reworkCodes ? (
                   <option value="">
-                    {!isEmpty(codeGroupId) && 'Loading...'}
+                    {!isEmpty(codeGroupId) && 'Carregando...'}
                   </option>
                 ) : (
                   <>
