@@ -10,6 +10,7 @@ import ProductionLinePage from './ProductionLinePage'
 import CompaniesPage from './CompaniesPage'
 import { useAuth } from './AuthProvider'
 import container from '../container'
+import ProductionLinePlanPage from './ProductionLinePlanPage'
 
 const AuthenticatedApp: React.FC = () => {
   const { signOut } = useAuth()
@@ -35,6 +36,11 @@ const AuthenticatedApp: React.FC = () => {
           exact
           path="/companies/:companyId/production_lines/:productionLineId"
           component={ProductionLinePage}
+        />
+        <Route
+          exact
+          path="/companies/:companyId/production_lines/:productionLineId/plan"
+          component={ProductionLinePlanPage}
         />
         <Redirect exact from="/login" to="/companies" />
         <Redirect exact from="/" to="/companies" />

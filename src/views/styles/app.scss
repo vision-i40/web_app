@@ -6,7 +6,9 @@
 @import 'variables';
 @import 'components/container';
 @import 'components/topbar';
+@import 'components/tabs';
 @import 'components/notification';
+@import 'components/board';
 @import 'components/operation';
 
 *,
@@ -279,6 +281,7 @@ a.card {
   left: 0;
   bottom: 0;
   right: 0;
+  z-index: 20;
 }
 
 .modal {

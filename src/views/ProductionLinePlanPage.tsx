@@ -2,24 +2,22 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import useAsync from './useAsync'
 import { RouteComponentProps, Link } from 'react-router-dom'
-import ProductionLineBoard from './ProductionLineBoard'
 import container from '../container'
 
-type ProductionLinePageProps = RouteComponentProps<{
+type ProductionLinePlanPageProps = RouteComponentProps<{
   companyId: string
   productionLineId: string
 }>
 
-const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
+const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
+  match
+}) => {
   const { companyId, productionLineId } = match.params
 
-  const { data: productionLine, reload } = useAsync(
-    container.getProductionLine,
-    {
-      onLoad: true,
-      args: [companyId, productionLineId]
-    }
-  )
+  const { data: productionLine } = useAsync(container.getProductionLine, {
+    onLoad: true,
+    args: [companyId, productionLineId]
+  })
 
   return (
     <div className="panel">
@@ -52,13 +50,13 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
       <div className="tabs">
         <Link
           to={`/companies/${companyId}/production_lines/${productionLineId}`}
-          className="tab__item active"
+          className="tab__item"
         >
           Ordem atual
         </Link>
         <Link
           to={`/companies/${companyId}/production_lines/${productionLineId}/plan`}
-          className="tab__item"
+          className="tab__item active"
         >
           Planejamento
         </Link>
@@ -66,20 +64,40 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
 
       <div className="content content--no-spacing">
         {productionLine ? (
-          productionLine.in_progress_order ? (
-            <ProductionLineBoard
-              productionLine={productionLine}
-              productionOrder={productionLine.in_progress_order}
-              reload={reload}
-              companyId={companyId}
-            ></ProductionLineBoard>
-          ) : (
-            <div className="container">
-              <div className="content">
-                Nenhum ordem de produção ativa para esta linha.
+          <div className="board">
+            <div className="board__column">
+              <div className="board__column__header">Liberada</div>
+              <div className="board__column__body">
+                <div className="board__card">
+                  <div className="board__card__body">
+                    <span className="board__card__title">TI000004</span>
+                    <p className="board__card__description">
+                      Água Mineral Boa Viagem
+                    </p>
+                    <p className="board__card__time">Iniciado em 10:00:00</p>
+                  </div>
+
+                  <div className="board__card__actions">
+                    <button className="btn btn--success btn--block">
+                      Executar
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          )
+
+            <div className="board__column">
+              <div className="board__column__header">Execução</div>
+            </div>
+
+            <div className="board__column">
+              <div className="board__column__header">Interrompida</div>
+            </div>
+
+            <div className="board__column">
+              <div className="board__column__header">Encerrada</div>
+            </div>
+          </div>
         ) : (
           <div className="content">Carregando...</div>
         )}
@@ -88,4 +106,4 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
   )
 }
 
-export default ProductionLinePage
+export default ProductionLinePlanPage

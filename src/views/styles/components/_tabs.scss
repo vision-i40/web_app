@@ -1,0 +1,35 @@
+.tabs {
+  color: $white;
+  background-color: $blue-grey-700;
+  @include box_shadow(2);
+  position: relative;
+}
+
+.tab__item {
+  text-decoration: none;
+  color: $blue-grey-100;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: ms(-1);
+  letter-spacing: 0.125em;
+  padding: #{$base-line-height * 0.5} 2rem calc(#{$base-line-height * 0.5} - 2px);
+  border-bottom: 2px $blue-grey-700 solid;
+  display: inline-block;
+  background-color: $blue-grey-700;
+  transition: 0.15s ease-in-out;
+
+  &:hover {
+    background-color: $blue-grey-600;
+    color: $blue-grey-100;
+  }
+
+  &.active {
+    cursor: default;
+    color: $white;
+    border-bottom: 2px $white solid;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+}
