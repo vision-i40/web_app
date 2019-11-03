@@ -1,9 +1,8 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import useForm from 'react-hook-form'
 import dayjs from 'dayjs'
 import Modal from './Modal'
 import { UnitOfMeasurement } from '../types'
-import transitions from '../config/transitions'
 
 type NewGoodPieceModalProps = {
   isOpen?: boolean
@@ -25,25 +24,11 @@ const AddProductionModal: React.FC<NewGoodPieceModalProps> = ({
   ...modalProps
 }) => {
   const quantityRef = useRef<HTMLInputElement | null>(null)
-  const { register, handleSubmit, reset } = useForm<NewGoodPiecesFormData>({
+  const { register, handleSubmit } = useForm<NewGoodPiecesFormData>({
     defaultValues: {
       eventDatetime: dayjs().format('YYYY-MM-DDTHH:mm')
     }
   })
-
-  useEffect(() => {
-    if (modalProps.isOpen) {
-      setTimeout(() => {
-        quantityRef.current && quantityRef.current.focus()
-      }, transitions.modalOpen)
-    } else {
-      setTimeout(() => {
-        reset({
-          eventDatetime: dayjs().format('YYYY-MM-DDTHH:mm')
-        })
-      }, transitions.modalClose)
-    }
-  }, [modalProps.isOpen, reset])
 
   return (
     <Modal {...modalProps} title="Adicionar peças boas">
@@ -52,8 +37,9 @@ const AddProductionModal: React.FC<NewGoodPieceModalProps> = ({
           <div className="form__group">
             <label htmlFor="">Quantidade</label>
             <input
-              id="quantity"
               required
+              autoFocus
+              id="quantity"
               name="quantity"
               type="number"
               className="form__field"

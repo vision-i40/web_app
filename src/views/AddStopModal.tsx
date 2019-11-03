@@ -29,9 +29,7 @@ const AddStopModal: React.FC<AddStopModalProps> = ({
   reload,
   ...modalProps
 }) => {
-  const { register, watch, reset, handleSubmit } = useForm<
-    NewManualStopFormData
-  >()
+  const { register, watch, handleSubmit } = useForm<NewManualStopFormData>()
   const { companyId, productionLineId } = useParams<ProductionLineParams>()
   const codeGroupId = watch('codeGroupId')
 
@@ -59,7 +57,6 @@ const AddStopModal: React.FC<AddStopModalProps> = ({
     modalProps.toggle()
     reload()
     setIsCreating(false)
-    reset()
   }
 
   return (
@@ -71,6 +68,7 @@ const AddStopModal: React.FC<AddStopModalProps> = ({
               <div className="col-xs-6">
                 <label htmlFor="start_datetime">Começou em</label>
                 <input
+                  autoFocus
                   required
                   ref={register}
                   name="start_datetime"

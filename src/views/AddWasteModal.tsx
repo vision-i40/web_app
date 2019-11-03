@@ -32,9 +32,7 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
     companyId: string
     productionLineId: string
   }>()
-  const { register, watch, handleSubmit, reset } = useForm<
-    NewScrapPiecesFormData
-  >({
+  const { register, watch, handleSubmit } = useForm<NewScrapPiecesFormData>({
     defaultValues: {
       eventDatetime: dayjs().format('YYYY-MM-DDTHH:mm')
     }
@@ -70,7 +68,6 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
     modalProps.toggle()
     reload()
     setIsCreating(false)
-    reset()
   }
 
   return (
@@ -80,6 +77,7 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
           <div className="form__group">
             <label htmlFor="quantity">Quantidade</label>
             <input
+              autoFocus
               required
               min={1}
               type="nusmber"

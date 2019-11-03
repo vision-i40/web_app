@@ -32,9 +32,7 @@ const AddReworkModal: React.FC<AddReworkModalProps> = ({
     companyId: string
     productionLineId: string
   }>()
-  const { register, watch, handleSubmit, reset } = useForm<
-    NewRejectedPiecesFormData
-  >({
+  const { register, watch, handleSubmit } = useForm<NewRejectedPiecesFormData>({
     defaultValues: {
       eventDatetime: dayjs().format('YYYY-MM-DDTHH:mm')
     }
@@ -71,7 +69,6 @@ const AddReworkModal: React.FC<AddReworkModalProps> = ({
     modalProps.toggle()
     reload()
     setIsCreating(false)
-    reset()
   }
 
   return (
@@ -81,6 +78,7 @@ const AddReworkModal: React.FC<AddReworkModalProps> = ({
           <div className="form__group">
             <label htmlFor="quantity">Quantidade</label>
             <input
+              autoFocus
               required
               min={1}
               type="nusmber"
