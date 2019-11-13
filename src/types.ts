@@ -18,9 +18,11 @@ export type ProductionOrder = {
   rework_quantity: number
   waste_quantity: number
   quantity: number
+  state?: 'InProgress' | 'Released' | 'Interrupted' | 'Done'
 }
 
 export type Product = {
+  id: ID
   name: string
   units_of_measurement: UnitOfMeasurement[]
 }
@@ -66,6 +68,8 @@ export type HttpErrorHandler = (error: HttpError) => void
 
 export type HttpClient = {
   post: HttpMethod
+  patch: HttpMethod
+  put: HttpMethod
   get: HttpMethod
   onError: (errorHandler: HttpErrorHandler) => void
 }

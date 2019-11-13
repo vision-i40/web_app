@@ -21,6 +21,30 @@ export default ({ baseUrl, getHeaders }: HttpClientOptions): HttpClient => {
       })
   }
 
+  const patch = async <T>(path: string, params?: {}): Promise<T> => {
+    return axios
+      .patch<T>(`${baseUrl}${path}`, params, {
+        headers: getHeaders && getHeaders()
+      })
+      .then(response => response.data)
+      .catch(error => {
+        errorHandler && errorHandler(error)
+        throw error
+      })
+  }
+
+  const put = async <T>(path: string, params?: {}): Promise<T> => {
+    return axios
+      .put<T>(`${baseUrl}${path}`, params, {
+        headers: getHeaders && getHeaders()
+      })
+      .then(response => response.data)
+      .catch(error => {
+        errorHandler && errorHandler(error)
+        throw error
+      })
+  }
+
   const get = async <T>(path: string): Promise<T> => {
     return axios
       .get<T>(`${baseUrl}${path}`, { headers: getHeaders && getHeaders() })
@@ -38,6 +62,8 @@ export default ({ baseUrl, getHeaders }: HttpClientOptions): HttpClient => {
   return {
     get,
     post,
+    patch,
+    put,
     onError
   }
 }

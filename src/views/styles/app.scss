@@ -135,6 +135,20 @@ button {
     }
   }
 
+  &--green {
+    background: $green-500;
+    color: $white;
+
+    &:hover {
+      background: $green-600;
+    }
+
+    &:disabled {
+      background: $green-600;
+      color: $green-100;
+    }
+  }
+
   &--warning {
     background: $warning;
     color: $white;

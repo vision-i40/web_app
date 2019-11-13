@@ -20,6 +20,7 @@ export default <T extends any[], U>(
   const [state, setState] = useState<AsyncState<U>>({
     status: 'idle'
   })
+  const isFinished = useMemo(() => state.status === 'finished', [state.status])
 
   const run = useCallback(
     (...args: T) => {
@@ -64,6 +65,6 @@ export default <T extends any[], U>(
     data: state.data,
     error: state.error,
     isLoading: state.status === 'loading',
-    isFinished: state.status === 'finished'
+    isFinished
   }
 }
