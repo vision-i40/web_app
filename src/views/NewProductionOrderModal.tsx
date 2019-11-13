@@ -41,7 +41,6 @@ const NewProductionOrderModal: React.FC<NewProductionOrderModalProps> = ({
   }, [isFinished])
 
   const onSubmit = async (form: NewProductionOrderForm) => {
-    console.log('FORM', form)
     runCreateProductionOrder({
       ...form,
       companyId,
