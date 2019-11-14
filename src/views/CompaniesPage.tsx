@@ -29,7 +29,7 @@ const CompaniesPage: React.FC<RouteComponentProps> = () => {
                 <Link
                   title={company.corporate_name}
                   key={company.id}
-                  className="card card--icon left-bar left-bar--success"
+                  className="card card--icon"
                   to={`/companies/${company.id}/production_lines`}
                 >
                   <div className="card__icon">

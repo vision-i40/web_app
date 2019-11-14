@@ -13,7 +13,10 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({ match }) => {
 
   const { data: productionLines, isLoading } = useAsync(
     container.getProductionLines,
-    { onLoad: true, args: [companyId] }
+    {
+      onLoad: true,
+      args: [companyId]
+    }
   )
 
   return (
@@ -38,7 +41,7 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({ match }) => {
                 <Link
                   title={productionLine.name}
                   key={productionLine.id}
-                  className="card card--icon left-bar left-bar--success"
+                  className="card card--icon"
                   to={`/companies/${companyId}/production_lines/${productionLine.id}`}
                 >
                   <div className="card__icon">

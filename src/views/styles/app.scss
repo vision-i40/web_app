@@ -208,7 +208,7 @@ button {
   @include box_shadow(1);
   color: inherit;
   text-decoration: none;
-  padding: #{$base-line-height * 0.75};
+  padding: 1rem;
   border-radius: $border-radius;
   background-color: $white;
 
@@ -226,30 +226,15 @@ button {
   margin-top: 4px
 }
 
-a.card {
-  transition: all 0.25s ease-in-out;
-  
-  &:hover {
-    background-color: $blue-grey-50;
-  }
-}
-
 .card__icon {
   font-size: ms(1);
   width: 2 * $base-line-height;
   height: 2 * $base-line-height;
   line-height: 2 * $base-line-height;
   text-align: center;
-  background-color: $blue-grey-50;
+  background-color: $teal-50;
+  color: $teal-300;
   border-radius: 99999px;
-}
-
-.left-bar {
-  border-left: 5px solid $light-bg;
-
-  &--success {
-    border-color: $success;
-  }
 }
 
 .chart {
