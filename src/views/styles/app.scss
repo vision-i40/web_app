@@ -199,10 +199,10 @@ button {
   &--float {
     @include box_shadow(3);
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 4rem;
-    height: 4rem;
+    bottom: 1rem;
+    right: 1rem;
+    width: 3.75rem;
+    height: 3.75rem;
     border-radius: 100%;
     text-align: center;
     font-size: ms(2);
@@ -291,7 +291,7 @@ button {
 
 .modal__backdrop {
   will-change: opacity;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   position: fixed;
   overflow-y: auto;
   background-color: $black-3;
