@@ -87,29 +87,24 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
       <div className="content content--no-spacing">
         {productionLine && productionOrders ? (
           <div className="board">
-            <div className="board__column">
+            <div className="board__column board__column--released">
               <div className="board__column__header">Liberada</div>
               <div className="board__column__body">
-                <button
-                  className="btn btn--success btn--block"
-                  onClick={toggleIsNewModalOpen}
-                >
-                  Nova Ordem de Produção
-                </button>
-
                 {productionOrders.filter(released).map(order => (
                   <div className="board__card" key={order.id}>
                     <div className="board__card__body">
-                      <span className="board__card__title">
+                      <div className="board__card__title">
                         {order.product.name}
-                      </span>
-                      <p className="board__card__description">{order.code}</p>
+                        <small className="board__card__detail">
+                          #{order.code}
+                        </small>
+                      </div>
                       <p className="board__card__time">Iniciado em 10:00:00</p>
                     </div>
 
                     <div className="board__card__actions">
                       <button
-                        className="btn btn--success"
+                        className="btn"
                         onClick={() =>
                           container
                             .updateProductionOrderStatus({
@@ -120,7 +115,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                             .then(reload)
                         }
                       >
-                        Executar
+                        <i className="fas fa-arrow-right"></i>Executar
                       </button>
                     </div>
                   </div>
@@ -128,22 +123,24 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
               </div>
             </div>
 
-            <div className="board__column">
+            <div className="board__column board__column--in-progress">
               <div className="board__column__header">Execução</div>
               <div className="board__column__body">
                 {productionOrders.filter(inProgress).map(order => (
                   <div className="board__card" key={order.id}>
                     <div className="board__card__body">
-                      <span className="board__card__title">
+                      <div className="board__card__title">
                         {order.product.name}
-                      </span>
-                      <p className="board__card__description">{order.code}</p>
+                        <small className="board__card__detail">
+                          #{order.code}
+                        </small>
+                      </div>
                       <p className="board__card__time">Iniciado em 10:00:00</p>
                     </div>
 
                     <div className="board__card__actions">
                       <button
-                        className="btn btn--danger"
+                        className="btn"
                         onClick={() =>
                           container
                             .updateProductionOrderStatus({
@@ -154,11 +151,11 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                             .then(reload)
                         }
                       >
-                        Interromper
+                        <i className="fas fa-ban"></i>Interromper
                       </button>
 
                       <button
-                        className="btn btn--green"
+                        className="btn"
                         onClick={() =>
                           container
                             .updateProductionOrderStatus({
@@ -169,7 +166,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                             .then(reload)
                         }
                       >
-                        Encerrar
+                        <i className="fas fa-check"></i>Encerrar
                       </button>
                     </div>
                   </div>
@@ -177,22 +174,24 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
               </div>
             </div>
 
-            <div className="board__column">
+            <div className="board__column board__column--interrupted">
               <div className="board__column__header">Interrompida</div>
               <div className="board__column__body">
                 {productionOrders.filter(interrupted).map(order => (
                   <div className="board__card" key={order.id}>
                     <div className="board__card__body">
-                      <span className="board__card__title">
+                      <div className="board__card__title">
                         {order.product.name}
-                      </span>
-                      <p className="board__card__description">{order.code}</p>
+                        <small className="board__card__detail">
+                          #{order.code}
+                        </small>
+                      </div>
                       <p className="board__card__time">Iniciado em 10:00:00</p>
                     </div>
 
                     <div className="board__card__actions">
                       <button
-                        className="btn btn--success"
+                        className="btn"
                         onClick={() =>
                           container
                             .updateProductionOrderStatus({
@@ -203,11 +202,11 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                             .then(reload)
                         }
                       >
-                        Executar
+                        <i className="fas fa-arrow-left"></i>Executar
                       </button>
 
                       <button
-                        className="btn btn--green"
+                        className="btn"
                         onClick={() =>
                           container
                             .updateProductionOrderStatus({
@@ -218,7 +217,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                             .then(reload)
                         }
                       >
-                        Encerrar
+                        <i className="fas fa-check"></i>Encerrar
                       </button>
                     </div>
                   </div>
@@ -226,16 +225,18 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
               </div>
             </div>
 
-            <div className="board__column">
+            <div className="board__column board__column--done">
               <div className="board__column__header">Encerrada</div>
               <div className="board__column__body">
                 {productionOrders.filter(done).map(order => (
                   <div className="board__card" key={order.id}>
                     <div className="board__card__body">
-                      <span className="board__card__title">
+                      <div className="board__card__title">
                         {order.product.name}
-                      </span>
-                      <p className="board__card__description">{order.code}</p>
+                        <small className="board__card__detail">
+                          #{order.code}
+                        </small>
+                      </div>
                       <p className="board__card__time">Iniciado em 10:00:00</p>
                     </div>
                   </div>
@@ -247,6 +248,13 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
           <Loading />
         )}
       </div>
+
+      <button
+        className="btn btn--success btn--float"
+        onClick={toggleIsNewModalOpen}
+      >
+        <i className="fas fa-plus"></i>
+      </button>
 
       <NewProductionOrderModal
         onSuccess={reload}

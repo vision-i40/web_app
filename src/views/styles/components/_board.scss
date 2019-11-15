@@ -3,6 +3,7 @@
   height: 100%;
   display: flex;
   overflow-x: auto;
+  margin-top: $base-line-height * 0.25;
 }
 
 .board__column {
@@ -10,7 +11,31 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 320px;
+  min-width: 360px;
+
+  &--released {
+    .board__card {
+      border-top: 4px solid $light-blue-300;
+    }
+  }
+
+  &--in-progress {
+    .board__card {
+      border-top: 4px solid $cyan-300;
+    }
+  }
+
+  &--interrupted {
+    .board__card {
+      border-top: 4px solid $orange-300;
+    }
+  }
+
+  &--done {
+    .board__card {
+      border-top: 4px solid $light-green-300;
+    }
+  }
 }
 
 .board__column__header {
@@ -18,48 +43,49 @@
   font-size: ms(1);
   font-weight: 700;
   padding: #{$base-line-height * 0.75} 1rem;
-  background: $blue-grey-50;
 }
 
 .board__column__body {
   flex: 1;
   padding: 0.5rem;
+  padding-top: 0;
 }
 
 .board__card {
   border-radius: $border-radius;
   background: $white;
-  margin-top: $base-line-height/2;
+  margin-bottom: $base-line-height/2;
   @include box_shadow(1);
 }
 
 .board__card__body {
-  padding: #{$base-line-height * 0.5} #{$base-line-height * 0.75};
+  padding: #{$base-line-height * 0.75};
+  line-height: ms(3);
 }
 
 .board__card__title {
   font-size: ms(1);
   font-weight: 700;
   display: block;
-  line-height: $base-line-height * 1.25;
-}
+  display: flex;
 
-.board__card__description {
-  margin: 0;
-  
+  small {
+    color: $secondary-font-color;
+    margin-left: auto;
+    font-size: 1rem;
+    font-weight: 400;
+  }
 }
 
 .board__card__time {
   margin: 0;
-  color: $secondary-font-color;
+  
 }
 
 .board__card__actions {
+  background-color: $blue-grey-C25;
+  color: $blue-grey-700;
   display: flex;
-}
-
-.board__card__actions button {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  flex: 1;
+  justify-content: flex-end;
+  padding: #{$base-line-height * 0.25} #{$base-line-height * 0.25};
 }
