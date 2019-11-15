@@ -6,6 +6,7 @@ import container from '../container'
 import { ProductionOrder } from '../types'
 import { useToggle } from './useToggle'
 import NewProductionOrderModal from './NewProductionOrderModal'
+import Loading from './Loading'
 
 type ProductionLinePlanPageProps = RouteComponentProps<{
   companyId: string
@@ -243,7 +244,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
             </div>
           </div>
         ) : (
-          <div className="content">Carregando...</div>
+          <Loading />
         )}
       </div>
 

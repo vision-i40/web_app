@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import useAsync from './useAsync'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import container from '../container'
+import Loading from './Loading'
 
 type ProductionLinesPageProps = RouteComponentProps<{
   companyId: string
@@ -35,35 +36,35 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({ match }) => {
 
       <div className="content">
         <div className="container">
-          {isLoading || !productionLines
-            ? 'Carregando...'
-            : productionLines.map(productionLine => (
-                <Link
-                  title={productionLine.name}
-                  key={productionLine.id}
-                  className="card card--icon"
-                  to={`/companies/${companyId}/production_lines/${productionLine.id}`}
-                >
-                  <div className="card__icon">
-                    <i className="fas fa-network-wired"></i>
-                  </div>
+          {isLoading || !productionLines ? (
+            <Loading />
+          ) : (
+            productionLines.map(productionLine => (
+              <Link
+                title={productionLine.name}
+                key={productionLine.id}
+                className="card card--icon"
+                to={`/companies/${companyId}/production_lines/${productionLine.id}`}
+              >
+                <div className="card__icon">
+                  <i className="fas fa-network-wired"></i>
+                </div>
 
-                  <div className="card__content">
-                    <div>
-                      <b>{productionLine.name}</b>
-                    </div>
-                    {productionLine.in_progress_order ? (
-                      <span>
-                        {productionLine.in_progress_order.product.name}
-                      </span>
-                    ) : (
-                      <span className="text-secondary">
-                        Ordem de produção não definida
-                      </span>
-                    )}
+                <div className="card__content">
+                  <div>
+                    <b>{productionLine.name}</b>
                   </div>
-                </Link>
-              ))}
+                  {productionLine.in_progress_order ? (
+                    <span>{productionLine.in_progress_order.product.name}</span>
+                  ) : (
+                    <span className="text-secondary">
+                      Ordem de produção não definida
+                    </span>
+                  )}
+                </div>
+              </Link>
+            ))
+          )}
         </div>
       </div>
     </>

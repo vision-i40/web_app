@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import useAsync from './useAsync'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import container from '../container'
+import Loading from './Loading'
 
 const CompaniesPage: React.FC<RouteComponentProps> = () => {
   const { data: companies, isLoading } = useAsync(container.getCompanies, {
@@ -23,26 +24,28 @@ const CompaniesPage: React.FC<RouteComponentProps> = () => {
 
       <div className="content">
         <div className="container">
-          {isLoading || !companies
-            ? 'Carregando...'
-            : companies.map(company => (
-                <Link
-                  title={company.corporate_name}
-                  key={company.id}
-                  className="card card--icon"
-                  to={`/companies/${company.id}/production_lines`}
-                >
-                  <div className="card__icon">
-                    <i className="far fa-building"></i>
-                  </div>
+          {isLoading || !companies ? (
+            <Loading />
+          ) : (
+            companies.map(company => (
+              <Link
+                title={company.corporate_name}
+                key={company.id}
+                className="card card--icon"
+                to={`/companies/${company.id}/production_lines`}
+              >
+                <div className="card__icon">
+                  <i className="far fa-building"></i>
+                </div>
 
-                  <div className="card__content">
-                    <div>
-                      <b>{company.corporate_name}</b>
-                    </div>
+                <div className="card__content">
+                  <div>
+                    <b>{company.corporate_name}</b>
                   </div>
-                </Link>
-              ))}
+                </div>
+              </Link>
+            ))
+          )}
         </div>
       </div>
     </>

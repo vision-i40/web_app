@@ -4,6 +4,7 @@ import useAsync from './useAsync'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import ProductionLineBoard from './ProductionLineBoard'
 import container from '../container'
+import Loading from './Loading'
 
 type ProductionLinePageProps = RouteComponentProps<{
   companyId: string
@@ -81,7 +82,7 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
             </div>
           )
         ) : (
-          <div className="content">Carregando...</div>
+          <Loading />
         )}
       </div>
     </div>

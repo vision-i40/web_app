@@ -102,7 +102,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
                       %
                     </div>
                     <div className="chart__subtitle">
-                      {productionOrder.production_quantity} /{' '}
+                      {productionOrder.production_quantity || 0} /{' '}
                       {productionOrder.quantity}
                     </div>
                   </div>
@@ -136,7 +136,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
                   <div className="operation__card__body">
                     <div className="operation__title">Produzidas</div>
                     <div className="operation__value">
-                      {productionOrder.production_quantity}
+                      {productionOrder.production_quantity || 0}
                     </div>
 
                     <span className="operation__bg__icon">
@@ -158,7 +158,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
                   <div className="operation__card__body">
                     <div className="operation__title">Retrabalho</div>
                     <div className="operation__value">
-                      {productionOrder.rework_quantity}
+                      {productionOrder.rework_quantity || 0}
                     </div>
 
                     <span className="operation__bg__icon operation__bg__icon--warning">
@@ -180,7 +180,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
                   <div className="operation__card__body">
                     <div className="operation__title">Disperdício</div>
                     <div className="operation__value">
-                      {productionOrder.waste_quantity}
+                      {productionOrder.waste_quantity || 0}
                     </div>
 
                     <span className="operation__bg__icon operation__bg__icon--danger">
@@ -202,7 +202,7 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
                   <div className="operation__card__body">
                     <div className="operation__title">Paradas</div>
                     <div className="operation__value">
-                      {productionOrder.waste_quantity}
+                      {productionOrder.waste_quantity || 0}
                     </div>
 
                     <span className="operation__bg__icon operation__bg__icon--danger-dark">

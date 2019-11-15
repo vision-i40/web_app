@@ -201,7 +201,7 @@ button {
 }
 
 .content:not(.content--no-spacing) {
-  padding: $base-line-height 0;
+  padding: $base-line-height*0.75 0;
 }
 
 .card {
@@ -429,3 +429,69 @@ input[type="date"].form__field {
   padding: #{0.5 * $base-line-height} 0;
 }
 
+.spinner {
+  width: 4rem;
+  height: 4rem;
+  
+  text-align: center;
+
+  &:after {
+    content: "";
+    margin: -4px auto;
+    display: block;
+    width: 3rem;
+    height: 1rem;
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    animation-duration: 1s;
+    animation-name: spinner-shadow;
+    animation-iteration-count: infinite;
+  }
+
+  img {
+    height: 100%;
+    animation-duration: 1s;
+    animation-name: spinner;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes spinner {
+  from {
+    transform: translateY(0); 
+  }
+
+  50% {
+    transform: translateY(-1.75rem); 
+  }
+
+  to {
+    transform: translateY(0); 
+  }
+}
+
+@keyframes spinner-shadow {
+  from {
+    transform: scale(1); 
+  }
+
+  50% {
+    transform: scale(0.75); 
+  }
+
+  to {
+    transform: scale(1); 
+  }
+}
+
+.loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F7FAFC;
+  z-index: 10;
+}

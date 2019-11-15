@@ -30,7 +30,7 @@
 
 .topbar__title {
   font-weight: 500;
-  margin-left: 1.75rem;
+  margin-left: 1rem;
 }
 
 .topbar__left-action + .topbar__title {
@@ -42,6 +42,10 @@
   display: block;
   color: $blue-grey-100;
   font-size: ms(0);
+}
+
+.btn:hover {
+  background: $blue-grey-600;
 }
 
 @media only screen and (min-width: 48em) {
