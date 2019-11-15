@@ -134,14 +134,16 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
               <div className="col-xs-12 col-sm-3">
                 <div className="operation__card">
                   <div className="operation__card__body">
-                    <div className="operation__title">Produzidas</div>
-                    <div className="operation__value">
-                      {productionOrder.production_quantity || 0}
-                    </div>
-
                     <span className="operation__bg__icon">
                       <i className="fa fa-check"></i>
                     </span>
+
+                    <div className="operation__card__info">
+                      <div className="operation__value">
+                        {productionOrder.production_quantity || 0}
+                      </div>
+                      <div className="operation__title">Produzidas</div>
+                    </div>
                   </div>
 
                   <button
@@ -156,14 +158,15 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
               <div className="col-xs-12 col-sm-3">
                 <div className="operation__card">
                   <div className="operation__card__body">
-                    <div className="operation__title">Retrabalho</div>
-                    <div className="operation__value">
-                      {productionOrder.rework_quantity || 0}
-                    </div>
-
                     <span className="operation__bg__icon operation__bg__icon--warning">
                       <i className="fa fa-recycle"></i>
                     </span>
+                    <div className="operation__card__info">
+                      <div className="operation__value">
+                        {productionOrder.rework_quantity || 0}
+                      </div>
+                      <div className="operation__title">Retrabalho</div>
+                    </div>
                   </div>
 
                   <button
@@ -178,14 +181,15 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
               <div className="col-xs-12 col-sm-3">
                 <div className="operation__card">
                   <div className="operation__card__body">
-                    <div className="operation__title">Disperdício</div>
-                    <div className="operation__value">
-                      {productionOrder.waste_quantity || 0}
-                    </div>
-
                     <span className="operation__bg__icon operation__bg__icon--danger">
                       <i className="fas fa-trash-alt"></i>
                     </span>
+                    <div className="operation__card__info">
+                      <div className="operation__value">
+                        {productionOrder.waste_quantity || 0}
+                      </div>
+                      <div className="operation__title">Disperdício</div>
+                    </div>
                   </div>
 
                   <button
@@ -200,14 +204,15 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
               <div className="col-xs-12 col-sm-3">
                 <div className="operation__card">
                   <div className="operation__card__body">
-                    <div className="operation__title">Paradas</div>
-                    <div className="operation__value">
-                      {productionOrder.waste_quantity || 0}
-                    </div>
-
                     <span className="operation__bg__icon operation__bg__icon--danger-dark">
                       <i className="fas fa-ban"></i>
                     </span>
+                    <div className="operation__card__info">
+                      <div className="operation__value">
+                        {productionOrder.waste_quantity || 0}
+                      </div>
+                      <div className="operation__title">Paradas</div>
+                    </div>
                   </div>
 
                   <button

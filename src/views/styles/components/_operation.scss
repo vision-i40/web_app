@@ -101,6 +101,14 @@
   }
 }
 
+.operation__card__body {
+  display: flex;
+}
+
+.operation__card__info {
+  flex: 1;
+}
+
 .operation__title {
   display: flex;
   align-items: center;
@@ -129,10 +137,10 @@
 }
 
 .operation__bg__icon {
-  position: absolute;
-  font-size: ms(7);
-  width: ms(12);
-  height: ms(12);
+  margin-right: 1rem;
+  font-size: ms(2);
+  width: ms(6);
+  height: ms(6);
   background: $cyan-50;
   color: $cyan-200;
   display: flex;
@@ -144,17 +152,17 @@
 
   &--warning {
     background: $amber-50;
-    color: $amber-200;
+    color: $amber-500;
   }
 
   &--danger {
     background: $deep-orange-50;
-    color: $deep-orange-200;
+    color: $deep-orange-500;
   }
   
   &--danger-dark {
     background: $red-50;
-    color: $red-200;
+    color: $red-500;
   }
 }
 
