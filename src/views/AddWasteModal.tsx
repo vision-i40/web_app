@@ -140,14 +140,14 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
               </select>
             </div>
           </div>
-        </div>
 
-        <button
-          disabled={isCreating}
-          className="btn btn--block btn--danger btn--lg"
-        >
-          {isCreating ? 'Adicionando...' : 'Adicionar disperdício'}
-        </button>
+          <button
+            disabled={isCreating}
+            className="btn btn--block btn--danger btn--lg"
+          >
+            {isCreating ? 'Adicionando...' : 'Adicionar disperdício'}
+          </button>
+        </div>
       </form>
     </Modal>
   )

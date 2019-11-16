@@ -5,6 +5,7 @@
 @import 'shadows';
 @import 'variables';
 @import 'components/container';
+@import 'components/modal';
 @import 'components/topbar';
 @import 'components/tabs';
 @import 'components/notification';
@@ -186,9 +187,9 @@ button {
   }
 
   &--lg {
-    font-size: ms(1);
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
+    font-size: 1.15rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 
   &--icon i,
@@ -289,68 +290,6 @@ button {
   color: $secondary-font-color;
 }
 
-.modal__backdrop {
-  will-change: opacity;
-  padding: 0 0.5rem;
-  position: fixed;
-  overflow-y: auto;
-  background-color: $black-3;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 20;
-}
-
-.modal {
-  will-change: opacity, transform;
-  max-width: 30rem;
-  margin: #{$base-line-height * 2} auto;
-  background: $white;
-  border-radius: $border-radius;
-  @include box_shadow(3);
-  position: relative;
-  top: 0;
-}
-
-.modal__header {
-  padding:  1.5rem 1.5rem 0;
-  font-size: ms(1);
-  border-top-left-radius: $border-radius;
-  border-top-right-radius: $border-radius;
-  font-weight: 700;
-  position: relative;
-
-  .modal__close {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-}
-
-.modal__close {
-  border: 0;
-  padding: 0;
-  line-height: $base-line-height * 3;
-  padding: 0 1.5rem;
-  background: transparent;
-  transition: all 0.15s ease-in-out;
-  opacity: 0.5;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.modal__body {
-  padding: $base-line-height 1.5rem;
-}
-
-.modal__body + .btn {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
 .form {
   text-align: left;
 
@@ -358,7 +297,7 @@ button {
     font-weight: 500;
     font-size: ms(0);
     line-height: $base-line-height;
-    margin-bottom: $base-line-height * 0.25;
+    margin-bottom: 0.25rem;
     display: block;
   }
 

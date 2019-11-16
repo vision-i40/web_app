@@ -89,14 +89,14 @@ const NewProductionOrderModal: React.FC<NewProductionOrderModalProps> = ({
               ref={register}
             />
           </div>
-        </div>
 
-        <button
-          disabled={isLoading}
-          className="btn btn--block btn--success btn--lg"
-        >
-          {isLoading ? 'Adicionando...' : 'Adicionar'}
-        </button>
+          <button
+            disabled={isLoading}
+            className="btn btn--block btn--success btn--lg"
+          >
+            {isLoading ? 'Adicionando...' : 'Adicionar'}
+          </button>
+        </div>
       </form>
     </Modal>
   )

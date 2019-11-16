@@ -1,0 +1,72 @@
+$base-padding: 1.25rem;
+$small-padding: 1.75rem;
+
+.modal__backdrop {
+  will-change: opacity;
+  padding: 0 0.5rem;
+  position: fixed;
+  overflow-y: auto;
+  background-color: $black-3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 20;
+}
+
+.modal {
+  will-change: opacity, transform;
+  max-width: 30rem;
+  margin: #{$base-line-height * 2} auto;
+  background: $white;
+  border-radius: $border-radius;
+  @include box_shadow(3);
+  position: relative;
+  top: 0;
+}
+
+.modal__header {
+  padding:  $base-padding $base-padding 0;
+  font-size: ms(1);
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  position: relative;
+
+  .modal__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+.modal__close {
+  border: 0;
+  padding: 0;
+  line-height: 4rem;
+  padding: 0 $base-padding;
+  background: transparent;
+  transition: all 0.15s ease-in-out;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.modal__body {
+  padding: $base-line-height $base-padding;
+}
+
+@media only screen and (min-width: 48em) {
+  .modal__header {
+    padding:  1.5rem $small-padding 0;
+  }
+  
+  .modal__close {
+    padding: 0 $small-padding;
+  }
+  
+  .modal__body {
+    padding: 1.5rem $small-padding 2rem;
+  }
+}

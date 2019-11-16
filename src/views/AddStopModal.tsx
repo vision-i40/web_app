@@ -128,14 +128,14 @@ const AddStopModal: React.FC<AddStopModalProps> = ({
               </select>
             </div>
           </div>
-        </div>
 
-        <button
-          disabled={isCreating}
-          className="btn btn--block btn--danger-dark btn--lg"
-        >
-          {isCreating ? 'Adicionando...' : 'Adicionar parada manual'}
-        </button>
+          <button
+            disabled={isCreating}
+            className="btn btn--block btn--danger-dark btn--lg"
+          >
+            {isCreating ? 'Adicionando...' : 'Adicionar parada manual'}
+          </button>
+        </div>
       </form>
     </Modal>
   )

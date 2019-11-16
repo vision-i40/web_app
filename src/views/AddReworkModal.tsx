@@ -140,14 +140,14 @@ const AddReworkModal: React.FC<AddReworkModalProps> = ({
               </select>
             </div>
           </div>
-        </div>
 
-        <button
-          disabled={isCreating}
-          className="btn btn--block btn--warning btn--lg"
-        >
-          {isCreating ? 'Adicionando...' : 'Adicionar retrabalho'}
-        </button>
+          <button
+            disabled={isCreating}
+            className="btn btn--block btn--warning btn--lg"
+          >
+            {isCreating ? 'Adicionando...' : 'Adicionar retrabalho'}
+          </button>
+        </div>
       </form>
     </Modal>
   )
