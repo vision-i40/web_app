@@ -7,6 +7,7 @@ import { ProductionOrder } from '../types'
 import { useToggle } from './useToggle'
 import NewProductionOrderModal from './NewProductionOrderModal'
 import Loading from './Loading'
+import dayjs from 'dayjs'
 
 type ProductionLinePlanPageProps = RouteComponentProps<{
   companyId: string
@@ -92,11 +93,15 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                     <div className="board__card__body">
                       <div className="board__card__title">
                         {order.product.name}
-                        <small className="board__card__detail">
-                          #{order.code}
-                        </small>
                       </div>
-                      <p className="board__card__time">Iniciado em 10:00:00</p>
+                      <div className="board__card__detail">
+                        <span className="board__card__id">#{order.code}</span>
+
+                        <span className="board__card__time">
+                          <i className="far fa-clock"></i>
+                          {dayjs(order.modified).format('HH:mm:ss')}
+                        </span>
+                      </div>
                     </div>
 
                     <div className="board__card__actions">
@@ -128,11 +133,15 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                     <div className="board__card__body">
                       <div className="board__card__title">
                         {order.product.name}
-                        <small className="board__card__detail">
-                          #{order.code}
-                        </small>
                       </div>
-                      <p className="board__card__time">Iniciado em 10:00:00</p>
+                      <div className="board__card__detail">
+                        <span className="board__card__id">#{order.code}</span>
+
+                        <span className="board__card__time">
+                          <i className="far fa-clock"></i>
+                          {dayjs(order.modified).format('HH:mm:ss')}
+                        </span>
+                      </div>
                     </div>
 
                     <div className="board__card__actions">
@@ -179,11 +188,15 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                     <div className="board__card__body">
                       <div className="board__card__title">
                         {order.product.name}
-                        <small className="board__card__detail">
-                          #{order.code}
-                        </small>
                       </div>
-                      <p className="board__card__time">Iniciado em 10:00:00</p>
+                      <div className="board__card__detail">
+                        <span className="board__card__id">#{order.code}</span>
+
+                        <span className="board__card__time">
+                          <i className="far fa-clock"></i>
+                          {dayjs(order.modified).format('HH:mm:ss')}
+                        </span>
+                      </div>
                     </div>
 
                     <div className="board__card__actions">
@@ -230,11 +243,15 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                     <div className="board__card__body">
                       <div className="board__card__title">
                         {order.product.name}
-                        <small className="board__card__detail">
-                          #{order.code}
-                        </small>
                       </div>
-                      <p className="board__card__time">Iniciado em 10:00:00</p>
+                      <div className="board__card__detail">
+                        <span className="board__card__id">#{order.code}</span>
+
+                        <span className="board__card__time">
+                          <i className="far fa-clock"></i>
+                          {dayjs(order.modified).format('HH:mm:ss')}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ))}

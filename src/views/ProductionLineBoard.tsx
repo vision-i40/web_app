@@ -10,6 +10,7 @@ import { ID, ProductionLine, ProductionOrder } from '../types'
 import container from '../container'
 import { NotificationContext } from './NotificationProvider'
 import { percentage } from './utils/calc'
+import dayjs from 'dayjs'
 
 type ProductionLineBoardProps = {
   productionLine: ProductionLine
@@ -118,8 +119,14 @@ const ProductionLineBoard: React.FC<ProductionLineBoardProps> = ({
                       <i className="fas fa-check"></i> Ativo
                     </span>
 
-                    <span className="operation__main__info__time">
-                      <i className="far fa-clock"></i> 10:00:00
+                    <span
+                      title={`Atualizado em ${dayjs(
+                        productionOrder.modified
+                      ).format('DD/MM/YY HH:mm:ss')}`}
+                      className="operation__main__info__time"
+                    >
+                      <i className="far fa-clock"></i>{' '}
+                      {dayjs(productionOrder.modified).format('HH:mm:ss')}
                     </span>
                   </div>
                 </hgroup>

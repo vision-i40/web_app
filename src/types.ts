@@ -18,6 +18,7 @@ export type ProductionOrder = {
   rework_quantity: number
   waste_quantity: number
   quantity: number
+  modified: string
   state?: 'InProgress' | 'Released' | 'Interrupted' | 'Done'
 }
 

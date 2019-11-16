@@ -68,18 +68,21 @@
   font-weight: 700;
   display: block;
   display: flex;
+}
 
-  small {
-    color: $secondary-font-color;
-    margin-left: auto;
-    font-size: 1rem;
-    font-weight: 400;
-  }
+.board__card__detail {
+  display: flex;
 }
 
 .board__card__time {
-  margin: 0;
+  margin-left: auto;
+  font-size: 0.875rem;
+  color: $secondary-font-color;
   
+  i {
+    margin-right: 0.25rem;
+    font-size: 12px;
+  }
 }
 
 .board__card__actions {
