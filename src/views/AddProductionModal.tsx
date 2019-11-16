@@ -38,7 +38,6 @@ const AddProductionModal: React.FC<NewGoodPieceModalProps> = ({
             <label htmlFor="">Quantidade</label>
             <input
               required
-              autoFocus
               id="quantity"
               name="quantity"
               type="number"

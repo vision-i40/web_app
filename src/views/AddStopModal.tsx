@@ -63,7 +63,6 @@ const AddStopModal: React.FC<AddStopModalProps> = ({
               <div className="col-xs-6">
                 <label htmlFor="start_datetime">Começou em</label>
                 <input
-                  autoFocus
                   required
                   ref={register}
                   name="start_datetime"

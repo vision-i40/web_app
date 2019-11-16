@@ -73,7 +73,6 @@ const AddReworkModal: React.FC<AddReworkModalProps> = ({
           <div className="form__group">
             <label htmlFor="quantity">Quantidade</label>
             <input
-              autoFocus
               required
               min={1}
               type="nusmber"
