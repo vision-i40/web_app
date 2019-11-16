@@ -187,8 +187,8 @@ button {
 
   &--lg {
     font-size: ms(1);
-    padding-top: $base-line-height;
-    padding-bottom: $base-line-height;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 
   &--icon i,
@@ -304,7 +304,7 @@ button {
 
 .modal {
   will-change: opacity, transform;
-  max-width: 34rem;
+  max-width: 30rem;
   margin: #{$base-line-height * 2} auto;
   background: $white;
   border-radius: $border-radius;
@@ -314,7 +314,7 @@ button {
 }
 
 .modal__header {
-  padding:  $base-line-height 1.5rem 0;
+  padding:  1.5rem 1.5rem 0;
   font-size: ms(1);
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
@@ -380,25 +380,26 @@ button {
 }
 
 .form__group {
-  margin-bottom: $base-line-height * 0.75;
+  margin-bottom: 1rem;
 }
 
 input.form__field,
 .form__field--select select {
   display: block;
   width: 100%;
-  line-height: calc(#{$base-line-height * 2} - 2px);
-  font-size: ms(1);
-  padding: 0 1rem;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  padding: 0.5rem;
   border-radius: $border-radius;
-  border: 1px solid $blue-grey-C200;
+  border: 2px solid $blue-grey-C200;
   background: $blue-grey-C200;
   outline: 0;
   color: $blue-grey-700;
+  transition: border 0.15s ease-in;
 
   &:active,
   &:focus {
-    border-color: $success;
+    border-color: $blue-200;
   }
 }
 
