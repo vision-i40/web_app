@@ -1,14 +1,12 @@
 import React from 'react'
+import useSWR from 'swr'
 import { Helmet } from 'react-helmet'
-import useAsync from './useAsync'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import container from '../container'
 import Loading from './Loading'
 
 const CompaniesPage: React.FC<RouteComponentProps> = () => {
-  const { data: companies, isLoading } = useAsync(container.getCompanies, {
-    onLoad: true
-  })
+  const { data: companies } = useSWR('companies', container.getCompanies)
 
   return (
     <>
@@ -24,7 +22,7 @@ const CompaniesPage: React.FC<RouteComponentProps> = () => {
 
       <div className="content">
         <div className="container">
-          {isLoading || !companies ? (
+          {!companies ? (
             <Loading />
           ) : (
             companies.map(company => (

@@ -1,5 +1,5 @@
 import React, { HTMLProps, forwardRef } from 'react'
-import useAsync from './useAsync'
+import useSWR from 'swr'
 import container from '../container'
 
 type ProductSelectOptions = HTMLProps<HTMLSelectElement> & {
@@ -9,10 +9,7 @@ type ProductSelectOptions = HTMLProps<HTMLSelectElement> & {
 
 const ProductSelect: React.FC<ProductSelectOptions> = forwardRef(
   ({ companyId, ...selectProps }, ref) => {
-    const { data: products } = useAsync(container.getProducts, {
-      onLoad: true,
-      args: [companyId]
-    })
+    const { data: products } = useSWR(companyId, container.getProducts)
 
     return (
       <select {...selectProps} ref={ref}>

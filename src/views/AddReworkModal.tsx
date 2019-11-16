@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import dayjs from 'dayjs'
 import useForm from 'react-hook-form'
 import Modal from './Modal'
-import useAsync from './useAsync'
+import useSWR from 'swr'
 import container from '../container'
 import { useParams } from 'react-router'
 import { isEmpty } from './utils/values'
@@ -40,15 +40,10 @@ const AddReworkModal: React.FC<AddReworkModalProps> = ({
   const codeGroupId = watch('codeGroupId')
 
   // Fetch rework codes
-  const { run: fetchReworkCodes, data: reworkCodes } = useAsync(
+  const { data: reworkCodes } = useSWR(
+    codeGroupId ? [companyId, codeGroupId, 'reworkCodes'] : null,
     container.getReworkCodes
   )
-
-  useEffect(() => {
-    if (!isEmpty(codeGroupId)) {
-      fetchReworkCodes(companyId, codeGroupId)
-    }
-  }, [codeGroupId, companyId, fetchReworkCodes])
 
   // Submit
   const [isCreating, setIsCreating] = useState(false)

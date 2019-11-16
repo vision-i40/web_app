@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import dayjs from 'dayjs'
 import useForm from 'react-hook-form'
 import Modal from './Modal'
-import useAsync from './useAsync'
+import useSWR from 'swr'
 import container from '../container'
 import { useParams } from 'react-router'
 import { isEmpty } from './utils/values'
@@ -40,14 +40,10 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
   const codeGroupId = watch('codeGroupId')
 
   // Fetch waste codes
-  const { run: fetchWasteCodes, data: reworkCodes } = useAsync(
+  const { data: wasteCodes } = useSWR(
+    codeGroupId ? [companyId, codeGroupId, 'wasteCodes'] : null,
     container.getWasteCodes
   )
-  useEffect(() => {
-    if (!isEmpty(codeGroupId)) {
-      fetchWasteCodes(companyId, codeGroupId)
-    }
-  }, [companyId, codeGroupId, fetchWasteCodes])
 
   // Submit
   const [isCreating, setIsCreating] = useState(false)
@@ -127,16 +123,16 @@ const AddWasteModal: React.FC<AddWasteModalProps> = ({
                 disabled={isEmpty(codeGroupId)}
                 required
               >
-                {!reworkCodes ? (
+                {!wasteCodes ? (
                   <option value="">
                     {!isEmpty(codeGroupId) && 'Carregando...'}
                   </option>
                 ) : (
                   <>
                     <option value="">Selecione um grupo</option>
-                    {reworkCodes.map(reworkCode => (
-                      <option key={reworkCode.id} value={reworkCode.id}>
-                        {reworkCode.name}
+                    {wasteCodes.map(wasteCode => (
+                      <option key={wasteCode.id} value={wasteCode.id}>
+                        {wasteCode.name}
                       </option>
                     ))}
                   </>

@@ -1,6 +1,6 @@
 import React from 'react'
+import useSWR from 'swr'
 import { Helmet } from 'react-helmet'
-import useAsync from './useAsync'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import container from '../container'
 import Loading from './Loading'
@@ -12,12 +12,9 @@ type ProductionLinesPageProps = RouteComponentProps<{
 const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({ match }) => {
   const { companyId } = match.params
 
-  const { data: productionLines, isLoading } = useAsync(
-    container.getProductionLines,
-    {
-      onLoad: true,
-      args: [companyId]
-    }
+  const { data: productionLines } = useSWR(
+    [companyId, 'productionLines'],
+    container.getProductionLines
   )
 
   return (
@@ -36,7 +33,7 @@ const ProductionLinesPage: React.FC<ProductionLinesPageProps> = ({ match }) => {
 
       <div className="content">
         <div className="container">
-          {isLoading || !productionLines ? (
+          {!productionLines ? (
             <Loading />
           ) : (
             productionLines.map(productionLine => (

@@ -1,5 +1,5 @@
 import React, { HTMLProps, forwardRef, useMemo } from 'react'
-import useAsync from './useAsync'
+import useSWR from 'swr'
 import container from '../container'
 import { GroupTypes } from '../types'
 
@@ -11,10 +11,7 @@ type CodeGroupSelectOptions = HTMLProps<HTMLSelectElement> & {
 
 const CodeGroupSelect: React.FC<CodeGroupSelectOptions> = forwardRef(
   ({ companyId, filterBy, ...selectProps }, ref) => {
-    const { data: codeGroups } = useAsync(container.getCodeGroups, {
-      onLoad: true,
-      args: [companyId]
-    })
+    const { data: codeGroups } = useSWR(companyId, container.getCodeGroups)
 
     const filteredCodeGroups = useMemo(() => {
       if (codeGroups && filterBy) {

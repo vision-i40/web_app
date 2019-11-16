@@ -1,6 +1,6 @@
 import React from 'react'
+import useSWR from 'swr'
 import { Helmet } from 'react-helmet'
-import useAsync from './useAsync'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import ProductionLineBoard from './ProductionLineBoard'
 import container from '../container'
@@ -14,12 +14,9 @@ type ProductionLinePageProps = RouteComponentProps<{
 const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
   const { companyId, productionLineId } = match.params
 
-  const { data: productionLine, reload } = useAsync(
-    container.getProductionLine,
-    {
-      onLoad: true,
-      args: [companyId, productionLineId]
-    }
+  const { data: productionLine, revalidate } = useSWR(
+    [companyId, productionLineId, 'productionLine'],
+    container.getProductionLine
   )
 
   return (
@@ -71,7 +68,7 @@ const ProductionLinePage: React.FC<ProductionLinePageProps> = ({ match }) => {
             <ProductionLineBoard
               productionLine={productionLine}
               productionOrder={productionLine.in_progress_order}
-              reload={reload}
+              reload={revalidate}
               companyId={companyId}
             ></ProductionLineBoard>
           ) : (

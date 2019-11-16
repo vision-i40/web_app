@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import useAsync from './useAsync'
+import useSWR from 'swr'
 import { RouteComponentProps, Link } from 'react-router-dom'
 import container from '../container'
 import { ProductionOrder } from '../types'
@@ -28,17 +28,14 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
   const { companyId, productionLineId } = match.params
   const [isNewModalOpen, toggleIsNewModalOpen] = useToggle()
 
-  const { data: productionLine } = useAsync(container.getProductionLine, {
-    onLoad: true,
-    args: [companyId, productionLineId]
-  })
+  const { data: productionLine } = useSWR(
+    [companyId, productionLineId, 'productionLine'],
+    container.getProductionLine
+  )
 
-  const { data: productionOrders, reload } = useAsync(
-    container.getProductionOrders,
-    {
-      onLoad: true,
-      args: [companyId, productionLineId]
-    }
+  const { data: productionOrders, revalidate } = useSWR(
+    [companyId, productionLineId],
+    container.getProductionOrders
   )
 
   return (
@@ -112,7 +109,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                               productionOrderId: order.id,
                               state: 'InProgress'
                             })
-                            .then(reload)
+                            .then(revalidate)
                         }
                       >
                         <i className="fas fa-arrow-right"></i>Executar
@@ -148,7 +145,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                               productionOrderId: order.id,
                               state: 'Interrupted'
                             })
-                            .then(reload)
+                            .then(revalidate)
                         }
                       >
                         <i className="fas fa-ban"></i>Interromper
@@ -163,7 +160,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                               productionOrderId: order.id,
                               state: 'Done'
                             })
-                            .then(reload)
+                            .then(revalidate)
                         }
                       >
                         <i className="fas fa-check"></i>Encerrar
@@ -199,7 +196,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                               productionOrderId: order.id,
                               state: 'InProgress'
                             })
-                            .then(reload)
+                            .then(revalidate)
                         }
                       >
                         <i className="fas fa-arrow-left"></i>Executar
@@ -214,7 +211,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
                               productionOrderId: order.id,
                               state: 'Done'
                             })
-                            .then(reload)
+                            .then(revalidate)
                         }
                       >
                         <i className="fas fa-check"></i>Encerrar
@@ -257,7 +254,7 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
       </button>
 
       <NewProductionOrderModal
-        onSuccess={reload}
+        onSuccess={revalidate}
         isOpen={isNewModalOpen}
         toggle={toggleIsNewModalOpen}
       ></NewProductionOrderModal>

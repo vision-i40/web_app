@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import useForm from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import Modal from './Modal'
 import CodeGroupSelect from './CodeGroupSelect'
-import useAsync from './useAsync'
+import useSWR from 'swr'
 import container from '../container'
 import { isEmpty } from './utils/values'
 import { ID } from '../types'
@@ -34,15 +34,10 @@ const AddStopModal: React.FC<AddStopModalProps> = ({
   const codeGroupId = watch('codeGroupId')
 
   // Fetch stop codes
-  const { run: fetchStopCodes, data: stopCodes } = useAsync(
+  const { data: stopCodes } = useSWR(
+    codeGroupId ? [companyId, codeGroupId, 'stopCodes'] : null,
     container.getStopCodes
   )
-
-  useEffect(() => {
-    if (!isEmpty(codeGroupId)) {
-      fetchStopCodes(companyId, codeGroupId)
-    }
-  }, [codeGroupId, companyId, fetchStopCodes])
 
   // Submit
   const [isCreating, setIsCreating] = useState(false)
