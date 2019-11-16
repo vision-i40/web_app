@@ -56,6 +56,17 @@
   background: $white;
   margin-bottom: $base-line-height/2;
   @include box_shadow(1);
+  position: relative;
+}
+
+.board__card__options {
+  position: absolute;
+  right: 0.1rem;
+  top: 0.1rem;
+  
+  button {
+    border-radius: 100%;
+  }
 }
 
 .board__card__body {

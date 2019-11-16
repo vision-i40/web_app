@@ -1,0 +1,27 @@
+.dropdown {
+  position: relative;
+}
+
+.dropdown__items {
+  list-style-type: none;
+  position: absolute;
+  background: $white;
+  border-radius: $border-radius;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  padding: 0.25rem 0;
+  margin: 0;
+  @include box_shadow(1);
+}
+
+.dropdown__item {
+  display: block;
+  min-width: 8.5rem;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $blue-grey-C25;
+  }
+}

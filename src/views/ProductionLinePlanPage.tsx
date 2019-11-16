@@ -8,6 +8,7 @@ import { useToggle } from './useToggle'
 import NewProductionOrderModal from './NewProductionOrderModal'
 import Loading from './Loading'
 import dayjs from 'dayjs'
+import Dropdown from './Dropdown'
 
 type ProductionLinePlanPageProps = RouteComponentProps<{
   companyId: string
@@ -90,6 +91,18 @@ const ProductionLinePlanPage: React.FC<ProductionLinePlanPageProps> = ({
               <div className="board__column__body">
                 {productionOrders.filter(released).map(order => (
                   <div className="board__card" key={order.id}>
+                    <Dropdown
+                      className="board__card__options"
+                      items={[
+                        { label: 'Editar', onClick: () => {} },
+                        { label: 'Excluir', onClick: () => {} }
+                      ]}
+                    >
+                      <button className="btn btn--icon">
+                        <i className="fas fa-ellipsis-h"></i>
+                      </button>
+                    </Dropdown>
+
                     <div className="board__card__body">
                       <div className="board__card__title">
                         {order.product.name}

@@ -4,6 +4,8 @@
 @import 'colors';
 @import 'shadows';
 @import 'variables';
+@import 'components/buttons';
+@import 'components/dropdown';
 @import 'components/container';
 @import 'components/modal';
 @import 'components/topbar';
@@ -104,110 +106,6 @@ button {
 .text-uppercase {
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-.btn {
-  @extend .text-uppercase;
-  color: inherit;
-  background: none;
-  border: 0;
-  padding: 0.5rem 0.75rem;
-  line-height: $base-line-height;
-  font-size: 14px;
-  font-weight: 700;
-  transition: all ease-in-out 0.15s;
-  border-radius: $border-radius;
-
-  &:hover {
-    background-color: $blue-grey-C300;
-  }
-
-  i {
-    margin-right: 0.5rem;
-  }
-
-  &--block {
-    display: block;
-    width: 100%;
-  }
-
-  &--success {
-    background: $success;
-    color: $white;
-
-    &:hover {
-      background: $success-hover;
-    }
-
-    &:disabled {
-      background: $success-hover;
-      color: $cyan-100;
-    }
-  }
-
-  &--green {
-    background: $green-500;
-    color: $white;
-
-    &:hover {
-      background: $green-600;
-    }
-
-    &:disabled {
-      background: $green-600;
-      color: $green-100;
-    }
-  }
-
-  &--warning {
-    background: $warning;
-    color: $white;
-
-    &:hover {
-      background: $warning-hover;
-    }
-  }
-
-  &--danger {
-    background: $danger;
-    color: $white;
-
-    &:hover {
-      background: $danger-hover;
-    }
-  }
-
-  &--danger-dark {
-    background: $danger-dark;
-    color: $white;
-
-    &:hover {
-      background: $danger-dark-hover;
-    }
-  }
-
-  &--lg {
-    font-size: 1.15rem;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-  }
-
-  &--icon i,
-  &--float i {
-    margin-right: 0;
-  }
-
-  &--float {
-    @include box_shadow(3);
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    width: 3.75rem;
-    height: 3.75rem;
-    border-radius: 100%;
-    text-align: center;
-    font-size: ms(2);
-  }
 }
 
 .panel {
