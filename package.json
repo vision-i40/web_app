@@ -16,7 +16,7 @@
     "dayjs": "^1.8.16",
     "flexboxgrid": "^6.3.1",
     "modularscale-sass": "^3.0.8",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
     "ramda": "^0.26.1",
     "react": "^16.9.0",
